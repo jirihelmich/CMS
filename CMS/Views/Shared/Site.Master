@@ -1,0 +1,49 @@
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Mìøení a regulace, regulátory, PID regulátory | <asp:ContentPlaceHolder ID="TitleContent" runat="server" /> | HTH8 s.r.o.</title>
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../../Scripts/ckeditor.js"></script>
+</head>
+
+<body>
+    <div class="page">
+
+        <div id="header">
+            <div id="title">
+                <h1>CMS</h1>
+            </div>
+              
+            <div id="logindisplay">
+                <% if((bool)ViewData["logged"]){%>
+                    Logged as <%= ViewData["user"] %>,
+                    <a href="/user/logout">Odhlásit se</a>
+                <%}else{%>
+                    <a href="/user/login">Pøihlásit se</a>
+                <%} %>
+            </div> 
+            
+            <div id="menucontainer">
+            
+                <ul id="menu">
+                        <li><a href="/">Titulka</a></li>  
+                        <li><a href="<%= Url.Action("Index","Backend") %>">Admin</a></li>       
+                    <% foreach (CMS.Models.category c in (IEnumerable<CMS.Models.category>) ViewData["menu"]){%>
+                        <li><a href="/category/list?id=<%= c.id %>">acd</a></li>
+                    <%} %>
+                </ul>
+            
+            </div>
+        </div>
+
+        <div id="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

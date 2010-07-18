@@ -1,0 +1,97 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+    <link href="../../Content/Admin.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/tablecloth.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/css/blitzer/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="../../Scripts/swfupload.js"></script>
+    <script type="text/javascript" src="../../Scripts/ckeditor.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery-1.4.1.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="../../Scripts/effects.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <!-- Your logo -->
+            <h1 id="logo">
+                <a href="/backend">Administrace HTH8.cz</a></h1>
+            <!-- Your slogan -->
+            <p id="login">
+                Uživatel <%= ViewData["user"] %>&nbsp;<a href="">Odhlásit se</a>
+            </p>
+            <hr class="noscreen" />
+        </div>
+        <!-- Hidden navigation -->
+        <hr class="noscreen" />
+        <hr class="noscreen" />
+        <!-- Horizontal navigation -->
+        <div id="navigation">
+            <h3 class="noscreen">
+                Navigace</h3>
+            <ul id="nav">
+            </ul>
+        </div>
+        <!-- /main -->
+        <hr class="noscreen" />
+        <!-- 2 columns (Content and Sidebar) -->
+        <div id="cols">
+            <div class="main box">
+                <!-- Sidebar -->
+                <!-- Content -->
+                <div id="main">
+            
+            <div id="messages">
+                <%
+                    CMS.CMS.Services.CMS_Services_Message messages = CMS.CMS.Services.CMS_Services_Message.getInstance();
+
+                    if (messages.hasErrors())
+                    {
+                        %>
+                            <ul class="errors">
+                                <% foreach (string err in messages.getErrors()) { %>
+                                   <li><%= err %></li>
+                                <% } %>
+                            </ul>
+                        <%
+                    }
+                            
+                    if (messages.hasMessages())
+                    {
+                        %>
+                            <ul class="messages">
+                                <% foreach (string msg in messages.getMessages()) { %>
+                                   <li><%= msg %></li>
+                                <% } %>
+                            </ul>
+                        <%
+                    }
+
+                    messages.truncate();
+                %>
+            </div>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div id="footer">
+            <p>
+                <span style="display: block; float: left;">&copy;&nbsp;2008-10 <a href="http://aventio.cz"
+                    title="aventio.cz">
+                    <img src="http://aventio.cz/aventio-transparent.png" width="80" height="23" alt="aventio.cz"
+                        title="aventio.cz" /></a>, všechna práva vyhrazena.</span>
+            </p>
+        </div>
+        <!-- /footer -->
+        <span class="clear"></span>
+    </div>
+</body>
+</html>

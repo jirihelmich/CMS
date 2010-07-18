@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS", "CMS\CMS.csproj", "{AEC61D35-9FEE-40CD-8E50-2D3BBF94EDC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Tests", "CMS.Tests\CMS.Tests.csproj", "{DD2E8DE9-CD59-4E99-A8A2-8E7D992FB830}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEC61D35-9FEE-40CD-8E50-2D3BBF94EDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC61D35-9FEE-40CD-8E50-2D3BBF94EDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC61D35-9FEE-40CD-8E50-2D3BBF94EDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC61D35-9FEE-40CD-8E50-2D3BBF94EDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD2E8DE9-CD59-4E99-A8A2-8E7D992FB830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2E8DE9-CD59-4E99-A8A2-8E7D992FB830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2E8DE9-CD59-4E99-A8A2-8E7D992FB830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2E8DE9-CD59-4E99-A8A2-8E7D992FB830}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

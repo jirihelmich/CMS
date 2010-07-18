@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ACL">
+  <DataContextMoniker Name="/ACLDataContext" />
+  <nestedChildShapes>
+    <classShape Id="cc7bd651-7a5a-42a8-9a8c-5dc12e6f6cc8" absoluteBounds="0.75, 3.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ACLDataContext/resource" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e8cb72f5-a704-43ca-9b9b-2a0fbda6c7d4" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="db5ff941-693b-40e0-959c-7b4e6d8b2e52" absoluteBounds="3.5, 0.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ACLDataContext/role_resource" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cfa13676-11ca-4362-8506-cada4c0e260a" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cfb1fbf5-b822-4ac9-91f2-9549ed9fe9fb" absoluteBounds="0.75, 0.875, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/ACLDataContext/role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="abf3e966-4738-4b9e-864f-ad2ff025addd" absoluteBounds="0.765, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.45242346379207 : 2.45359537760417); (1.45242346379207 : 2.70359537760417); (2.06174684745593 : 2.70359537760417); (2.06174684745593 : 2.45359537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ACLDataContext/role/role_role" />
+      <nodes>
+        <classShapeMoniker Id="cfb1fbf5-b822-4ac9-91f2-9549ed9fe9fb" />
+        <classShapeMoniker Id="cfb1fbf5-b822-4ac9-91f2-9549ed9fe9fb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.63544840494792); (4.5 : 4.63544840494792); (4.5 : 2.45359537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ACLDataContext/resource/resource_role_resource" />
+      <nodes>
+        <classShapeMoniker Id="cc7bd651-7a5a-42a8-9a8c-5dc12e6f6cc8" />
+        <classShapeMoniker Id="db5ff941-693b-40e0-959c-7b4e6d8b2e52" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.66429768880208); (3.5 : 1.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ACLDataContext/role/role_role_resource" />
+      <nodes>
+        <classShapeMoniker Id="cfb1fbf5-b822-4ac9-91f2-9549ed9fe9fb" />
+        <classShapeMoniker Id="db5ff941-693b-40e0-959c-7b4e6d8b2e52" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

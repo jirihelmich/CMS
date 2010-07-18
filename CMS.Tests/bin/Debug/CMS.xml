@@ -1,0 +1,1883 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CMS</name>
+    </assembly>
+    <members>
+        <member name="F:CMS.CMS.Form.CMS_Form._action">
+            <summary>
+            URL where we want to send form data on submit
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.CMS_Form._method">
+            <summary>
+            HTTP METHOD
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.CMS_Form._elements">
+            <summary>
+            Form elements
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.CMS_Form._multipart">
+            <summary>
+            Determines if render should append multipart/form-data enctype
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.#ctor(CMS.CMS.Form.Method.CMS_Method)">
+            <summary>
+            Constructor with specifiing method for the form
+            </summary>
+            <param name="method">HTTP method</param>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.#ctor(CMS.CMS.Form.CMS_Action)">
+            <summary>
+            Constructor with specifiing action for the form
+            </summary>
+            <param name="method">Action URL</param>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.#ctor(CMS.CMS.Form.CMS_Action,CMS.CMS.Form.Method.CMS_Method)">
+            <summary>
+            Constructor with specifiing method and action for the form
+            </summary>
+            <param name="method">HTTP method</param>
+            <param name="action">Action URL</param>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.addElement(CMS.CMS.Form.Element.CMS_Form_Element)">
+            <summary>
+            Adds new element to the form
+            </summary>
+            <param name="e">form element</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.removeElement(CMS.CMS.Form.Element.CMS_Form_Element)">
+            <summary>
+            Removes element
+            </summary>
+            <param name="e">element</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.render">
+            <summary>
+            Renders markup for the form
+            </summary>
+            <returns>HTML</returns>
+            TODO: decorators would be great
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.setAction(CMS.CMS.Form.CMS_Action)">
+            <summary>
+            Sets action for the form
+            </summary>
+            <param name="a">Action</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.getAction">
+            <summary>
+            Action getter
+            </summary>
+            <returns>Action</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.getMethod">
+            <summary>
+            Method getter
+            </summary>
+            <returns>HTTP method</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.isValid(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Runs the validation of the form
+            </summary>
+            <param name="form">Form data</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Form.getElements">
+            <summary>
+            Gets all form elements in list
+            </summary>
+            <returns>List of elements</returns>
+        </member>
+        <member name="P:CMS.CMS.Form.CMS_Form.Item(System.String)">
+            <summary>
+            Indexer over stored elements
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Category_Add.#ctor(System.Int64)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parent">id of parent category</param>
+        </member>
+        <member name="M:CMS.Forms.Form_Category_Add.setEditData(CMS.Models.category)">
+            <summary>
+            Sets data for edit mode
+            </summary>
+            <param name="edited">edited entity</param>
+        </member>
+        <member name="T:CMS.CMS.Form.Method.CMS_Method">
+            <summary>
+            toString is derived by default,
+            just need to have common type for
+            all the methods
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.Method.CMS_Method_Post.ToString">
+            <summary>
+            ToString method
+            </summary>
+            <returns>post</returns>
+        </member>
+        <member name="F:CMS.CMS.Acl.ACLRoleNotRegisteredException._name">
+            <summary>
+            Role name
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Acl.ACLRoleNotRegisteredException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Role name</param>
+        </member>
+        <member name="P:CMS.CMS.Acl.ACLRoleNotRegisteredException.Message">
+            <summary>
+            Property for getting Error message
+            </summary>
+        </member>
+        <member name="M:CMS.Forms.Form_Role_Add.#ctor(System.Int64)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parent">parentid</param>
+        </member>
+        <member name="M:CMS.Forms.Form_Role_Add.setEditData(CMS.Models.role)">
+            <summary>
+            Sets data for edit mode
+            </summary>
+            <param name="r">role</param>
+        </member>
+        <member name="M:CMS.CMS.Login.CMS_Login.checkCredentials(System.String,System.String,CMS.Models.user@)">
+            <summary>
+            Tries to find a user with given credentials
+            </summary>
+            <param name="userame">Username</param>
+            <param name="password">Password</param>
+            <param name="user">found user</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Login.CMS_Login.SignIn(CMS.Models.user)">
+            <summary>
+            signs in the given user
+            </summary>
+            <param name="user">user to be signed in</param>
+        </member>
+        <member name="M:CMS.CMS.Login.CMS_Login.SignOut">
+            <summary>
+            signs out the currently logged user
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Login.CMS_Login.getIdentity">
+            <summary>
+            unserialize the data stored in session
+            and returns user object for the currently signed in user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Login.CMS_Login.hasIdentity">
+            <summary>
+            Is anybody logged in?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App_Comments._app">
+            <summary>
+            CMS_App instance
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App_Comments.#ctor(CMS.CMS.App.CMS_App)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="app">Application</param>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App_Comments.getById(System.Int64)">
+            <summary>
+            Returns a comment identified by the given id
+            </summary>
+            <param name="id">Comment id</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App_Comments.deleteById(System.Int64)">
+            <summary>
+            Removes the comment with the given id from data source
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App_Comments.add(System.Int64,CMS.Forms.Form_Comment_New,System.String)">
+            <summary>
+            Adds a new comment to the article specifed with given id
+            </summary>
+            <param name="id">comment id</param>
+            <param name="form">form containing data</param>
+            <param name="ip">Client IP address</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App_Comments.reply(System.Int64,CMS.Forms.Form_Comment_New,System.String,System.Int64@)">
+            <summary>
+            Saves a reply to a comment with the given id
+            </summary>
+            <param name="id">Comment id</param>
+            <param name="form">Reply data</param>
+            <param name="aid">Article id</param>
+            <param name="ip">Client IP address</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_Edit.#ctor(CMS.Models.article)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="OriginalArticle">Edited article</param>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_Edit.setAuthors(System.Collections.Generic.List{CMS.Models.author},System.Collections.Generic.List{CMS.Models.articles_author})">
+            <summary>
+            Sets authors for the selectbox
+            </summary>
+            <param name="authors">List of authors</param>
+            <param name="saved">Currently assigned authors</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_Edit.setRoles(System.Collections.Generic.List{CMS.Models.role},System.String)">
+            <summary>
+            Sets roles for the selectbox
+            </summary>
+            <param name="roles">List of roles</param>
+            <param name="saved">Currently assigned roles</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_Edit.setCategories(System.Collections.Generic.List{CMS.Models.category},System.Collections.Generic.List{CMS.Models.articles_category})">
+            <summary>
+            Sets categories for the selectbox
+            </summary>
+            <param name="categories">List of categories</param>
+            <param name="saved">Currently assigned categories</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_Edit.setTags(System.Collections.Generic.List{CMS.Models.tag})">
+            <summary>
+            Sets tags for the selectbox
+            </summary>
+            <param name="categories">List of tags</param>
+            <param name="saved">Currently assigned tags</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="F:CMS.CMS.Ctrl.CMS_Controller._app">
+            <summary>
+            Application instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Ctrl.CMS_Controller._messages">
+            <summary>
+            Messages instance
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Ctrl.CMS_Controller.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Ctrl.CMS_Controller.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            ACL trigger
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="F:CMS.CMS.App.Roles.CMS_App_Roles._app">
+            <summary>
+            Application instance
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.#ctor(CMS.CMS.App.CMS_App)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="app">Application</param>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.getById(System.Int64)">
+            <summary>
+            Returns category identified by the specified ID
+            </summary>
+            <param name="id">User id</param>
+            <returns>Role represented by the given id</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.get(System.Int64,CMS.Models.ACLDataContext,System.Int32,System.Int32)">
+            <summary>
+            List of roles
+            </summary>
+            <param name="id">parent role (0 for root)</param>
+            <param name="a">DataContext</param>
+            <param name="start">How many roles have to be skipped</param>
+            <param name="count">The maximum amount of returned roles</param>
+            <returns>List of roles</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.get">
+            <summary>
+            Returns first ten roles in a list
+            </summary>
+            <returns>List of roles</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.get(System.Int64,System.Int32,System.Int32)">
+            <summary>
+            List of roles
+            </summary>
+            <param name="id">parent role (0 for root)</param>
+            <param name="start">How many roles have to be skipped</param>
+            <param name="count">The maximum amount of returned roles</param>
+            <returns>List of roles</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.add(System.Int64,CMS.Forms.Form_Role_Add)">
+            <summary>
+            Adds a new role
+            </summary>
+            <param name="parent">Parent role</param>
+            <param name="form">Role data</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.save(CMS.Forms.Form_Role_Add,CMS.Models.role)">
+            <summary>
+            Save changes to the given role
+            </summary>
+            <param name="form">Role data</param>
+            <param name="r">Role</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.getByName(System.String)">
+            <summary>
+            Gets role by role name
+            </summary>
+            <param name="name">role name</param>
+            <returns>Role</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.getCount">
+            <summary>
+            Gets count of roles
+            </summary>
+            <returns>Count of roles</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.delete(System.Int64)">
+            <summary>
+            Deletes a role with the specified id
+            </summary>
+            <param name="id">role id</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Roles.CMS_App_Roles.getAll">
+            <summary>
+            Gets all roles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:CMS.CMS.Form.Element.Form_ElementNameNotSetException.Message">
+            <summary>
+            Message property
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._name">
+            <summary>
+            element html attrbute name value
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._value">
+            <summary>
+            element value attribute value
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._label">
+            <summary>
+            element label
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._labeled">
+            <summary>
+            Does the element have a label (e.g. submit btn not)
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._class">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._validators">
+            <summary>
+            A list of attached validators
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._validationErrors">
+            <summary>
+            A list of validation errors
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element._req">
+            <summary>
+            NonEmptyValidator
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">HTML attribute name value</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.toString">
+            <summary>
+            ToString - returns HTML markup
+            </summary>
+            <returns>HTML markup</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.render">
+            <summary>
+            Returns HTML for the element
+            </summary>
+            <returns>markup</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.getName">
+            <summary>
+            HTML name attribute value getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.setName(System.String)">
+            <summary>
+            HTML name attribute value setter
+            </summary>
+            <param name="name">HTML name attr. value</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.setValue(System.String)">
+            <summary>
+            HTML value attribute value getter
+            </summary>
+            <param name="value">HTML value/text attr. value</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.getValue">
+            <summary>
+            HTML value attribute value getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element._filterName(System.String)">
+            <summary>
+            filters "bad" chars from the element's name
+            </summary>
+            <param name="name">name</param>
+            <returns>filtered name</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.setLabel(System.String)">
+            <summary>
+            Label setter
+            </summary>
+            <param name="label">label</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.getLabel">
+            <summary>
+            Label getter
+            </summary>
+            <returns>label</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.addValidator(CMS.CMS.Validator.CMS_Validator)">
+            <summary>
+            Attaches another validator
+            </summary>
+            <param name="v">validator</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.isValid">
+            <summary>
+            Checks if all validators validates the value as correct
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.setRequired">
+            <summary>
+            Adds NonEmpty validator
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.addValidationError(System.String)">
+            <summary>
+            Adds validation error
+            </summary>
+            <param name="e">Error</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.getValidationErrors">
+            <summary>
+            Returns array of validation error messages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.hasErrors">
+            <summary>
+            Checks if there was a validation error
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.setRequired(System.Boolean)">
+            <summary>
+            Sets if the value can be empty
+            </summary>
+            <param name="p">boolean</param>
+            <returns>Floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element.setClass(System.String)">
+            <summary>
+            Sets HTML attr class
+            </summary>
+            <param name="c">class</param>
+            <returns>Floating object</returns>
+        </member>
+        <member name="P:CMS.CMS.Form.Element.CMS_Form_Element.Labeled">
+            <summary>
+            Does this element type have a label?
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_File.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">name</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_File.render">
+            <summary>
+            Renders HTML markup
+            </summary>
+            <returns>HTML markup</returns>
+        </member>
+        <member name="F:CMS.CMS.Acl.ACLResourceNotRegisteredException._name">
+            <summary>
+            Resource name
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Acl.ACLResourceNotRegisteredException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Resource name</param>
+        </member>
+        <member name="P:CMS.CMS.Acl.ACLResourceNotRegisteredException.Message">
+            <summary>
+            Property for getting Error message
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Role._name">
+            <summary>
+            Role name
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Role._parent">
+            <summary>
+            parental role
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Role.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Role name</param>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Role.#ctor(System.String,CMS.CMS.Acl.CMS_Role)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Role name</param>
+            <param name="parent">Parentar role</param>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Role.getName">
+            <summary>
+            Return name of the role
+            </summary>
+            <returns>name</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Role.Equals(CMS.CMS.Acl.CMS_Role)">
+            <summary>
+            IEquatable method
+            </summary>
+            <param name="r">role</param>
+            <returns>Equality</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Role.getParent">
+            <summary>
+            Parental role
+            </summary>
+            <returns>parental role</returns>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Resource._name">
+            <summary>
+            resource name
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Resource._parent">
+            <summary>
+            parental resource
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Resource.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Resource name</param>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Resource.#ctor(System.String,CMS.CMS.Acl.CMS_Resource)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">resource name</param>
+            <param name="parent">parental resource</param>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Resource.getName">
+            <summary>
+            Get name of the resource
+            </summary>
+            <returns>name</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Resource.Equals(CMS.CMS.Acl.CMS_Resource)">
+            <summary>
+            IEquatable method
+            </summary>
+            <param name="r">Equals to</param>
+            <returns>equality</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Resource.getParent">
+            <summary>
+            Return parental resource
+            </summary>
+            <returns>parental resource</returns>
+        </member>
+        <member name="M:CMS.Helpers.CommentHelper.Help(System.Int64,System.Collections.Generic.Dictionary{System.Int64,System.Collections.Generic.List{CMS.Models.comment}},System.Boolean)">
+            <summary>
+            Renders comments tree
+            </summary>
+            <param name="key">current tree key</param>
+            <param name="tree">whole tree</param>
+            <param name="add">Render new comment link</param>
+            <returns>Rendered data</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_User_Add.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.Forms.Form_User_Add.setRoles(System.Collections.Generic.List{CMS.Models.role})">
+            <summary>
+            set roles for selectbox
+            </summary>
+            <param name="roles">roles</param>
+        </member>
+        <member name="M:CMS.Forms.Form_User_Add.setEditData(CMS.Models.user)">
+            <summary>
+            Sets edit data for edit mode
+            </summary>
+            <param name="u">user</param>
+        </member>
+        <member name="M:CMS.Forms.Form_Resource_Add.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.Forms.Form_Resource_Add.setEditData(CMS.Models.resource,System.Collections.Generic.List{CMS.Models.role},System.Collections.Generic.List{CMS.Models.role})">
+            <summary>
+            Sets data for edit mode
+            </summary>
+            <param name="r">resource</param>
+            <param name="roles">List of roles</param>
+            <param name="allowed">List of allowed roles</param>
+        </member>
+        <member name="M:CMS.Forms.Form_LoginForm.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Textarea.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Element name</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Textarea.render">
+            <summary>
+            Renders HTML markup
+            </summary>
+            <returns>HTML markup</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Textbox.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Element name</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Textbox.render">
+            <summary>
+            Renders HTML markup
+            </summary>
+            <returns>HTML markup</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_DateTime.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">name</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_DateTime.setValue(System.String)">
+            <summary>
+            Set value override
+            </summary>
+            <see cref="T:CMS.CMS.Form.Element.CMS_Form_Element"/>
+            <param name="value">Value</param>
+            <returns>Floating object</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_New.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_New.setAuthors(System.Collections.Generic.List{CMS.Models.author})">
+            <summary>
+            Sets data for the selecbox
+            </summary>
+            <param name="authors">list of authors</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_New.setRoles(System.Collections.Generic.List{CMS.Models.role})">
+            <summary>
+            Sets data for the selecbox
+            </summary>
+            <param name="authors">list of roles</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Article_New.setCategories(System.Collections.Generic.List{CMS.Models.category})">
+            <summary>
+            Sets data for the selecbox
+            </summary>
+            <param name="authors">list of categories</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="F:CMS.CMS.App.Resources.CMS_App_Resources._app">
+            <summary>
+            CMS_App instance
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.#ctor(CMS.CMS.App.CMS_App)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="app">Application</param>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.getById(System.Int64)">
+            <summary>
+            Returns resource identified by the specified ID
+            </summary>
+            <param name="id">resource id</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.get(CMS.Models.ACLDataContext)">
+            <summary>
+            Returns a list of resources
+            </summary>
+            <param name="a">DataContext</param>
+            <returns>List of resources</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.get">
+            <summary>
+            Returns a list of resources
+            </summary>
+            <returns>List of resources</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.add(CMS.Forms.Form_Resource_Add,System.Int64@)">
+            <summary>
+            Adds a new resource
+            </summary>
+            <param name="form">Resource data</param>
+            <param name="id">Resource id</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.save(CMS.Forms.Form_Resource_Add,CMS.Models.resource)">
+            <summary>
+            Save changes to the given resource
+            </summary>
+            <param name="form">Resource data</param>
+            <param name="edited">Edited resource</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.getRolesById(System.Int64)">
+            <summary>
+            Gets allowed roles for the given resource id
+            </summary>
+            <param name="id">resource id</param>
+            <returns>List of allowed roles</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.getCount">
+            <summary>
+            Gets count of resources
+            </summary>
+            <returns>Count of resources</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.get(System.Int32,System.Int32)">
+            <summary>
+            Gets list of resources
+            </summary>
+            <param name="start">How many resources have to be skipped</param>
+            <param name="count">Count of returned resources (max)</param>
+            <returns>List of resources</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Resources.CMS_App_Resources.delete(System.Int64)">
+            <summary>
+            Deletes a resource with the given id
+            </summary>
+            <param name="id">resource id</param>
+            <returns>success</returns>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element_Select._isMultiSelect">
+            <summary>
+            Determines if the element has multiple values
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element_Select._size">
+            <summary>
+            HTML size attr
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element_Select._values">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Element name</param>
+        </member>
+        <member name="F:CMS.CMS.Form.Element.CMS_Form_Element_Select._options">
+            <summary>
+            Options storage
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.addOption(System.String,System.String)">
+            <summary>
+            Adds a new option into the list of options
+            </summary>
+            <param name="key">posted value</param>
+            <param name="value">displayed label</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.setIsMultiSelect">
+            <summary>
+            Changes multiselect setting
+            </summary>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.setIsMultiSelect(System.Boolean)">
+            <summary>
+            Changes multiselect setting
+            </summary>
+            <param name="flag">flag</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.setSize(System.Int32)">
+            <summary>
+            Sets the size of the element
+            </summary>
+            <param name="size">Size</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.render">
+            <summary>
+            Renders HTML markup
+            </summary>
+            <returns>HTML markup</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.setValue(System.String)">
+            <summary>
+            HTML value attribute value getter
+            </summary>
+            <param name="value">HTML value/text attr. value</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.setValue(System.String[])">
+            <summary>
+            Sets values
+            </summary>
+            <param name="value">values sepatared by comma</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.getValue">
+            <summary>
+            Returns the only value if there is no more values
+            </summary>
+            <returns>value</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Select.getValues">
+            <summary>
+            Returns a list of values
+            </summary>
+            <returns>List of values</returns>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Acl._roles">
+            <summary>
+            Roles storage
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Acl._resources">
+            <summary>
+            Resources storage
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:CMS.CMS.Acl.CMS_Acl._allowed" -->
+        <!-- Badly formed XML comment ignored for member "F:CMS.CMS.Acl.CMS_Acl._denied" -->
+        <member name="M:CMS.CMS.Acl.CMS_Acl.addRole(CMS.CMS.Acl.CMS_Role)">
+            <summary>
+            Add the given role into the storage
+            </summary>
+            <param name="role">role instance</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.addResource(CMS.CMS.Acl.CMS_Resource)">
+            <summary>
+            Add the give resource into the storage
+            </summary>
+            <param name="resource">resource instance</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.allow(System.String,System.String)">
+            <summary>
+            Allow access for the given role to the given resource 
+            </summary>
+            <param name="role">role name</param>
+            <param name="resource">resource name</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.allow(CMS.CMS.Acl.CMS_Role,CMS.CMS.Acl.CMS_Resource)">
+            <summary>
+            Allow access for the given role to the given resource 
+            </summary>
+            <param name="role">role name</param>
+            <param name="resource">resource name</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.deny(CMS.CMS.Acl.CMS_Role,CMS.CMS.Acl.CMS_Resource)">
+            <summary>
+            Deny access for the given role to the given resource
+            </summary>
+            <param name="role">role instance</param>
+            <param name="resource">resource instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.isAllowed(System.String,System.String)">
+            <summary>
+            Determines if the given role has access to the given 
+            </summary>
+            <param name="role">role name</param>
+            <param name="resource">resource name</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.isAllowed(CMS.CMS.Acl.CMS_Role,CMS.CMS.Acl.CMS_Resource)">
+            <summary>
+            Determines if the given role has access to the given 
+            </summary>
+            <param name="role">role instance</param>
+            <param name="resource">resource instance</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl._getResourceByName(System.String)">
+            <summary>
+            Returns a stored instance of resource with the given name
+            </summary>
+            <param name="name">resource name</param>
+            <returns>resource instance</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl._getRoleByName(System.String)">
+            <summary>
+            Returns a stored instance of role with the given name
+            </summary>
+            <param name="name">role name</param>
+            <returns>role instance</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.Clone">
+            <summary>
+            IClonable method
+            </summary>
+            <returns>clone of the current instance</returns>
+        </member>
+        <member name="T:CMS.CMS.Acl.CMS_Acl.Couple">
+            <summary>
+            Class for comfortable handling paired roles and resources
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Acl.Couple._role">
+            <summary>
+            Role instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Acl.Couple._resource">
+            <summary>
+            Resource instance
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.Couple.#ctor(CMS.CMS.Acl.CMS_Role,CMS.CMS.Acl.CMS_Resource)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="role">Role</param>
+            <param name="resource">Resource</param>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.Couple.Equals(CMS.CMS.Acl.CMS_Acl.Couple)">
+            <summary>
+            IEquatable method for comparing couples
+            </summary>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CMS.CMS.Acl.CMS_Acl.CoupleList">
+            <summary>
+            List of couples (nested class)
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Acl.CMS_Acl.CoupleList._couples">
+            <summary>
+            List of couples
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.CoupleList.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.CoupleList.#ctor(System.Collections.Generic.List{CMS.CMS.Acl.CMS_Acl.Couple})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="couples">List of couples</param>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.CoupleList.Add(CMS.CMS.Acl.CMS_Acl.Couple)">
+            <summary>
+            Add a new couple into the list
+            </summary>
+            <param name="c"></param>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.CoupleList.Contains(CMS.CMS.Acl.CMS_Acl.Couple)">
+            <summary>
+            Determines if the given couple is in the list
+            </summary>
+            <param name="c">couple</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:CMS.CMS.Acl.CMS_Acl.CoupleList.Clone">
+            <summary>
+            ICloneable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._articles">
+            <summary>
+            CMS_App_Articles Instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._users">
+            <summary>
+            CMS_App_Users Instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._roles">
+            <summary>
+            CMS_App_Roles Instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._categories">
+            <summary>
+            CMS_App_Categories Instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._resources">
+            <summary>
+            CMS_App_Resources Instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._acl">
+            <summary>
+            CMS_Acl Instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._comments">
+            <summary>
+            CMS_App_Comments Instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._listLength">
+            <summary>
+            Length of lists
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.CMS_App._unregComm">
+            <summary>
+            Is unregistered user 
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.checkLevel(System.Int64)">
+            <summary>
+            Determines if logged user is allowed to access this resource level
+            </summary>
+            <param name="level">Resource level</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.allowedLevels">
+            <summary>
+            Get a list of levels allowed for the current user
+            </summary>
+            <returns>List of levels</returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.checkACL(System.String,CMS.CMS.Acl.CMS_Acl)">
+            <summary>
+            Checks if current user has privilegies to access the given resource
+            </summary>
+            <param name="resource">Resource name</param>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.articles">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.users">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.roles">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.categories">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.resources">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.comments">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.makeAlias(System.String)">
+            <summary>
+            remove diacritics and whitespace
+            </summary>
+            <param name="name">name</param>
+            <returns>name without diacritics</returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.dateFromString(System.String)">
+            <summary>
+            Constructs DateTime based on string
+            </summary>
+            <param name="str">date in Y-m-d H:i:s</param>
+            <returns>DateTime object</returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.dateToString(System.DateTime)">
+            <summary>
+            DateTime to Y-m-d H:i:s
+            </summary>
+            <param name="d">DateTime object</param>
+            <returns>date string</returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.reFormatDate(System.String)">
+            <summary>
+            Formats date from d.m.Y H:i:s to Y-m-d H:i:s
+            </summary>
+            <param name="str">date</param>
+            <returns>date</returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.getAcl">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.makeRss(System.Collections.Generic.List{CMS.Models.article})">
+            <summary>
+            Make RSS
+            </summary>
+            <param name="list">List of articles</param>
+            <returns>XML markup</returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.saveSettings(CMS.Forms.Form_Settings)">
+            <summary>
+            Saves settings
+            </summary>
+            <param name="form">Form instance</param>
+            <returns>boolean</returns>
+        </member>
+        <member name="P:CMS.CMS.App.CMS_App.ListLength">
+            <summary>
+            Property representing length of lists
+            </summary>
+        </member>
+        <member name="P:CMS.CMS.App.CMS_App.UnregistredComments">
+            <summary>
+            Property representing boolean value if an unregistered user user
+            is able to post comments
+            </summary>
+        </member>
+        <member name="M:CMS.Forms.Form_Settings.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="listLength">lists length</param>
+            <param name="unregComments">unregistred can comment</param>
+        </member>
+        <member name="M:CMS.Forms.Form_Author_Add.#ctor(System.Int64)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="id">user id</param>
+        </member>
+        <member name="M:CMS.Forms.Form_Author_Add.setEditData(CMS.Models.author)">
+            <summary>
+            Sets data for edit mode
+            </summary>
+            <param name="edited">edited entity</param>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator.validate(CMS.CMS.Form.Element.CMS_Form_Element)">
+            <summary>
+            Visitor pattern style method - validates the value of the given element
+            </summary>
+            <param name="e">Element</param>
+            <returns>is valid</returns>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_NonEmpty.validate(CMS.CMS.Form.Element.CMS_Form_Element)">
+            <summary>
+            Visitor pattern style method - validates the value of the given element
+            </summary>
+            <param name="e">Element</param>
+            <returns>is valid</returns>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.#ctor">
+            <summary>
+            Private constructor to avoid creating instances by other classes
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Services.CMS_Services_Message._instance">
+            <summary>
+            Singleton instance
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Services.CMS_Services_Message._messages">
+            <summary>
+            List of stored messages
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Services.CMS_Services_Message._errors">
+            <summary>
+            List of stored errors
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.getInstance">
+            <summary>
+            Singleton getInstance method
+            Returns new Instance if none exists, otherwise the existing one
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.addError(System.String)">
+            <summary>
+            Add the given error into the list
+            </summary>
+            <param name="error">Error message</param>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.addMessage(System.String)">
+            <summary>
+            Add the given message into the list
+            </summary>
+            <param name="message">Message</param>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.hasErrors">
+            <summary>
+            Is there any error?
+            </summary>
+            <returns>Error existence</returns>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.hasMessages">
+            <summary>
+            Is there any message?
+            </summary>
+            <returns>Message existence</returns>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.getMessages">
+            <summary>
+            Get the stored list of messages
+            </summary>
+            <returns>List of messages</returns>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.getErrors">
+            <summary>
+            Get the stored list of errors
+            </summary>
+            <returns>List of errors</returns>
+        </member>
+        <member name="M:CMS.CMS.Services.CMS_Services_Message.truncate">
+            <summary>
+            Removes all stored errors and messages
+            </summary>
+        </member>
+        <member name="P:CMS.CMS.Form.FormElementAlreadyAddedException.Message">
+            <summary>
+            Message property
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.Users.CMS_App_Users._app">
+            <summary>
+            Application
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.App.Users.CMS_App_Users._login">
+            <summary>
+            Login
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.#ctor(CMS.CMS.App.CMS_App)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="app">Application</param>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getById(System.Int64)">
+            <summary>
+            Returns user identified by the specified ID
+            </summary>
+            <param name="id">User id</param>
+            <returns>User</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getCountByUsernameAndPassword(System.String,System.String)">
+            <summary>
+            Returns count of users matching given username and password
+            expected count should be 0 or 1
+            </summary>
+            <param name="username">Username</param>
+            <param name="password">Pasword</param>
+            <returns>Amount of users matching given credentials</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getByUsernameAndPassword(System.String,System.String)">
+            <summary>
+            Gets a user by the specified username and password
+            </summary>
+            <param name="username">username</param>
+            <param name="password">password</param>
+            <returns>user</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.isLogged">
+            <summary>
+            Determines if the user is logged
+            </summary>
+            <returns>boolean</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getLogged">
+            <summary>
+            Gets logged user instance
+            </summary>
+            <returns>Logged user</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getAuthors(CMS.Models.ArticleDataContext)">
+            <summary>
+            Gets a list of all authors
+            </summary>
+            <param name="a">DataContext</param>
+            <returns>List of authors</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getAuthors">
+            <summary>
+            Gets a list of all authors
+            </summary>
+            <returns>List of authors</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.get">
+            <summary>
+            Gets a list of all users
+            </summary>
+            <returns>List of users</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.add(CMS.Forms.Form_User_Add)">
+            <summary>
+            Adds a new user
+            </summary>
+            <param name="form">User data</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.save(CMS.Forms.Form_User_Add,CMS.Models.user)">
+            <summary>
+            Save changes to the given user
+            </summary>
+            <param name="form">User data</param>
+            <param name="edited">Edited user</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.removeAuthorByUserId(System.Int64)">
+            <summary>
+            Removes an author from the system (if there is no article written by him - DB FK)
+            </summary>
+            <param name="id">User id</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.promoteUser(CMS.Forms.Form_Author_Add,System.Int64)">
+            <summary>
+            Adds an author to the system
+            </summary>
+            <param name="form">Author data</param>
+            <param name="id">User id</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getAuthorByUserId(System.Int64)">
+            <summary>
+            Gets an author for a user specified by the given id
+            </summary>
+            <param name="uid">User id</param>
+            <returns>author</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.saveAuthor(CMS.Forms.Form_Author_Add,CMS.Models.author)">
+            <summary>
+            Save changes to the given author
+            </summary>
+            <param name="form">Author data</param>
+            <param name="edited">Edited author</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.getCount">
+            <summary>
+            Gets count of users
+            </summary>
+            <returns>Count of users</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Users.CMS_App_Users.delete(System.Int64)">
+            <summary>
+            Deletes a user with the given id
+            </summary>
+            <param name="id">user id</param>
+            <returns>success</returns>
+        </member>
+        <member name="F:CMS.CMS.Validator.CMS_Validator_StringLength._maxlength">
+            <summary>
+            Maximal length of filled value
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Validator.CMS_Validator_StringLength._minlength">
+            <summary>
+            Minimal length of filled value
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_StringLength.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_StringLength.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="min">minimal length</param>
+            <param name="max">maximal length</param>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_StringLength.setMaxLength(System.Int32)">
+            <summary>
+            Sets the maximal length
+            </summary>
+            <param name="max">length</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_StringLength.setMinLength(System.Int32)">
+            <summary>
+            Sets the minimal length
+            </summary>
+            <param name="min">length</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_StringLength.validate(CMS.CMS.Form.Element.CMS_Form_Element)">
+            <summary>
+            Visitor pattern style method - validates the value of the given element
+            </summary>
+            <param name="e">Element</param>
+            <returns>is valid</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Submit.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Element name</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Submit.render">
+            <summary>
+            Returns HTML for the element
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Submit.setValue(System.String)">
+            <summary>
+            Sets label through input value attrivute
+            </summary>
+            <param name="value">Label</param>
+            <returns>floating object</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Submit.getValue">
+            <summary>
+            Returns label
+            </summary>
+            <returns>label</returns>
+        </member>
+        <member name="P:CMS.CMS.Form.Element.CMS_Form_Element_Submit.Labeled">
+            <summary>
+            Labeled flag - there is no need to render dt label for submit button
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App_Authors.getAll">
+            <summary>
+            Returns all authors
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_Email.validate(CMS.CMS.Form.Element.CMS_Form_Element)">
+            <summary>
+            Visitor pattern style method - validates the value of the given element
+            </summary>
+            <param name="e">Element</param>
+            <returns>is valid</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Password.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Element name</param>
+        </member>
+        <member name="M:CMS.CMS.Form.Element.CMS_Form_Element_Password.render">
+            <summary>
+            Returns HTML for the element
+            </summary>
+            <returns>HTML markup</returns>
+        </member>
+        <member name="M:CMS.Forms.Form_Comment_New.#ctor(System.Int64,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="id">id</param>
+            <param name="ident">ident (art or parent)</param>
+        </member>
+        <member name="P:CMS.CMS.Form.FormActionNotSetException.Message">
+            <summary>
+            Message property
+            </summary>
+        </member>
+        <member name="F:CMS.CMS.Form.CMS_Action._url">
+            <summary>
+            Action URL
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Action.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="url">Action URL</param>
+        </member>
+        <member name="M:CMS.CMS.Form.CMS_Action.ToString">
+            <summary>
+            Returns a string representing the object
+            </summary>
+            <returns>String representation</returns>
+        </member>
+        <member name="F:CMS.CMS.App.Articles.CMS_App_Articles._app">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.#ctor(CMS.CMS.App.CMS_App)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getFrontpage(System.Int32,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getFrontpage(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getFrontpage(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getFrontpageArticlesCount">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getAll">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getAll(CMS.Models.ArticleDataContext)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getById(System.Int64,CMS.Models.ArticleDataContext)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.newArticle(CMS.CMS.Form.CMS_Form,System.Web.HttpRequestBase)">
+            <summary>
+            
+            </summary>
+            <param name="form"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.saveArticle(CMS.CMS.Form.CMS_Form,System.Web.HttpRequestBase)">
+            <summary>
+            
+            </summary>
+            <param name="form"></param>
+            <param name="Request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getAuthorsById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getAuthorsListById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getCategoriesById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getCategoriesListById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getTagsById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.deleteArticle(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getAllLevels">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getAuthorsStringById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getCommentsById(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getByCategoryId(System.Int64,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="count"></param>
+            <param name="start"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getCountByCategoryId(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getByAuthorId(System.Int64,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="count"></param>
+            <param name="start"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getCountByAuthorId(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Articles.CMS_App_Articles.getCount">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.Validator.CMS_Validator_DateTime.validate(CMS.CMS.Form.Element.CMS_Form_Element)">
+            <summary>
+            Visitor pattern style method - validates the value of the given element
+            </summary>
+            <param name="e">Element</param>
+            <returns>is valid</returns>
+        </member>
+        <member name="M:CMS.CMS.Form.Method.CMS_Method_Get.ToString">
+            <summary>
+            To string method
+            </summary>
+            <returns>get</returns>
+        </member>
+        <member name="F:CMS.CMS.App.Categories.CMS_App_Categories._app">
+            <summary>
+            CMS_App instance
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.#ctor(CMS.CMS.App.CMS_App)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="app">CMS_App instance</param>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.getById(System.Int64)">
+            <summary>
+            Returns category identified by the specified ID
+            </summary>
+            <param name="id">User id</param>
+            <returns>Category represented by the specified id</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.get(System.Int64,CMS.Models.ArticleDataContext,System.Int32,System.Int32)">
+            <summary>
+            Returns a list of categories
+            </summary>
+            <param name="id">Parent category id (0 for root)</param>
+            <param name="a">Data context</param>
+            <param name="start">How many categories should be skipped</param>
+            <param name="count">Amount of returned categories</param>
+            <returns>List of categories</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.get">
+            <summary>
+            Returns first 10 categories (root children)
+            </summary>
+            <returns>List of categories</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.get(System.Int64,System.Int32,System.Int32)">
+            <summary>
+            Returns a list of categories
+            </summary>
+            <param name="id">Parent category id (0 for root)</param>
+            <param name="start">How many categories should be skipped</param>
+            <param name="count">Amount of returned categories</param>
+            <returns>List of categories</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.add(System.Int64,CMS.Forms.Form_Category_Add)">
+            <summary>
+            Adds a new child for the given parent category
+            </summary>
+            <param name="parent">parent category (0 for root)</param>
+            <param name="form">form containig data</param>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.save(CMS.Forms.Form_Category_Add,CMS.Models.category)">
+            <summary>
+            Save changes for the given category
+            </summary>
+            <param name="form">form containing data</param>
+            <param name="c">category</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.getCount(System.Int64)">
+            <summary>
+            Get count of children for the given category (0 for root)
+            </summary>
+            <returns>count of children</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.delete(System.Int64)">
+            <summary>
+            Deletes a category specified by the given id
+            </summary>
+            <param name="id">category id</param>
+            <returns>success</returns>
+        </member>
+        <member name="M:CMS.CMS.App.Categories.CMS_App_Categories.getAll">
+            <summary>
+            Gets all categories
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

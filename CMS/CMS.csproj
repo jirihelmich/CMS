@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AEC61D35-9FEE-40CD-8E50-2D3BBF94EDC0}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMS</RootNamespace>
+    <AssemblyName>CMS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\CMS.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>libs\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.AspNet4">
+      <HintPath>libs\Microsoft.Web.Mvc.AspNet4.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.Build">
+      <HintPath>libs\Microsoft.Web.Mvc.Build.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CMS\Acl\ACLResourceNotRegisteredException.cs" />
+    <Compile Include="CMS\Acl\ACLRoleNotRegisteredException.cs" />
+    <Compile Include="CMS\Acl\CMS_Resource.cs" />
+    <Compile Include="CMS\Acl\CMS_Role.cs" />
+    <Compile Include="CMS\App\CMS_App_Pages.cs" />
+    <Compile Include="CMS\App\CMS_App_Articles.cs" />
+    <Compile Include="CMS\App\CMS_App.cs" />
+    <Compile Include="CMS\Acl\CMS_Acl.cs" />
+    <Compile Include="CMS\App\CMS_App_Authors.cs" />
+    <Compile Include="CMS\App\CMS_App_Comments.cs" />
+    <Compile Include="CMS\App\CMS_App_Users.cs" />
+    <Compile Include="CMS\App\CMS_App_Roles.cs" />
+    <Compile Include="CMS\App\CMS_App_Categories.cs" />
+    <Compile Include="CMS\FileUploadJsonResult.cs" />
+    <Compile Include="CMS\Ctrl\CMS_Controller.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element_DateTime.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element_File.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element_Select.cs" />
+    <Compile Include="CMS\InputModels\PageInputModel.cs" />
+    <Compile Include="CMS\Login\CMS_Login.cs" />
+    <Compile Include="CMS\OutputModels\DocumentOutputModel.cs" />
+    <Compile Include="CMS\OutputModels\LangOutputModel.cs" />
+    <Compile Include="CMS\OutputModels\PageListOutputModel.cs" />
+    <Compile Include="CMS\Validator\CMS_Validator.cs" />
+    <Compile Include="CMS\Form\CMS_Form.cs" />
+    <Compile Include="CMS\Form\Action\CMS_Action.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element_Textarea.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element_Password.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element_Submit.cs" />
+    <Compile Include="CMS\Form\FormActionNotSetException.cs" />
+    <Compile Include="CMS\Form\FormElementAlreadyAddedException.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element_Textbox.cs" />
+    <Compile Include="CMS\Form\Element\CMS_Form_Element.cs" />
+    <Compile Include="CMS\Form\Element\Form_ElementNameNotSetException.cs" />
+    <Compile Include="CMS\Form\Method\CMS_Method_Get.cs" />
+    <Compile Include="CMS\Form\Method\CMS_Method_Post.cs" />
+    <Compile Include="CMS\Form\Method\CMS_Method.cs" />
+    <Compile Include="CMS\Services\CMS_Services_Message.cs" />
+    <Compile Include="CMS\Validator\CMS_Validator_DateTime.cs" />
+    <Compile Include="CMS\Validator\CMS_Validator_NonEmpty.cs" />
+    <Compile Include="CMS\Validator\CMS_Validator_StringLength.cs" />
+    <Compile Include="Controllers\BackendController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Page_New.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ACL.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ACL.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lang.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\CMS.mdf">
+    </Content>
+    <Content Include="App_Data\CMS_log.ldf">
+      <DependentUpon>CMS.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\Admin.css" />
+    <Content Include="Content\tablecloth.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\ckeditor.js" />
+    <Content Include="Scripts\ckeditor_basic.js" />
+    <Content Include="Scripts\ckeditor_basic_source.js" />
+    <Content Include="Scripts\ckeditor_source.js" />
+    <Content Include="Scripts\config.js" />
+    <Content Include="Scripts\effects.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Views\Article\Detail.aspx" />
+    <Content Include="Views\Author\List.aspx" />
+    <Content Include="Views\Backend\AddCategory.aspx" />
+    <Content Include="Views\Backend\AddPage.aspx" />
+    <Content Include="Views\Backend\AddResource.aspx" />
+    <Content Include="Views\Backend\AddRole.aspx" />
+    <Content Include="Views\Backend\AddUser.aspx" />
+    <Content Include="Views\Backend\EditAuthor.aspx" />
+    <Content Include="Views\Backend\EditUser.aspx" />
+    <Content Include="Views\Backend\Index.aspx" />
+    <Content Include="Views\Backend\ListPages.aspx" />
+    <Content Include="Views\Backend\ListRoles.aspx" />
+    <Content Include="Views\Backend\EditRole.aspx" />
+    <Content Include="Views\Backend\EditCategory.aspx" />
+    <Content Include="Views\Backend\EditResource.aspx" />
+    <Content Include="Views\Backend\EditArticle.aspx" />
+    <Content Include="Views\Backend\ListArticles.aspx" />
+    <Content Include="Views\Backend\ListCategories.aspx" />
+    <Content Include="Views\Backend\ListResources.aspx" />
+    <Content Include="Views\Backend\ListUsers.aspx" />
+    <Content Include="Views\Backend\NewArticle.aspx" />
+    <Content Include="Views\Backend\PromoteUser.aspx" />
+    <Content Include="Views\Backend\Settings.aspx" />
+    <Content Include="Views\Comment\Add.aspx" />
+    <Content Include="Views\Feed\Rss.aspx" />
+    <Content Include="Views\Category\List.aspx" />
+    <Content Include="Views\User\Login.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.3.2.js" />
+    <Content Include="Scripts\jquery-1.3.2.min.js" />
+    <Content Include="Scripts\jquery-1.3.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.3.2.min-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Lang.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Lang.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Models\User.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>User.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Shared\Admin.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\User.dbml.layout">
+      <DependentUpon>User.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\ACL.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ACL.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\ACL.dbml.layout">
+      <DependentUpon>ACL.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CMS\App\CMS_App_Resources.cs" />
+    <Compile Include="CMS\Validator\CMS_Validator_Email.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
+    <Compile Include="Forms\Form_Article_Edit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Article_New.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Author_Add.cs" />
+    <Compile Include="Forms\Form_Category_Add.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Comment_New.cs" />
+    <Compile Include="Forms\Form_LoginForm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Resource_Add.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Role_Add.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Settings.cs" />
+    <Compile Include="Forms\Form_User_Add.cs" />
+    <Compile Include="Helpers\CommentHelper.cs" />
+    <Compile Include="Models\Settings.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.dbml</DependentUpon>
+    </Compile>
+    <None Include="Models\Settings.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Settings.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Settings.dbml.layout">
+      <DependentUpon>Settings.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Lang.dbml.layout">
+      <DependentUpon>Lang.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>17815</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

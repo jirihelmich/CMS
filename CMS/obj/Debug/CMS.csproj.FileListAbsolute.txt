@@ -1,0 +1,5 @@
+C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\bin\CMS.dll
+C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\bin\CMS.pdb
+C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\obj\Debug\CMS.dll
+C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\obj\Debug\CMS.pdb
