@@ -18,6 +18,7 @@ namespace CMS.CMS.InputModels
                 public String content {get; set; }
             }
 
+            public long? Id { get; set; }
             public String lang { get; set; }
             public PageData data { get; set; }
         }

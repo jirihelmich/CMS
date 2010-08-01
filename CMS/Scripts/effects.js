@@ -12,33 +12,84 @@ $(document).ready(function () {
                 url: "/backend/deletePageAjax",
                 type: "POST",
                 dataType: 'json',
-                data: { id: parseInt(el.attr(rel)) },
+                data: { id: parseInt(el.attr('rel')) },
                 //contentType: 'application/json; charset=utf-8',
                 success: function (data) {
 
                     data = eval("(" + data + ")");
 
-                    if (data.result) {
-                        el.fadeOut().remove();
+                    if (data) {
+                        el.parents("tr").fadeOut().remove();
                     } else {
-
+                        alert("Došlo k chybě.");
                     }
 
                 }
 
             });
-
         }
+
+        return false;
     });
 
     var documentUploadInProgress = false;
 
     switch (true) {
         case $("#add-static-page").length > 0:
-
             bindAddStaticPage();
-
             break;
+
+        case $("#edit-static-page").length > 0:
+            bindEditStaticPage();
+            break;
+
+        case $("#add-category").length > 0:
+            bindAddCategory();
+            break;
+
+        case $("#edit-category").length > 0:
+            bindEditCategory();
+            break;
+
+        case $("#categories-list").length > 0:
+            bindListCategories();
+            break;
+    }
+
+    function bindListCategories() {
+        $(".category").draggable({ revert: 'invalid' });
+        $(".category").droppable({ greedy: true, drop: function () {
+
+        }
+        });
+
+        $(".category .delete").click(function () {
+
+            var cat = $(this).parents(".category").eq(0);
+
+            if (confirm("Opravdu chcete kategorii smazat?")) {
+                $.ajax({
+                    url: "/backend/deleteCategoryAjax",
+                    type: "POST",
+                    dataType: 'json',
+                    data: Json.toString({ id: cat.attr('id') }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        var data = eval('(' + data + ')');
+
+                        if (data.result) {
+                            cat.fadeOut().remove();
+                        } else {
+                            alert(data.errMsg);
+                        }
+
+                    }
+
+                });
+            }
+
+        });
     }
 
     function collectAddPageParams() {
@@ -80,6 +131,261 @@ $(document).ready(function () {
         });
 
         return JSON.stringify({ request: out });
+    }
+
+    function collectEditPageParams() {
+        var out = [];
+
+        $("#edit-page-container>div").each(function () {
+            var div = $(this);
+            var lang = div.attr('id');
+
+            var docs = [];
+            var imgs = [];
+
+            $(".file", div).each(function () {
+                var item = $(this);
+                var i = {
+                    title: $(".name", item).text(),
+                    id: item.attr('id')
+                };
+
+                if (item.parents(".docs").length > 0) {
+                    docs.push(i);
+                } else {
+                    imgs.push(i);
+                }
+            });
+
+
+            out.push({
+                id: parseInt($("#edit-static-page").attr("rel")),
+                lang: lang,
+                data: {
+                    title: $("#title-" + lang).val(),
+                    text: CKEDITOR.instances["text-" + lang].getData()
+                },
+                files: {
+                    docs: docs,
+                    images: imgs
+                }
+            });
+        });
+
+        return JSON.stringify({ request: out });
+    }
+
+    function bindEditCategory() {
+
+        window.onbeforeunload = function () {
+            return "Vámi provedené změny v takovém případě nebudou uloženy!";
+        }
+
+        $("#edit-category-container #tabs").tabs();
+
+
+        $("#cancel").click(function () {
+            window.onbeforeunload = null;
+
+            document.location.href = "/backend/listCategories";
+        });
+
+        $("#save").click(function () {
+
+            $.ajax({
+                url: "/backend/editCategoryAjax",
+                type: "POST",
+                dataType: 'json',
+                data: collectEditCategoryParams(),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var data = eval('(' + data + ')');
+
+                    if (data.result) {
+                        $("#cancel").click();
+                    } else {
+                        alert(data.errMsg);
+                    }
+
+                }
+
+            });
+        });
+    }
+
+    function collectEditCategoryParams() {
+
+        data = JSON.parse(collectAddCategoryParams());
+
+        data.id = $("#edit-category").attr("rel");
+
+        return JSON.toString(data);
+
+    }
+
+    function bindAddCategory() {
+
+        window.onbeforeunload = function () {
+            return "Vámi provedené změny v takovém případě nebudou uloženy!";
+        }
+
+        $("#add-category-container #tabs").tabs();
+
+
+        $("#cancel").click(function () {
+            window.onbeforeunload = null;
+
+            document.location.href = "/backend/listCategories";
+        });
+
+        $("#save").click(function () {
+
+            $.ajax({
+                url: "/backend/addCategoryAjax",
+                type: "POST",
+                dataType: 'json',
+                data: collectAddCategoryParams(),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var data = eval('(' + data + ')');
+
+                    if (data.result) {
+                        $("#cancel").click();
+                    } else {
+                        alert(data.errMsg);
+                    }
+
+                }
+
+            });
+        });
+    }
+
+    function collectAddCategoryParams() {
+        var out = [];
+
+        $("#add-category-container #tabs>div").each(function () {
+
+            var lang = $(this).attr("id");
+
+            var obj = {
+                lang: lang,
+                data: {
+                    title: $("#title-" + lang).val(),
+                    content: CKEDITOR.instances["description-" + lang].getData()
+                }
+            };
+
+            out.push(obj);
+        });
+
+        var parentId = ($("#tree input").length > 0 ? $("#tree input[checked=checked]").attr('id') : null);
+
+        return JSON.stringify({ request: out, parent: parentId });
+    }
+
+    function bindEditStaticPage() {
+
+        window.onbeforeunload = function () {
+            return "Vámi provedené změny v takovém případě nebudou uloženy!";
+        }
+
+        $("#save").click(function () {
+
+            $.ajax({
+                url: "/backend/editPageAjax",
+                type: "POST",
+                dataType: 'json',
+                data: collectEditPageParams(),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var data = eval('(' + data + ')');
+
+                    if (data.result) {
+                        $("#cancel").click();
+                    } else {
+                        alert(data.errMsg);
+                    }
+
+                }
+
+            });
+        });
+
+        $("#cancel").click(function () {
+            window.onbeforeunload = null;
+
+            document.location.href = "/backend/listPages";
+        });
+
+        $("#edit-page-container").tabs();
+
+        window.setInterval(function () {
+            $("[id^=document]").add("[id^=image]").each(function () {
+                var el = $(this);
+
+                if (!documentUploadInProgress && el.val().length > 0) {
+                    el.parents("form").submit();
+                    documentUploadInProgress = true;
+                }
+
+            });
+        }, 500);
+
+        $("#title-change").dialog({ modal: true, autoOpen: false });
+
+        $("[id^=files] .edit").live('click', function () {
+
+            var el = $(this);
+
+            $("#title-change").dialog("option", "buttons", {
+                "Hotovo": function () {
+                    if ($("#title-change input").val().length > 0) {
+                        $(".name", el.parents(".file")).text($("#title-change input").val());
+                        $("#title-change input").val("");
+                    }
+                    $(this).dialog('close');
+                },
+                "Storno": function () {
+                    $(this).dialog('close');
+                }
+            });
+            $("#title-change").dialog('open');
+        });
+
+        $("[id^=files] .delete").live('click', function () {
+            $(this).parents(".file").fadeOut().remove();
+        });
+
+        $("[id^=ajaxUploadForm]").each(function () {
+            var form = $(this);
+
+            form.ajaxForm({
+                iframe: true,
+                dataType: "json",
+                beforeSubmit: function () {
+                    form.fadeOut("fast", function () {
+                        form.after('<span class="uploadInfo">Nahrávám...</span>');
+                    });
+                },
+                success: function (result) {
+                    form.resetForm();
+                    documentUploadInProgress = false;
+                    $(".uploadInfo").remove();
+                    form.fadeIn();
+                    form.next(".uploaded").eq(0).append('<span class="file"><span class="name">' + result.name + '</span><span class="edit">E</span><span class="delete">X</span></span>');
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    form.resetForm();
+                    documentUploadInProgress = false;
+                    $(".uploadInfo").remove();
+                    form.fadeIn();
+                }
+            });
+        });
     }
 
     function bindAddStaticPage() {

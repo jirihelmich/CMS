@@ -12,6 +12,8 @@ using System.Xml.Linq;
 using CMS.Models;
 using System.Collections.Generic;
 using CMS.Forms;
+using CMS.CMS.OutputModels;
+using CMS.CMS.InputModels;
 
 namespace CMS.CMS.App.Categories
 {
@@ -36,7 +38,7 @@ namespace CMS.CMS.App.Categories
         /// </summary>
         /// <param name="id">User id</param>
         /// <returns>Category represented by the specified id</returns>
-        public category getById(long id)
+        public CategoryOutputModel getById(long id)
         {
             using (LangDataContext a = new LangDataContext())
             {
@@ -46,7 +48,7 @@ namespace CMS.CMS.App.Categories
                         .Where(x => x.id == id)
                         .Single();
 
-                    return data;
+                    return fillCategoryModel(data);
                 }
                 catch (Exception)
                 {
@@ -141,6 +143,48 @@ namespace CMS.CMS.App.Categories
             return true;
         }
 
+        public long add(CategoryInputModel input)
+        {
+            using (LangDataContext dataContext = new LangDataContext())
+            {
+                category c = new category();
+
+                text title = new text();
+                text content = new text();
+
+                dataContext.categories.InsertOnSubmit(c);
+                dataContext.texts.InsertOnSubmit(title);
+                dataContext.texts.InsertOnSubmit(content);
+
+                c.text = content;
+                c.text1 = title;
+
+                foreach (CategoryInputModel.Category cat in input.request)
+                {
+                    texts_value titleValue = new texts_value();
+                    titleValue.culture = cat.lang;
+                    titleValue.value = cat.data.Title;
+                    titleValue.text = title;
+
+                    texts_value contentValue = new texts_value();
+                    contentValue.culture = cat.lang;
+                    contentValue.value = cat.data.Content;
+                    contentValue.text = content;
+
+                    dataContext.texts_values.InsertOnSubmit(titleValue);
+                    dataContext.texts_values.InsertOnSubmit(contentValue);
+                }
+
+                c.parentid = input.Parent;
+                c.date = DateTime.Now;
+
+                dataContext.SubmitChanges();
+
+                return c.id;
+
+            }
+        }
+
         /// <summary>
         /// Save changes for the given category
         /// </summary>
@@ -218,12 +262,64 @@ namespace CMS.CMS.App.Categories
         /// Gets all categories
         /// </summary>
         /// <returns></returns>
-        public List<category> getAll()
+        public List<CategoryOutputModel> getAll()
+        {
+            using (LangDataContext a = new LangDataContext())
+            {
+                List<CategoryOutputModel> ret = new List<CategoryOutputModel>();
+
+                var data = a.categories;//.OrderBy(x => x.text.texts_values.Single().value);
+
+                foreach (category c in data)
+                {
+                    ret.Add(fillCategoryModel(c));
+                }
+
+                return ret;
+            }
+        }
+
+        public List<category> getList()
         {
             using (LangDataContext a = new LangDataContext())
             {
                 return a.categories.ToList();
             }
+        }
+
+        public CategoryOutputModel fillCategoryModel(category c)
+        { 
+            if (c == null) return null;
+
+            CategoryOutputModel om = new CategoryOutputModel();
+            om.Id = c.id;
+
+            om.Parent = fillCategoryModel(c.category1);
+
+            om.Content = this._app.fillLangModel(c.text.texts_values);
+            om.Title = this._app.fillLangModel(c.text1.texts_values);
+
+            return om;
+        }
+
+        public bool edit(CategoryInputModel input)
+        {
+            using (LangDataContext dc = new LangDataContext())
+            {
+                category c = dc.categories.Where(x => x.id == input.Id).Single();
+
+                String[] langs = new String[] {"cz", "gb", "de", "ru"};
+
+                foreach (String lang in langs)
+                {
+                    c.text1.texts_values.Where(x => x.culture == lang).Single().value = input.request.Where(x => x.lang == lang).Single().data.Title;
+                    c.text.texts_values.Where(x => x.culture == lang).Single().value = input.request.Where(x => x.lang == lang).Single().data.Content;
+                }
+
+                dc.SubmitChanges();
+            }
+
+            return true;
         }
     }
 }

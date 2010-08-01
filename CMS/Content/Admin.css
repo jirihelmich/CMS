@@ -48,7 +48,7 @@ body{
 }
 
 #container{
-	background: url(images/admin/header.png) repeat-x top left;
+	background: url(css/images/admin/header.png) repeat-x top left;
 	min-width: 1000px;
 }
 
@@ -185,20 +185,20 @@ dd{
 #navigation ul#nav li#nav-active a.top{
 	text-decoration: none;
 	color:#000;
-	background: url(images/admin/active-background.png);
+	background: url(css/images/admin/active-background.png);
 }
 
 #navigation ul#nav li#nav-active a span {
 	text-decoration: none;
 	color:#000;
 	display: block;	height: 100%;
-	background: url(images/admin/active-background-left-corner.png) no-repeat top left;
+	background: url(css/images/admin/active-background-left-corner.png) no-repeat top left;
 }
 #navigation ul#nav li#nav-active a.top span span{
 	text-decoration: none;
 	color:#000;
 	height: 100%;
-	background: url(images/admin/active-background-right-corner.png) no-repeat top right ;
+	background: url(css/images/admin/active-background-right-corner.png) no-repeat top right ;
 }
 
 
@@ -298,7 +298,7 @@ position:relative;
 
 .highlight .left-corner{
 	display: block;
-	background: url(images/admin/in-box-highlight-left.png);
+	background: url(css/images/admin/in-box-highlight-left.png);
 	width: 9px;
 	height: 17px;
 	position:absolute;
@@ -308,7 +308,7 @@ position:relative;
 
 .highlight .right-corner{
 	display: block;
-	background: url(images/admin/in-box-highlight-right.png) no-repeat;
+	background: url(css/images/admin/in-box-highlight-right.png) no-repeat;
 	width: 12px;
 	height: 17px;
 	position:absolute;
@@ -318,7 +318,7 @@ position:relative;
 
 .left-corner{
 	display: block;
-	background: url(images/admin/in-box-left.png);
+	background: url(css/images/admin/in-box-left.png);
 	width: 11px;
 	height: 20px;
 	position:absolute;
@@ -329,7 +329,7 @@ position:relative;
 }
 .right-corner{
 	display: block;
-	background: url(images/admin/in-box-right.png) no-repeat;
+	background: url(css/images/admin/in-box-right.png) no-repeat;
 	width: 13px;
 	height: 20px;
 	position:absolute;
@@ -373,7 +373,7 @@ position:relative;
 /*
 .box-content ul li{
 	padding-left: 30px;
-	background: url(images/admin/list.png) no-repeat left center;
+	background: url(css/images/admin/list.png) no-repeat left center;
 }
 */
 
@@ -386,29 +386,29 @@ position:relative;
 	margin: 0;
 	height: 38px;
 	display: block;
-	background: url(images/admin/header-background-red.png) repeat-x;
+	background: url(css/images/admin/header-background-red.png) repeat-x;
 	color: #fff;
 	font-weight: bold;
 }
 
 .box-name span{
 	display: block;
-	background: url(images/admin/header-background-left-corner-red.png) no-repeat top left;
+	background: url(css/images/admin/header-background-left-corner-red.png) no-repeat top left;
 }
 
 .box-name span span{
 	display: block;
-	background: url(images/admin/header-background-right-corner-red.png) no-repeat top right;
+	background: url(css/images/admin/header-background-right-corner-red.png) no-repeat top right;
 	padding: 10px 20px 0 20px;
 }
 /*
 .box-name #arrow{
-	background: url(images/admin/header-background-left-corner-red.png) no-repeat top right;
+	background: url(css/images/admin/header-background-left-corner-red.png) no-repeat top right;
 }
 */
 
 .move{
-		background: url(images/admin/move-box.png) no-repeat top right;
+		background: url(css/images/admin/move-box.png) no-repeat top right;
 		padding: 10px;
 }
 
@@ -499,7 +499,7 @@ dd{
 
 .smallLoader{
 	margin-left: 15px;
-	background: transparent url(images/admin/loader.gif) no-repeat left center;
+	background: transparent url(css/images/admin/loader.gif) no-repeat left center;
 	width: 16px;
 	height: 16px;
 }
@@ -582,31 +582,31 @@ a img
 }
 
 #dashboard li#categories a{
-	background-image: url(images/admin/categories.png);
+	background-image: url(css/images/admin/categories.png);
 }
 
 #dashboard li#users a{
-	background-image: url(images/admin/users.png);
+	background-image: url(css/images/admin/users.png);
 }
 
 #dashboard li#access a{
-	background-image: url(images/admin/access.png);
+	background-image: url(css/images/admin/access.png);
 }
 
 #dashboard li#static a{
-	background-image: url(images/admin/static.png);
+	background-image: url(css/images/admin/static.png);
 }
 
 #dashboard li#products a{
-	background-image: url(images/admin/products.png);
+	background-image: url(css/images/admin/products.png);
 }
 
 #dashboard li#settings a{
-	background-image: url(images/admin/settings.png);
+	background-image: url(css/images/admin/settings.png);
 }
 
 #dashboard li#files a{
-	background-image: url(images/admin/files.png);
+	background-image: url(css/images/admin/files.png);
 }
 
 .largeField
@@ -618,4 +618,23 @@ a img
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #000045;
+}
+
+#categories-list .category
+{
+  background-color: Gray;
+  height: 30px;
+  border: 1px solid black;
+  display: block;  
+  margin-bottom: 10px;
+}
+
+.category .controls
+{
+  float: right;  
+}
+
+.category .move
+{
+  cursor: move;  
 }

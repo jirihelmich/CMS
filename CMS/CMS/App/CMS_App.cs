@@ -18,6 +18,8 @@ using System.Xml;
 using System.IO;
 using System.Configuration;
 using CMS.Forms;
+using CMS.CMS.OutputModels;
+using CMS.Models;
 
 namespace CMS.CMS.App
 {
@@ -515,6 +517,8 @@ namespace CMS.CMS.App
             }
         }
 
+        
+
         public Object saveUploadedFile(HttpRequestBase Request) {
             
             HttpPostedFileBase small = Request.Files[0];
@@ -549,6 +553,17 @@ namespace CMS.CMS.App
                     return new { id = 0, path = "", name = small.FileName };
             }
 
+        }
+
+        public LangOutputModel fillLangModel(System.Data.Linq.EntitySet<Models.texts_value> val)
+        {
+            LangOutputModel lmo = new LangOutputModel();
+            lmo.cz = val.Where(x => x.culture == "cz").Single().value;
+            lmo.gb = val.Where(x => x.culture == "gb").Single().value;
+            lmo.de = val.Where(x => x.culture == "de").Single().value;
+            lmo.ru = val.Where(x => x.culture == "ru").Single().value;
+
+            return lmo;
         }
     }
 

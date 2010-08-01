@@ -7,6 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Administrace: Výpis stránek</h2>
+
+    <a href="<%= Url.Action("AddPage","Backend") %>">Nová stránka</a>
     
     <table>
     <tr>
@@ -31,7 +33,7 @@
     <% } %>
     <% if (Model.Count() == 0) { %>
         <tr>
-            <td colspan="4">Žádné statické stránky</td>
+            <td colspan="7">Žádné statické stránky</td>
         </tr>
     <% } %>
     </table>

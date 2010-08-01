@@ -27,7 +27,7 @@ namespace CMS.Controllers
 
             List<author> authors = this._app.users().getAuthors();
             List<role> roles = this._app.roles().get();
-            List<category> categories = this._app.categories().getAll();
+            List<category> categories = this._app.categories().getList();
 
             Form_Article_New form = new Form_Article_New();
             form.setAuthors(authors);
@@ -121,7 +121,7 @@ namespace CMS.Controllers
 
                     List<author> authors = this._app.users().getAuthors();
                     List<role> roles = this._app.roles().get();
-                    List<category> categories = this._app.categories().getAll();
+                    List<category> categories = this._app.categories().getList();
 
                     Form_Article_Edit form = new Form_Article_Edit(a);
                     form.setAuthors(authors, articlesAuthorsCross);
@@ -246,84 +246,19 @@ namespace CMS.Controllers
         // GET: /Backend/ListCategories
         public ActionResult ListCategories()
         {
-            long parent = 0;
-            if (Request.Params.AllKeys.Contains("parent"))
-            {
-                if (Request.Params["parent"] != String.Empty)
-                {
-                    try
-                    {
-                        parent = long.Parse(Request.Params["parent"]);
-                    }
-                    catch { }
-                }
-                ViewData["current"] = parent;
-
-                if (parent > 0)
-                {
-                    category c = this._app.categories().getById(parent);
-                    if (c != null)
-                    {
-                        if (c.parentid.HasValue) ViewData["parent"] = c.parentid.Value;
-                    }
-                }
-            }
-
-            int page = 0;
-            try
-            {
-                page = int.Parse(Request.Params["page"]);
-            }
-            catch { }
-
-            ViewData["categoriesCount"] = this._app.categories().getCount(parent);
-
-            return View(this._app.categories().get(parent, page * this._app.ListLength, this._app.ListLength));
+            return View(this._app.categories().getAll());
         }
 
         //
         // GET+POST: /Backend/AddCategory[?parent={id}]
         public ActionResult AddCategory()
         {
-            long parent = 0;
-            if (Request.Params.AllKeys.Contains("parent"))
-            {
-                try
-                {
-                    parent = long.Parse(Request.Params["parent"]);
-                }
-                catch { }
-            }
+            return View(this._app.categories().getAll());
+        }
 
-            string name = "Base imaginary category (root)";
-
-            if (parent > 0)
-            {
-                category c = this._app.categories().getById(parent);
-                if (c != null)
-                {
-                    //name = c.name;
-                }
-            }
-
-            ViewData["name"] = name;
-
-            Form_Category_Add form = new Form_Category_Add(parent);
-            if (Request.HttpMethod.ToLower() == form.getMethod().ToString())
-            {
-                if (form.isValid(Request.Form))
-                {
-                    if (this._app.categories().add(parent, form))
-                    {
-                        _messages.addMessage("The category has been successfully added");
-                        return Redirect("/backend/ListCategories?parent=" + parent.ToString());
-                    }
-                }
-            }
-
-            ViewData["form"] = form.render();
-
-            return View();
+        public ActionResult AddCategoryAjax(CategoryInputModel input)
+        {
+            return Json(new {result = this._app.categories().add(input)});
         }
 
         //
@@ -340,36 +275,20 @@ namespace CMS.Controllers
                 }
                 catch { }
 
-                category c = this._app.categories().getById(id);
+                CategoryOutputModel c = this._app.categories().getById(id);
 
                 if (c != null)
                 {
-                    Form_Category_Add form = new Form_Category_Add(0);
-                    if (Request.HttpMethod.ToLower() == form.getMethod().ToString())
-                    {
-                        if (form.isValid(Request.Form))
-                        {
-                            if (this._app.categories().save(form, c))
-                            {
-                                _messages.addMessage("The category has been successfully saved");
-                                if (c.parentid.HasValue)
-                                {
-                                    return Redirect("/backend/ListCategories?parent=" + c.parentid);
-                                }
-                                return Redirect("/backend/ListCategories?parent=" + c.id);
-                            }
-                        }
-                    }
-
-                    form.setEditData(c);
-
-                    ViewData["form"] = form.render();
-
-                    return View();
+                    return View(c);
                 }
             }
             _messages.addError("Undefined or wrong parameter ID");
             return RedirectToAction("listCategories", "backend");
+        }
+
+        public ActionResult EditCategoryAjax(CategoryInputModel input)
+        {
+            return Json(new {result = this._app.categories().edit(input)});
         }
 
         //
@@ -772,6 +691,13 @@ namespace CMS.Controllers
             return RedirectToAction("ListRoles", "backend");
         }
 
+        public ActionResult DeleteCategoryAjax(long id)
+        {
+
+            return Json(this._app.categories().delete(id));
+
+        }
+
         //
         // GET: /Backend/DeleteCategory?id={id}
         public ActionResult DeleteCategory()
@@ -801,7 +727,7 @@ namespace CMS.Controllers
 
         public ActionResult DeletePageAjax(long id)
         {
-            return Json(2);//this._app.pages().delete(id));
+            return Json(this._app.pages().delete(id));
         }
 
         public ActionResult ListPages()
@@ -816,6 +742,18 @@ namespace CMS.Controllers
             ViewData["pagesCount"] = this._app.pages().getCount();
 
             return View(this._app.pages().getAll());
+        }
+
+        public ActionResult EditPage()
+        {
+            long id = long.Parse(Request.Params["id"]);
+            return View(this._app.pages().get(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditPageAjax(PageInputModel p)
+        {
+            return Json(this._app.pages().edit(p));
         }
 
         public ActionResult AddPage()

@@ -92,8 +92,10 @@
     <Compile Include="CMS\Form\Element\CMS_Form_Element_DateTime.cs" />
     <Compile Include="CMS\Form\Element\CMS_Form_Element_File.cs" />
     <Compile Include="CMS\Form\Element\CMS_Form_Element_Select.cs" />
+    <Compile Include="CMS\InputModels\CategoryInputModel.cs" />
     <Compile Include="CMS\InputModels\PageInputModel.cs" />
     <Compile Include="CMS\Login\CMS_Login.cs" />
+    <Compile Include="CMS\OutputModels\CategoryOutputModel.cs" />
     <Compile Include="CMS\OutputModels\DocumentOutputModel.cs" />
     <Compile Include="CMS\OutputModels\LangOutputModel.cs" />
     <Compile Include="CMS\OutputModels\PageListOutputModel.cs" />
@@ -175,6 +177,7 @@
     <Content Include="Views\Backend\AddRole.aspx" />
     <Content Include="Views\Backend\AddUser.aspx" />
     <Content Include="Views\Backend\EditAuthor.aspx" />
+    <Content Include="Views\Backend\EditPage.aspx" />
     <Content Include="Views\Backend\EditUser.aspx" />
     <Content Include="Views\Backend\Index.aspx" />
     <Content Include="Views\Backend\ListPages.aspx" />

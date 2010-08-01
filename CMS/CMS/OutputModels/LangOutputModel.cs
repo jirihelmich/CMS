@@ -11,5 +11,22 @@ namespace CMS.CMS.OutputModels
         public String gb { get; set; }
         public String ru { get; set; }
         public String de { get; set; }
+
+        public String getByCulture(String culture)
+        {
+            switch (culture)
+            {
+                case "cz":
+                    return cz;
+                case "de":
+                    return de;
+                case "gb":
+                    return gb;
+                case "ru":
+                    return ru;
+                default:
+                    return String.Empty;
+            }
+        }
     }
 }

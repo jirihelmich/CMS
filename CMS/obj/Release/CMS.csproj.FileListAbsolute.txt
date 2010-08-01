@@ -15,6 +15,6 @@ c:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.M
 c:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.pdb
 c:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.AspNet4.pdb
 c:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.Build.pdb
-c:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\CMS.XML
 c:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\System.Web.Mvc.dll
 c:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\System.Web.Mvc.xml
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\CMS.XML

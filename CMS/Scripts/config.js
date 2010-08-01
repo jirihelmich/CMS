@@ -25,7 +25,7 @@ CKEDITOR.editorConfig = function( config )
 
         ['Outdent', 'Indent'], //, 'Blockquote'],
         ['Link', 'Unlink', 'Anchor'],
-
+        '/',
         ['Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
         ['Image', 'Flash', 'Table', 'HorizontalRule'],// 'Smiley', 'SpecialChar', 'PageBreak'],
         //'/',

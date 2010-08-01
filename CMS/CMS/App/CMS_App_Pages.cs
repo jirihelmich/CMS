@@ -81,28 +81,55 @@ namespace CMS.CMS.App.Pages
 
                 foreach (page p in data)
                 {
-                    PageListOutputModel pom = new PageListOutputModel();
-                    pom.Id = p.id;
-
-                    LangOutputModel title = new LangOutputModel();
-                    title.cz = p.text.texts_values.Where(x => x.culture == "cz").Single().value;
-                    title.gb = p.text.texts_values.Where(x => x.culture == "gb").Single().value;
-                    title.de = p.text.texts_values.Where(x => x.culture == "de").Single().value;
-                    title.ru = p.text.texts_values.Where(x => x.culture == "ru").Single().value;
-
-                    LangOutputModel content = new LangOutputModel();
-                    content.cz = p.text1.texts_values.Where(x => x.culture == "cz").Single().value;
-                    content.gb = p.text1.texts_values.Where(x => x.culture == "gb").Single().value;
-                    content.de = p.text1.texts_values.Where(x => x.culture == "de").Single().value;
-                    content.ru = p.text1.texts_values.Where(x => x.culture == "ru").Single().value;
-
-                    pom.Title = title;
-                    pom.Content = content;
+                    PageListOutputModel pom = this.getPOM(p);
 
                     l.Add(pom);
                 }
 
                 return l;
+            }
+        }
+
+        public PageListOutputModel get(long id)
+        {
+            using (LangDataContext dC = new LangDataContext())
+            {
+                return getPOM(getById(id, dC));
+            }
+        }
+
+        private PageListOutputModel getPOM(page p)
+        {
+            PageListOutputModel pom = new PageListOutputModel();
+            pom.Id = p.id;
+
+            LangOutputModel title = new LangOutputModel();
+            title.cz = p.text.texts_values.Where(x => x.culture == "cz").Single().value;
+            title.gb = p.text.texts_values.Where(x => x.culture == "gb").Single().value;
+            title.de = p.text.texts_values.Where(x => x.culture == "de").Single().value;
+            title.ru = p.text.texts_values.Where(x => x.culture == "ru").Single().value;
+
+            LangOutputModel content = new LangOutputModel();
+            content.cz = p.text1.texts_values.Where(x => x.culture == "cz").Single().value;
+            content.gb = p.text1.texts_values.Where(x => x.culture == "gb").Single().value;
+            content.de = p.text1.texts_values.Where(x => x.culture == "de").Single().value;
+            content.ru = p.text1.texts_values.Where(x => x.culture == "ru").Single().value;
+
+            pom.Title = title;
+            pom.Content = content;
+
+            return pom;
+        }
+
+        public bool delete(long id)
+        {
+            using (LangDataContext dataContext = new LangDataContext())
+            {
+                dataContext.pages.DeleteOnSubmit(dataContext.pages.Where(x => x.id == id).Single());
+
+                dataContext.SubmitChanges();
+
+                return true;
             }
         }
 
@@ -124,8 +151,7 @@ namespace CMS.CMS.App.Pages
         /// <returns></returns>
         public page getById(long id, LangDataContext a)
         {
-            using (a)
-            {
+
                 try
                 {
                     var data = a.pages
@@ -136,7 +162,28 @@ namespace CMS.CMS.App.Pages
                 {
                     return null;
                 }
+        }
+
+        public bool edit(PageInputModel input)
+        {
+            using (LangDataContext dC = new LangDataContext())
+            {
+                page p = dC.pages.Where(x => x.id == input.request[0].Id).Single();
+
+                p.text.texts_values.Where(x => x.culture == "cz").Single().value = input.request.Where(x => x.lang == "cz").Single().data.title;
+                p.text.texts_values.Where(x => x.culture == "gb").Single().value = input.request.Where(x => x.lang == "gb").Single().data.title;
+                p.text.texts_values.Where(x => x.culture == "de").Single().value = input.request.Where(x => x.lang == "de").Single().data.title;
+                p.text.texts_values.Where(x => x.culture == "ru").Single().value = input.request.Where(x => x.lang == "ru").Single().data.title;
+
+                p.text1.texts_values.Where(x => x.culture == "cz").Single().value = input.request.Where(x => x.lang == "cz").Single().data.title;
+                p.text1.texts_values.Where(x => x.culture == "gb").Single().value = input.request.Where(x => x.lang == "gb").Single().data.title;
+                p.text1.texts_values.Where(x => x.culture == "de").Single().value = input.request.Where(x => x.lang == "de").Single().data.title;
+                p.text1.texts_values.Where(x => x.culture == "ru").Single().value = input.request.Where(x => x.lang == "ru").Single().data.title;
+
+                dC.SubmitChanges();
             }
+
+            return true;
         }
 
         public long add(PageInputModel input)
