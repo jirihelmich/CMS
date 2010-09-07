@@ -14,22 +14,7 @@ namespace CMS.Controllers
         // GET: /
         public ActionResult Index()
         {
-            int page = 0;
-            try
-            {
-                page = int.Parse(Request.Params["page"]);
-            }
-            catch { }
-
-            string ordering = "date";
-            if (Request.Form.AllKeys.Contains("ordering"))
-            {
-                ordering = Request.Form["ordering"];
-            }
-
-            ViewData["articlesCount"] = this._app.articles().getFrontpageArticlesCount();
-
-            return View(this._app.articles().getFrontpage(this._app.ListLength, page * this._app.ListLength, ordering));
+            return View(this._app.news().getAll().Take(4));
         }
     }
 }

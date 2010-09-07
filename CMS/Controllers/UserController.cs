@@ -29,11 +29,12 @@ namespace CMS.Controllers
             CMS_Login login = new CMS_Login();
             if (login.hasIdentity())
             {
-                _messages.addMessage("You are already logged in.");
-                return RedirectToAction("Index", "Home");
+                _messages.addMessage("Již jste pøihlášen(a).");
+                return RedirectToAction("Index", "Backend");
             }
 
-            Form_LoginForm form = new Form_LoginForm();
+
+            Form_LoginForm form = new Form_LoginForm((Request.Params.AllKeys.Contains("backUrl") ? Request.Params["backUrl"] : ""));
 
             if (Request.HttpMethod.ToLower() == form.getMethod().ToString())
             {
@@ -43,9 +44,13 @@ namespace CMS.Controllers
                     if (login.checkCredentials(form["username"].getValue(), form["password"].getValue(), out user))
                     {
                         login.SignIn(user);
-                        return RedirectToAction("Index", "Home");
+                        if (Request.Params.AllKeys.Contains("backUrl") && !String.IsNullOrEmpty(Request.Params["backUrl"]))
+                        {
+                            return Redirect(Request.Params["backUrl"]);
+                        }
+                        return RedirectToAction("Index", "Backend");
                     }
-                    _messages.addError("Bad login or password");
+                    _messages.addError("Špatné uživatelské jméno nebo heslo.");
                 }
             }
 

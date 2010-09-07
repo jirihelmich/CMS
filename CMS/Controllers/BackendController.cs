@@ -691,11 +691,16 @@ namespace CMS.Controllers
             return RedirectToAction("ListRoles", "backend");
         }
 
-        public ActionResult DeleteCategoryAjax(long id)
+        public ActionResult DeleteCategoryAjax(IdInputModel input)
         {
 
-            return Json(this._app.categories().delete(id));
+            return Json(this._app.categories().delete(input.catId));
 
+        }
+
+        public ActionResult setCategoryParent(ChildParentInputModel input)
+        {
+            return Json(this._app.categories().setParent(input.childId, input.parentId));
         }
 
         //
@@ -705,14 +710,14 @@ namespace CMS.Controllers
             try
             {
                 long id = long.Parse(Request.Params["id"]);
-                if (this._app.categories().delete(id))
+                /*if (this._app.categories().delete(id))
                 {
                     this._messages.addMessage("The category has been successfully deleted");
                 }
                 else
                 {
                     this._messages.addError("The category cannot be deleted because of binded data");
-                }
+                }*/
             }
             catch { }
             return RedirectToAction("ListCategories", "backend");
@@ -732,13 +737,6 @@ namespace CMS.Controllers
 
         public ActionResult ListPages()
         {
-            int page = 0;
-            try
-            {
-                page = int.Parse(Request.Params["page"]);
-            }
-            catch { }
-
             ViewData["pagesCount"] = this._app.pages().getCount();
 
             return View(this._app.pages().getAll());
@@ -765,6 +763,46 @@ namespace CMS.Controllers
         public ActionResult AddPageAjax(PageInputModel p)
         {
             return Json(this._app.pages().add(p));
+        }
+
+        public ActionResult DeleteNewsAjax(long id)
+        {
+            return Json(this._app.news().delete(id));
+        }
+
+        public ActionResult ListNews()
+        {
+            ViewData["pagesCount"] = this._app.pages().getCount();
+
+            return View(this._app.news().getAll());
+        }
+
+        public ActionResult EditNews()
+        {
+            long id = long.Parse(Request.Params["id"]);
+            return View(this._app.news().get(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditNewsAjax(PageInputModel p)
+        {
+            return Json(this._app.news().edit(p));
+        }
+
+        public ActionResult AddNews()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddNewsAjax(NewsInputModel p)
+        {
+            return Json(this._app.news().add(p));
+        }
+
+        public ActionResult searchProducts(StringInputModel s)
+        {
+            return Json(new {result = this._app.products().search(s)});
         }
 
 
@@ -798,6 +836,69 @@ namespace CMS.Controllers
             Object info = this._app.saveUploadedFile(Request);
 
             return new FileUploadJsonResult { Data = info };
+        }
+
+        public ActionResult listProducts()
+        {
+            return View(new CategoriesProductsOutputModel(this._app.categories().getAll(), this._app.products().getAll()));
+        }
+
+        public ActionResult addProduct()
+        {
+            return View(this._app.categories().getAll());
+        }
+
+        public ActionResult addProductAjax(ProductInputModel p)
+        {
+            return Json(this._app.products().add(p));
+        }
+
+        public ActionResult editProductAjax(ProductInputModel p)
+        {
+            return Json(this._app.products().edit(p));
+        }
+
+        public ActionResult MultiUpload()
+        {
+            Object info = this._app.MultiUpload(Request);
+
+            return new FileUploadJsonResult { Data = info };
+        }
+
+        public ActionResult DeleteProduct(ProductInputModel p)
+        {
+            return Json(this._app.products().delete((long)p.prodId));
+        }
+
+        public ActionResult ChangeProductCategory(ChangeProductCategoryModel input)
+        {
+            return Json(
+                this._app
+                    .products()
+                    .changeCategory(input.oldCatId, input.newCatId, input.productId)
+            );
+        }
+
+        public ActionResult AddProductCategory(ChangeProductCategoryModel input)
+        {
+            return Json(
+                this._app
+                    .products()
+                    .addCategory(input.newCatId, input.productId)
+            );
+        }
+
+        public ActionResult EditProduct()
+        {
+            try
+            {
+                long id = long.Parse(Request.Params["id"]);
+                return View(this._app.products().getById(id));
+            }
+            catch {
+                
+            }
+            return RedirectToAction("listProducts", "Backend");
         }
 
     }

@@ -5,56 +5,46 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
   
-  <h3 id="add-static-page">Upravit statickou stránku</h3>
+  <h3 id="edit-static-page">Upravit statickou stránku</h3>
 
   <div id="controls"><div id="save">Uložit</div><div id="cancel">Storno</div></div>
 
-    <% String[] langs = new String[] { "cz", "gb", "de", "ru" }; %>
   <div id="edit-page-container" rel="<%= Model.Id %>">
+    
+        <div class="left box-width-70" id="tabs">
 
     <ul>
-      <% foreach (String lang in langs) { %>
+      <% foreach (String lang in CMS.Helpers.LangHelper.langs)
+         { %>
       <li><a href="#<%= lang %>">
         <img src="../../Content/flags/<%= lang %>.png" /></a></li>
       <% } %>
     </ul>
-
-    <% foreach (String lang in langs) { %>
+    <% foreach (String lang in CMS.Helpers.LangHelper.langs)
+       { %>
       <div id="<%= lang %>">
-        <div class="left box-width-70">
           <input id="title-<%= lang %>" type="text" class="largeField" value="<%= Model.Title.getByCulture(lang) %>" />
           <br />
           <textarea id="text-<%= lang %>" class="ckeditor"><%= Model.Content.getByCulture(lang) %></textarea>
-        </div>
-        <div class="box left box-width-30 highlight" id="files-<%= lang %>">
-          <div class="box-content">
-            <form id="ajaxUploadFormDoc-<%= lang %>" action="<%= Url.Action("Upload", "Backend")%>" method="post" enctype="multipart/form-data">
-            <fieldset>
-              <legend>Přidat dokument:</legend>
-              <input type="hidden" name="type" value="doc" />
-              <label><input type="file" name="file" id="document-<%= lang %>" /></label>
-            </fieldset>
-            </form>
-            <div class="uploaded docs"></div>
-            <hr />
-            <form id="ajaxUploadFormImg-<%= lang %>" action="<%= Url.Action("Upload", "Backend")%>" method="post" enctype="multipart/form-data">
-            <fieldset>
-              <legend>Přidat obrázek:</legend>
-              <label><input type="file" name="file" id="image-<%= lang %>" /></label>
-              <input type="hidden" name="type" value="img" />
-            </fieldset>
-            </form>
-            <div class="uploaded img"></div>
-          </div>
-        </div>
-        <hr class="clear" />
       </div>
 
     <% } %>
-
-    <div id="title-change" title="Zadejte název dokumentu/obrázku">
-      <input type="text" class="largeField" />
-    </div>
+        </div>
+        <div class="box left box-width-30 highlight" id="files">
+            <div class="box-content">
+                <form id="ajaxUploadFormImg" action="<%= Url.Action("Upload", "Backend")%>" method="post"
+                enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Přidat obrázek:</legend>
+                    <label>
+                        <input type="file" name="file" id="image" /></label>
+                    <input type="hidden" name="type" value="img" />
+                </fieldset>
+                </form>
+                <div class="uploaded img">
+                </div>
+            </div>
+        </div>
 
   </div>
 </asp:Content>

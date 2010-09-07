@@ -1,6 +1,66 @@
 ﻿/// <reference path="jquery-1.4.1-vsdoc.js" />
+/// <reference path="linq-vsdoc.js" />
+
+var CMS = {};
 
 $(document).ready(function () {
+
+    window.setInterval(function () {
+        $("[id^=document]").add("[id^=image]").each(function () {
+            var el = $(this);
+
+            if (!documentUploadInProgress && el.val().length > 0) {
+                el.parents("form").submit();
+                documentUploadInProgress = true;
+            }
+
+        });
+    }, 500);
+
+    $("[id=ajaxUploadFormImg]").ajaxForm({
+        iframe: true,
+        dataType: "json",
+        beforeSubmit: function () {
+            $("[id=ajaxUploadFormImg]").hide();
+            $("[id=ajaxUploadFormImg]").after('<span class="uploading">Nahrávám...</span>');
+        },
+        success: function (result) {
+            $("[id=ajaxUploadFormImg]").resetForm();
+            $("[id=ajaxUploadFormImg]").show();
+            $(".uploading").remove();
+
+            if (result.id) {
+                var img = $('<img />').attr("cmsid", result.id).attr("src", '/Image/Thumbnail?path=' + result.path+"&w=200&h=200").load(function () {
+                    $(".uploaded.img").append($(this));
+                });
+            }
+            documentUploadInProgress = false;
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr, textStatus, errorThrown);
+            $("[id=ajaxUploadFormImg]").resetForm();
+            documentUploadInProgress = false;
+        }
+    });
+
+    $(".uploaded.img img").live('click', function () {
+        $("#product-image").html($(this).clone());
+    });
+
+
+    var langs = ["cz", "gb", "de", "ru", "fr", "pl"];
+
+    $(".category").hover(
+        function (e) {
+            e.stopPropagation();
+            $(this).parents(".category").removeClass("hover");
+            $(this).addClass("hover");
+        },
+        function () {
+            $(this).removeClass("hover");
+            $(this).parents(".category").eq(0).addClass("hover");
+        }
+    );
 
     $(".delete-page").click(function () {
 
@@ -47,6 +107,14 @@ $(document).ready(function () {
             bindAddCategory();
             break;
 
+        case $("#add-product").length > 0:
+            bindAddProduct("add");
+            break;
+
+        case $("#edit-product").length > 0:
+            bindAddProduct("edit");
+            break;
+
         case $("#edit-category").length > 0:
             bindEditCategory();
             break;
@@ -54,11 +122,482 @@ $(document).ready(function () {
         case $("#categories-list").length > 0:
             bindListCategories();
             break;
+
+        case $("#products-list").length > 0:
+            bindListProducts();
+            break;
+    }
+
+    function bindAddProduct(type) {
+
+        $("#"+type+"-product-container").tabs();
+
+        var defVal = $("#autocomplete").val();
+        var emptyCont = $("#results").html();
+
+        $("#autocomplete").click(function () {
+            if ($("#autocomplete").val() == defVal) {
+                $("#autocomplete").val("");
+            }
+        });
+
+        $("#autocomplete").blur(function () {
+            if ($("#autocomplete").val() == "") {
+                $("#autocomplete").val(defVal);
+            }
+        });
+
+        var tmtout = null;
+
+        function getHighlighted(langVal, search) {
+            var out = "";
+
+            Enumerable.From(langVal).ForEach(function (text) {
+                text = (text ? (text.Value ? text.Value : "") : "");
+                text = text.replace(search, '<strong>' + search + '</strong>');
+                out += text + "<br />";
+            });
+
+            return out;
+        }
+
+        $("#autocomplete").keyup(function () {
+            if (tmtout) {
+                window.clearTimeout(tmtout);
+                tmtout = null;
+            }
+            tmtout = window.setTimeout(function () {
+                $.ajax({
+                    url: "/backend/searchProducts",
+                    type: "POST",
+                    dataType: 'json',
+                    data: JSON.stringify({ str: $("#autocomplete").val() }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.result) {
+                            $("#results").html("");
+                            Enumerable.From(data.result).ForEach(function (item) {
+                                var prod = $('<div id="conn_' + item.Id + '" class="product-small">' + getHighlighted(item.Title, $("#autocomplete").val()) + '</div>');
+                                prod.appendTo($("#results"));
+                            });
+                            if ($("#results .product-small").length == 0) {
+                                $("#results").html(emptyCont);
+                            }
+                        } else {
+
+                        }
+
+                    }
+                });
+            }, 200);
+        });
+
+        $(".product-small").live('click', function () {
+            if ($("#"+$(this).attr("id"), "#results").length > 0) {
+                if ($("conn_" + $(this).attr('id'), "#connected").length == 0) {
+                    $("#connected").append($(this));
+                } else {
+
+                }
+            } else {
+                $(this).remove();
+            }
+        });
+
+        $("#docs_upload").dialog({ modal: true, autoOpen: false, modal: true, width: 600, height: 350,
+            buttons: {
+                "Nahrát na server": function () {
+                    $("#docs_upload form").submit();
+                    $("#docs_upload").hide();
+                    $("#docs_upload").after('<div class="ajax-loader"></div>');
+                },
+                "Zrušit": function () {
+                    $("#docs_upload").dialog('close');
+                }
+            }
+        });
+
+        $("[id=ajaxUploadFormDoc]").ajaxForm({
+            iframe: true,
+            dataType: "json",
+            beforeSubmit: function () {
+            },
+            success: function (result) {
+                $("[id=ajaxUploadFormDoc]").resetForm();
+                $("#docs_upload").show();
+                $('.ajax-loader').remove();
+
+                var row = $('<tr id="' + result.id + '"></tr>');
+                $("table#docgroups").append(row);
+
+                for (var i in langs) {
+
+                    for (var k in result.docs) {
+                        if (result.docs[k].lang == langs[i]) {
+                            row.append("<td>" + result.docs[k].data.name + "</td>");
+                        }
+                    }
+                }
+                row.append('<td class="delete">[X]</td>');
+
+                $("#docs_upload").dialog('close');
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
+                $("[id=ajaxUploadFormDoc]").resetForm();
+            }
+        });
+
+        $("#documents td.delete").click(function () {
+            $(this).parent().slideUp(function () { $(this).remove(); })
+        });
+
+        $("#add-docs").click(function () {
+            $("#docs_upload").dialog('open');
+        });
+
+        $("#save").click(function () {
+
+            if (type == "add" && ("#categories-select input[type=checkbox]:checked").length == 0) {
+                alert("Musíte vybrat alespoň jednu kategorii!");
+                return false;
+            }
+
+            $.ajax({
+                url: "/backend/"+type+"ProductAjax",
+                type: "POST",
+                dataType: 'json',
+                data: collectAddProductParams(type),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.Id) {
+                        document.location.href = "/Backend/listProducts";
+                    } else {
+
+                    }
+
+                }
+            });
+        });
+    }
+
+    function collectAddProductParams(type) {
+
+        var request = [];
+
+        for (var i in langs) {
+            var lang = langs[i];
+
+            var product = {
+                lang: lang,
+                data: {
+                    prodId: (type == "edit" ? parseInt($("#edit-product").attr('cmsid')) : 0),
+                    title: $("#title-" + lang).val(),
+                    subtitle: $("#subtitle-" + lang).val(),
+                    text: CKEDITOR.instances["text-" + lang].getData(),
+                    shortdesc: CKEDITOR.instances["shortdesc-" + lang].getData()
+                }
+            };
+
+            request.push(product);
+
+        }
+
+        var out = {
+            mainImage: parseInt($("#product-image img").attr("cmsid")),
+            docGroups: collectDocGroups(),
+            categories: collectCategories(),
+            connections: collectConnections(),
+            request: request
+        };
+
+        return JSON.stringify(out);
+
+    }
+
+    function collectConnections(){
+        var out = [];
+        $("#connected .product-small").each(function(){
+            out.push(parseInt($(this).attr('id').replace("conn_","")));
+        });
+        return out;
+    }
+
+    function collectCategories() {
+        var cats = [];
+
+        $("#categories-select input[type=checkbox]:checked").each(function () {
+            cats.push(parseInt($(this).attr('name').replace("checkbox[", "")));
+        });
+
+        return cats;
+    }
+
+    function collectDocGroups() {
+
+        var docgroups = [];
+
+        $("#docgroups tr").not($("#docgroups tr:first-child")).each(function () {
+            var row = $(this);
+
+            docgroups.push({ Id: parseInt(row.attr("id")) });
+        });
+
+        return docgroups;
+    }
+
+    function bindListProducts() {
+
+        var catId = null;
+
+        $(".product .delete").live('click', function () {
+
+            var el = $(this);
+            var id = parseInt(el.attr('id'));
+
+            catId = id;
+
+            if (confirm("Opravdu chcete smazat tento produkt?")) {
+
+                $.ajax({
+                    url: "/backend/deleteProduct",
+                    type: "POST",
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        productId: parseInt(el.attr('id'))
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.result) {
+                            el.slideUp(function () { el.remove(); });
+                            var index = Enumerable
+                                .From(window.pageData)
+                                .IndexOf(
+                                    Enumerable
+                                    .From(window.pageData)
+                                    .Single(function (x) { return (x.Id == id); })
+                                );
+
+                            window.pageData.splice(index, 1);
+                        } else {
+                            alert(data.errMsg);
+                        }
+
+                    }
+
+                });
+            }
+        });
+
+        $(".category").droppable({ greedy: true, drop: function (event, ui) {
+
+            var dropped = $(this);
+            var newCatId = parseInt(dropped.attr('id'));
+            var prodId = parseInt($(ui.draggable).attr('id'));
+
+            $("<div title='Přesunul jste produkt'>Chcete produkt přesunout nebo zkopírovat?</div>").dialog({
+                modal: true,
+                width: 350,
+                height: 200,
+                dialogClass: 'confirm',
+                buttons: {
+                    'Přesunout': function () {
+                        $(this).dialog('close').destroy();
+
+                        $.ajax({
+                            url: "/backend/changeProductCategory",
+                            type: "POST",
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                oldCatId: catId,
+                                newCatId: newCatId,
+                                productId: prodId
+                            }),
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+
+                                if (data.result) {
+                                    //najit kategorii se spravnym Id a priradit si ji
+                                    var Pindex = Enumerable
+                                        .From(window.pageData)
+                                        .IndexOf(
+                                            Enumerable
+                                            .From(window.pageData)
+                                            .Single(function (x) { return (x.id == prodId); })
+                                        );
+
+                                    var OCindex = Enumerable
+                                        .From(window.pageData[Pindex])
+                                        .IndexOf(
+                                            Enumerable
+                                            .From(window.pageData)
+                                            .Single(function (x) { return (x.id == catId); })
+                                        );
+
+                                    var newCat = Enumerable
+                                        .From(window.pageData)
+                                        .Where(function (x) {
+                                            return (
+                                                Enumerable
+                                                .From(x.Categories)
+                                                .Where(function (y) { return (y.id == newCatId); })
+                                                .Count() > 0
+                                            );
+                                        })
+                                        .Select(function (x) { return x.Category })
+                                        .Single(function (x) { return x.Id == newCatId });
+
+                                    var newObject = jQuery.extend(true, {}, newCat);
+
+                                    window.pageData[Pindex].Categories.splice(OCindex, 1, newObject);
+
+                                    $(ui.draggable).slideUp().remove();
+
+                                } else {
+                                    $(ui.draggable).animate({ top: 0, left: 0 });
+                                    alert(data.errMsg);
+                                }
+
+                            }
+
+                        });
+
+                    },
+                    'Zkopírovat': function () {
+
+                        $.ajax({
+                            url: "/backend/addProductCategory",
+                            type: "POST",
+                            dataType: 'json',
+                            data: JSON.stringify({
+                                newCatId: newCatId,
+                                productId: prodId
+                            }),
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (data) {
+
+                                if (data.result) {
+                                    //najit kategorii se spravnym Id a priradit si ji
+                                    var Pindex = Enumerable
+                                        .From(window.pageData)
+                                        .IndexOf(
+                                            Enumerable
+                                            .From(window.pageData)
+                                            .Single(function (x) { return (x.id == prodId); })
+                                        );
+
+                                    var newCat = Enumerable
+                                        .From(window.pageData)
+                                        .Where(function (x) {
+                                            return (
+                                                Enumerable
+                                                .From(x.Categories)
+                                                .Where(function (y) { return (y.id == newCatId); })
+                                                .Count() > 0
+                                            );
+                                        })
+                                        .Select(function (x) { return x.Category })
+                                        .Single(function (x) { return x.Id == newCatId });
+
+                                    var newObject = jQuery.extend(true, {}, newCat);
+
+                                    window.pageData[Pindex].Categories.push(newObject);
+
+                                } else {
+                                    $(ui.draggable).animate({ top: 0, left: 0 });
+                                    alert(data.errMsg);
+                                }
+
+                            }
+
+                        });
+
+                        $(this).dialog('close').destroy();
+                    },
+                    'Storno': function () {
+                        $(this).dialog('close').destroy();
+                    }
+                }
+            });
+        }
+        });
+
+        $(".category").live('click', function () {
+
+            var cat = $(this);
+            var id = parseInt(cat.attr("id"));
+
+            $("#products-placeholder").text("");
+
+            Enumerable
+                .From(window.pageData)
+                .Where(function (x) {
+                    return (
+                        Enumerable
+                            .From(x.Categories)
+                            .Where(function (y) { return (parseInt(y.Id) == id) })
+                            .Count() > 0
+                    );
+                })
+            .ForEach(function (x) {
+
+                var product = $('<div class="product"><span class="title">' + x.Title.cz + '</span><div class="desc">' + (x.Shortdesc.cz ? x.Shortdesc.cz : '') + '</div><div class="controls"><a href="/Backend/EditProduct?id=' + x.Id + '" class="edit">Editovat</a><a href="#" class="delete">Smazat</a></div></div>');
+
+                if (x.mainImage) {
+                    var img = $('<img src="../../files/' + x.mainImage.path + '" />');
+
+                    img.load(function () {
+                        if ($(this).width() > 200) $(this).width(200);
+
+                        $(".desc", product).before(img);
+                    });
+                }
+
+                $("#products-placeholder").append(product);
+            });
+            $(".product").draggable({
+                revert: 'invalid',
+                scroll: true,
+                cursorAt: {
+                    cursor: 'move', top: 2, left: 2
+                },
+                helper: function (event) {
+                    return $('<div class="move-helper">' + $('.title', this).text() + '</div>');
+                }
+            });
+        });
     }
 
     function bindListCategories() {
         $(".category").draggable({ revert: 'invalid' });
-        $(".category").droppable({ greedy: true, drop: function () {
+        $(".category").droppable({ greedy: true, drop: function (event, ui) {
+            $(this).append(ui.draggable);
+            $(ui.draggable).css('left', '0px');
+            $(ui.draggable).css('top', '0px');
+
+            $.ajax({
+                url: "/backend/setCategoryParent",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({
+                    childId: parseInt($(ui.draggable).attr('id')),
+                    parentId: parseInt($(ui.draggable).parent().attr('id'))
+                }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.result) {
+
+                    } else {
+                        alert(data.errMsg);
+                    }
+
+                }
+
+            });
 
         }
         });
@@ -72,16 +611,14 @@ $(document).ready(function () {
                     url: "/backend/deleteCategoryAjax",
                     type: "POST",
                     dataType: 'json',
-                    data: Json.toString({ id: cat.attr('id') }),
+                    data: JSON.stringify({ catId: parseInt(cat.attr('id')) }),
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-
-                        var data = eval('(' + data + ')');
 
                         if (data.result) {
                             cat.fadeOut().remove();
                         } else {
-                            alert(data.errMsg);
+                            alert("Kategorii není možné smazat, pravděpodobně obsahuje produkty.");
                         }
 
                     }
@@ -101,21 +638,6 @@ $(document).ready(function () {
 
             var docs = [];
             var imgs = [];
-
-            $(".file", div).each(function () {
-                var item = $(this);
-                var i = {
-                    title: $(".name", item).text(),
-                    id: item.attr('id')
-                };
-
-                if (item.parents(".docs").length > 0) {
-                    docs.push(i);
-                } else {
-                    imgs.push(i);
-                }
-            });
-
 
             out.push({
                 lang: lang,
@@ -142,21 +664,6 @@ $(document).ready(function () {
 
             var docs = [];
             var imgs = [];
-
-            $(".file", div).each(function () {
-                var item = $(this);
-                var i = {
-                    title: $(".name", item).text(),
-                    id: item.attr('id')
-                };
-
-                if (item.parents(".docs").length > 0) {
-                    docs.push(i);
-                } else {
-                    imgs.push(i);
-                }
-            });
-
 
             out.push({
                 id: parseInt($("#edit-static-page").attr("rel")),
@@ -200,8 +707,6 @@ $(document).ready(function () {
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
 
-                    var data = eval('(' + data + ')');
-
                     if (data.result) {
                         $("#cancel").click();
                     } else {
@@ -216,11 +721,11 @@ $(document).ready(function () {
 
     function collectEditCategoryParams() {
 
-        data = JSON.parse(collectAddCategoryParams());
+        data = JSON.parse(collectAddCategoryParams("#edit-category-container #tabs>div"));
 
-        data.id = $("#edit-category").attr("rel");
+        data.catId = $("#edit-category").attr("rel");
 
-        return JSON.toString(data);
+        return JSON.stringify(data);
 
     }
 
@@ -245,11 +750,9 @@ $(document).ready(function () {
                 url: "/backend/addCategoryAjax",
                 type: "POST",
                 dataType: 'json',
-                data: collectAddCategoryParams(),
+                data: collectAddCategoryParams("#add-category-container #tabs>div"),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-
-                    var data = eval('(' + data + ')');
 
                     if (data.result) {
                         $("#cancel").click();
@@ -263,10 +766,10 @@ $(document).ready(function () {
         });
     }
 
-    function collectAddCategoryParams() {
+    function collectAddCategoryParams(container) {
         var out = [];
 
-        $("#add-category-container #tabs>div").each(function () {
+        $(container).each(function () {
 
             var lang = $(this).attr("id");
 
@@ -281,9 +784,9 @@ $(document).ready(function () {
             out.push(obj);
         });
 
-        var parentId = ($("#tree input").length > 0 ? $("#tree input[checked=checked]").attr('id') : null);
+        var catParent = ($("ul.categories input:checked").length > 0 ? parseInt($("ul.categories input:checked").val()) : null);
 
-        return JSON.stringify({ request: out, parent: parentId });
+        return JSON.stringify({ request: out, parent: catParent });
     }
 
     function bindEditStaticPage() {
@@ -321,71 +824,7 @@ $(document).ready(function () {
             document.location.href = "/backend/listPages";
         });
 
-        $("#edit-page-container").tabs();
-
-        window.setInterval(function () {
-            $("[id^=document]").add("[id^=image]").each(function () {
-                var el = $(this);
-
-                if (!documentUploadInProgress && el.val().length > 0) {
-                    el.parents("form").submit();
-                    documentUploadInProgress = true;
-                }
-
-            });
-        }, 500);
-
-        $("#title-change").dialog({ modal: true, autoOpen: false });
-
-        $("[id^=files] .edit").live('click', function () {
-
-            var el = $(this);
-
-            $("#title-change").dialog("option", "buttons", {
-                "Hotovo": function () {
-                    if ($("#title-change input").val().length > 0) {
-                        $(".name", el.parents(".file")).text($("#title-change input").val());
-                        $("#title-change input").val("");
-                    }
-                    $(this).dialog('close');
-                },
-                "Storno": function () {
-                    $(this).dialog('close');
-                }
-            });
-            $("#title-change").dialog('open');
-        });
-
-        $("[id^=files] .delete").live('click', function () {
-            $(this).parents(".file").fadeOut().remove();
-        });
-
-        $("[id^=ajaxUploadForm]").each(function () {
-            var form = $(this);
-
-            form.ajaxForm({
-                iframe: true,
-                dataType: "json",
-                beforeSubmit: function () {
-                    form.fadeOut("fast", function () {
-                        form.after('<span class="uploadInfo">Nahrávám...</span>');
-                    });
-                },
-                success: function (result) {
-                    form.resetForm();
-                    documentUploadInProgress = false;
-                    $(".uploadInfo").remove();
-                    form.fadeIn();
-                    form.next(".uploaded").eq(0).append('<span class="file"><span class="name">' + result.name + '</span><span class="edit">E</span><span class="delete">X</span></span>');
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    form.resetForm();
-                    documentUploadInProgress = false;
-                    $(".uploadInfo").remove();
-                    form.fadeIn();
-                }
-            });
-        });
+        $("#edit-page-container #tabs").tabs();
     }
 
     function bindAddStaticPage() {
@@ -421,71 +860,7 @@ $(document).ready(function () {
             document.location.href = "/backend/listPages";
         });
 
-        $("#add-page-container").tabs();
-
-        window.setInterval(function () {
-            $("[id^=document]").add("[id^=image]").each(function () {
-                var el = $(this);
-
-                if (!documentUploadInProgress && el.val().length > 0) {
-                    el.parents("form").submit();
-                    documentUploadInProgress = true;
-                }
-
-            });
-        }, 500);
-
-        $("#title-change").dialog({ modal: true, autoOpen: false });
-
-        $("[id^=files] .edit").live('click', function () {
-
-            var el = $(this);
-
-            $("#title-change").dialog("option", "buttons", {
-                "Hotovo": function () {
-                    if ($("#title-change input").val().length > 0) {
-                        $(".name", el.parents(".file")).text($("#title-change input").val());
-                        $("#title-change input").val("");
-                    }
-                    $(this).dialog('close');
-                },
-                "Storno": function () {
-                    $(this).dialog('close');
-                }
-            });
-            $("#title-change").dialog('open');
-        });
-
-        $("[id^=files] .delete").live('click', function () {
-            $(this).parents(".file").fadeOut().remove();
-        });
-
-        $("[id^=ajaxUploadForm]").each(function () {
-            var form = $(this);
-
-            form.ajaxForm({
-                iframe: true,
-                dataType: "json",
-                beforeSubmit: function () {
-                    form.fadeOut("fast", function () {
-                        form.after('<span class="uploadInfo">Nahrávám...</span>');
-                    });
-                },
-                success: function (result) {
-                    form.resetForm();
-                    documentUploadInProgress = false;
-                    $(".uploadInfo").remove();
-                    form.fadeIn();
-                    form.next(".uploaded").eq(0).append('<span class="file"><span class="name">' + result.name + '</span><span class="edit">E</span><span class="delete">X</span></span>');
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    form.resetForm();
-                    documentUploadInProgress = false;
-                    $(".uploadInfo").remove();
-                    form.fadeIn();
-                }
-            });
-        });
+        $("#add-page-container #tabs").tabs();
     }
 
 });
@@ -1170,160 +1545,160 @@ $(document).ready(function () {
 /******************************************/
 
 /*
-    http://www.JSON.org/json2.js
-    2010-03-20
+http://www.JSON.org/json2.js
+2010-03-20
 
-    Public Domain.
+Public Domain.
 
-    NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
 
-    See http://www.JSON.org/js.html
-
-
-    This code should be minified before deployment.
-    See http://javascript.crockford.com/jsmin.html
-
-    USE YOUR OWN COPY. IT IS EXTREMELY UNWISE TO LOAD CODE FROM SERVERS YOU DO
-    NOT CONTROL.
+See http://www.JSON.org/js.html
 
 
-    This file creates a global JSON object containing two methods: stringify
-    and parse.
+This code should be minified before deployment.
+See http://javascript.crockford.com/jsmin.html
 
-        JSON.stringify(value, replacer, space)
-            value       any JavaScript value, usually an object or array.
-
-            replacer    an optional parameter that determines how object
-                        values are stringified for objects. It can be a
-                        function or an array of strings.
-
-            space       an optional parameter that specifies the indentation
-                        of nested structures. If it is omitted, the text will
-                        be packed without extra whitespace. If it is a number,
-                        it will specify the number of spaces to indent at each
-                        level. If it is a string (such as '\t' or '&nbsp;'),
-                        it contains the characters used to indent at each level.
-
-            This method produces a JSON text from a JavaScript value.
-
-            When an object value is found, if the object contains a toJSON
-            method, its toJSON method will be called and the result will be
-            stringified. A toJSON method does not serialize: it returns the
-            value represented by the name/value pair that should be serialized,
-            or undefined if nothing should be serialized. The toJSON method
-            will be passed the key associated with the value, and this will be
-            bound to the value
-
-            For example, this would serialize Dates as ISO strings.
-
-                Date.prototype.toJSON = function (key) {
-                    function f(n) {
-                        // Format integers to have at least two digits.
-                        return n < 10 ? '0' + n : n;
-                    }
-
-                    return this.getUTCFullYear()   + '-' +
-                         f(this.getUTCMonth() + 1) + '-' +
-                         f(this.getUTCDate())      + 'T' +
-                         f(this.getUTCHours())     + ':' +
-                         f(this.getUTCMinutes())   + ':' +
-                         f(this.getUTCSeconds())   + 'Z';
-                };
-
-            You can provide an optional replacer method. It will be passed the
-            key and value of each member, with this bound to the containing
-            object. The value that is returned from your method will be
-            serialized. If your method returns undefined, then the member will
-            be excluded from the serialization.
-
-            If the replacer parameter is an array of strings, then it will be
-            used to select the members to be serialized. It filters the results
-            such that only members with keys listed in the replacer array are
-            stringified.
-
-            Values that do not have JSON representations, such as undefined or
-            functions, will not be serialized. Such values in objects will be
-            dropped; in arrays they will be replaced with null. You can use
-            a replacer function to replace those with JSON values.
-            JSON.stringify(undefined) returns undefined.
-
-            The optional space parameter produces a stringification of the
-            value that is filled with line breaks and indentation to make it
-            easier to read.
-
-            If the space parameter is a non-empty string, then that string will
-            be used for indentation. If the space parameter is a number, then
-            the indentation will be that many spaces.
-
-            Example:
-
-            text = JSON.stringify(['e', {pluribus: 'unum'}]);
-            // text is '["e",{"pluribus":"unum"}]'
+USE YOUR OWN COPY. IT IS EXTREMELY UNWISE TO LOAD CODE FROM SERVERS YOU DO
+NOT CONTROL.
 
 
-            text = JSON.stringify(['e', {pluribus: 'unum'}], null, '\t');
-            // text is '[\n\t"e",\n\t{\n\t\t"pluribus": "unum"\n\t}\n]'
+This file creates a global JSON object containing two methods: stringify
+and parse.
 
-            text = JSON.stringify([new Date()], function (key, value) {
-                return this[key] instanceof Date ?
-                    'Date(' + this[key] + ')' : value;
-            });
-            // text is '["Date(---current time---)"]'
+JSON.stringify(value, replacer, space)
+value       any JavaScript value, usually an object or array.
+
+replacer    an optional parameter that determines how object
+values are stringified for objects. It can be a
+function or an array of strings.
+
+space       an optional parameter that specifies the indentation
+of nested structures. If it is omitted, the text will
+be packed without extra whitespace. If it is a number,
+it will specify the number of spaces to indent at each
+level. If it is a string (such as '\t' or '&nbsp;'),
+it contains the characters used to indent at each level.
+
+This method produces a JSON text from a JavaScript value.
+
+When an object value is found, if the object contains a toJSON
+method, its toJSON method will be called and the result will be
+stringified. A toJSON method does not serialize: it returns the
+value represented by the name/value pair that should be serialized,
+or undefined if nothing should be serialized. The toJSON method
+will be passed the key associated with the value, and this will be
+bound to the value
+
+For example, this would serialize Dates as ISO strings.
+
+Date.prototype.toJSON = function (key) {
+function f(n) {
+// Format integers to have at least two digits.
+return n < 10 ? '0' + n : n;
+}
+
+return this.getUTCFullYear()   + '-' +
+f(this.getUTCMonth() + 1) + '-' +
+f(this.getUTCDate())      + 'T' +
+f(this.getUTCHours())     + ':' +
+f(this.getUTCMinutes())   + ':' +
+f(this.getUTCSeconds())   + 'Z';
+};
+
+You can provide an optional replacer method. It will be passed the
+key and value of each member, with this bound to the containing
+object. The value that is returned from your method will be
+serialized. If your method returns undefined, then the member will
+be excluded from the serialization.
+
+If the replacer parameter is an array of strings, then it will be
+used to select the members to be serialized. It filters the results
+such that only members with keys listed in the replacer array are
+stringified.
+
+Values that do not have JSON representations, such as undefined or
+functions, will not be serialized. Such values in objects will be
+dropped; in arrays they will be replaced with null. You can use
+a replacer function to replace those with JSON values.
+JSON.stringify(undefined) returns undefined.
+
+The optional space parameter produces a stringification of the
+value that is filled with line breaks and indentation to make it
+easier to read.
+
+If the space parameter is a non-empty string, then that string will
+be used for indentation. If the space parameter is a number, then
+the indentation will be that many spaces.
+
+Example:
+
+text = JSON.stringify(['e', {pluribus: 'unum'}]);
+// text is '["e",{"pluribus":"unum"}]'
 
 
-        JSON.parse(text, reviver)
-            This method parses a JSON text to produce an object or array.
-            It can throw a SyntaxError exception.
+text = JSON.stringify(['e', {pluribus: 'unum'}], null, '\t');
+// text is '[\n\t"e",\n\t{\n\t\t"pluribus": "unum"\n\t}\n]'
 
-            The optional reviver parameter is a function that can filter and
-            transform the results. It receives each of the keys and values,
-            and its return value is used instead of the original value.
-            If it returns what it received, then the structure is not modified.
-            If it returns undefined then the member is deleted.
+text = JSON.stringify([new Date()], function (key, value) {
+return this[key] instanceof Date ?
+'Date(' + this[key] + ')' : value;
+});
+// text is '["Date(---current time---)"]'
 
-            Example:
 
-            // Parse the text. Values that look like ISO date strings will
-            // be converted to Date objects.
+JSON.parse(text, reviver)
+This method parses a JSON text to produce an object or array.
+It can throw a SyntaxError exception.
 
-            myData = JSON.parse(text, function (key, value) {
-                var a;
-                if (typeof value === 'string') {
-                    a =
+The optional reviver parameter is a function that can filter and
+transform the results. It receives each of the keys and values,
+and its return value is used instead of the original value.
+If it returns what it received, then the structure is not modified.
+If it returns undefined then the member is deleted.
+
+Example:
+
+// Parse the text. Values that look like ISO date strings will
+// be converted to Date objects.
+
+myData = JSON.parse(text, function (key, value) {
+var a;
+if (typeof value === 'string') {
+a =
 /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
-                    if (a) {
-                        return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
-                            +a[5], +a[6]));
-                    }
-                }
-                return value;
-            });
+if (a) {
+return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
++a[5], +a[6]));
+}
+}
+return value;
+});
 
-            myData = JSON.parse('["Date(09/09/2001)"]', function (key, value) {
-                var d;
-                if (typeof value === 'string' &&
-                        value.slice(0, 5) === 'Date(' &&
-                        value.slice(-1) === ')') {
-                    d = new Date(value.slice(5, -1));
-                    if (d) {
-                        return d;
-                    }
-                }
-                return value;
-            });
+myData = JSON.parse('["Date(09/09/2001)"]', function (key, value) {
+var d;
+if (typeof value === 'string' &&
+value.slice(0, 5) === 'Date(' &&
+value.slice(-1) === ')') {
+d = new Date(value.slice(5, -1));
+if (d) {
+return d;
+}
+}
+return value;
+});
 
 
-    This is a reference implementation. You are free to copy, modify, or
-    redistribute.
+This is a reference implementation. You are free to copy, modify, or
+redistribute.
 */
 
 /*jslint evil: true, strict: false */
 
 /*members "", "\b", "\t", "\n", "\f", "\r", "\"", JSON, "\\", apply,
-    call, charCodeAt, getUTCDate, getUTCFullYear, getUTCHours,
-    getUTCMinutes, getUTCMonth, getUTCSeconds, hasOwnProperty, join,
-    lastIndex, length, parse, prototype, push, replace, slice, stringify,
-    test, toJSON, toString, valueOf
+call, charCodeAt, getUTCDate, getUTCFullYear, getUTCHours,
+getUTCMinutes, getUTCMonth, getUTCSeconds, hasOwnProperty, join,
+lastIndex, length, parse, prototype, push, replace, slice, stringify,
+test, toJSON, toString, valueOf
 */
 
 
@@ -1346,12 +1721,12 @@ if (!this.JSON) {
         Date.prototype.toJSON = function (key) {
 
             return isFinite(this.valueOf()) ?
-                   this.getUTCFullYear()   + '-' +
+                   this.getUTCFullYear() + '-' +
                  f(this.getUTCMonth() + 1) + '-' +
-                 f(this.getUTCDate())      + 'T' +
-                 f(this.getUTCHours())     + ':' +
-                 f(this.getUTCMinutes())   + ':' +
-                 f(this.getUTCSeconds())   + 'Z' : null;
+                 f(this.getUTCDate()) + 'T' +
+                 f(this.getUTCHours()) + ':' +
+                 f(this.getUTCMinutes()) + ':' +
+                 f(this.getUTCSeconds()) + 'Z' : null;
         };
 
         String.prototype.toJSON =
@@ -1371,7 +1746,7 @@ if (!this.JSON) {
             '\n': '\\n',
             '\f': '\\f',
             '\r': '\\r',
-            '"' : '\\"',
+            '"': '\\"',
             '\\': '\\\\'
         },
         rep;
@@ -1379,10 +1754,10 @@ if (!this.JSON) {
 
     function quote(string) {
 
-// If the string contains no control characters, no quote characters, and no
-// backslash characters, then we can safely slap some quotes around it.
-// Otherwise we must also replace the offending characters with safe escape
-// sequences.
+        // If the string contains no control characters, no quote characters, and no
+        // backslash characters, then we can safely slap some quotes around it.
+        // Otherwise we must also replace the offending characters with safe escape
+        // sequences.
 
         escapable.lastIndex = 0;
         return escapable.test(string) ?
@@ -1397,7 +1772,7 @@ if (!this.JSON) {
 
     function str(key, holder) {
 
-// Produce a string from holder[key].
+        // Produce a string from holder[key].
 
         var i,          // The loop counter.
             k,          // The member key.
@@ -1407,151 +1782,151 @@ if (!this.JSON) {
             partial,
             value = holder[key];
 
-// If the value has a toJSON method, call it to obtain a replacement value.
+        // If the value has a toJSON method, call it to obtain a replacement value.
 
         if (value && typeof value === 'object' &&
                 typeof value.toJSON === 'function') {
             value = value.toJSON(key);
         }
 
-// If we were called with a replacer function, then call the replacer to
-// obtain a replacement value.
+        // If we were called with a replacer function, then call the replacer to
+        // obtain a replacement value.
 
         if (typeof rep === 'function') {
             value = rep.call(holder, key, value);
         }
 
-// What happens next depends on the value's type.
+        // What happens next depends on the value's type.
 
         switch (typeof value) {
-        case 'string':
-            return quote(value);
+            case 'string':
+                return quote(value);
 
-        case 'number':
+            case 'number':
 
-// JSON numbers must be finite. Encode non-finite numbers as null.
+                // JSON numbers must be finite. Encode non-finite numbers as null.
 
-            return isFinite(value) ? String(value) : 'null';
+                return isFinite(value) ? String(value) : 'null';
 
-        case 'boolean':
-        case 'null':
+            case 'boolean':
+            case 'null':
 
-// If the value is a boolean or null, convert it to a string. Note:
-// typeof null does not produce 'null'. The case is included here in
-// the remote chance that this gets fixed someday.
+                // If the value is a boolean or null, convert it to a string. Note:
+                // typeof null does not produce 'null'. The case is included here in
+                // the remote chance that this gets fixed someday.
 
-            return String(value);
+                return String(value);
 
-// If the type is 'object', we might be dealing with an object or an array or
-// null.
+                // If the type is 'object', we might be dealing with an object or an array or
+                // null.
 
-        case 'object':
+            case 'object':
 
-// Due to a specification blunder in ECMAScript, typeof null is 'object',
-// so watch out for that case.
+                // Due to a specification blunder in ECMAScript, typeof null is 'object',
+                // so watch out for that case.
 
-            if (!value) {
-                return 'null';
-            }
-
-// Make an array to hold the partial results of stringifying this object value.
-
-            gap += indent;
-            partial = [];
-
-// Is the value an array?
-
-            if (Object.prototype.toString.apply(value) === '[object Array]') {
-
-// The value is an array. Stringify every element. Use null as a placeholder
-// for non-JSON values.
-
-                length = value.length;
-                for (i = 0; i < length; i += 1) {
-                    partial[i] = str(i, value) || 'null';
+                if (!value) {
+                    return 'null';
                 }
 
-// Join all of the elements together, separated with commas, and wrap them in
-// brackets.
+                // Make an array to hold the partial results of stringifying this object value.
 
-                v = partial.length === 0 ? '[]' :
+                gap += indent;
+                partial = [];
+
+                // Is the value an array?
+
+                if (Object.prototype.toString.apply(value) === '[object Array]') {
+
+                    // The value is an array. Stringify every element. Use null as a placeholder
+                    // for non-JSON values.
+
+                    length = value.length;
+                    for (i = 0; i < length; i += 1) {
+                        partial[i] = str(i, value) || 'null';
+                    }
+
+                    // Join all of the elements together, separated with commas, and wrap them in
+                    // brackets.
+
+                    v = partial.length === 0 ? '[]' :
                     gap ? '[\n' + gap +
                             partial.join(',\n' + gap) + '\n' +
                                 mind + ']' :
                           '[' + partial.join(',') + ']';
-                gap = mind;
-                return v;
-            }
+                    gap = mind;
+                    return v;
+                }
 
-// If the replacer is an array, use it to select the members to be stringified.
+                // If the replacer is an array, use it to select the members to be stringified.
 
-            if (rep && typeof rep === 'object') {
-                length = rep.length;
-                for (i = 0; i < length; i += 1) {
-                    k = rep[i];
-                    if (typeof k === 'string') {
-                        v = str(k, value);
-                        if (v) {
-                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                if (rep && typeof rep === 'object') {
+                    length = rep.length;
+                    for (i = 0; i < length; i += 1) {
+                        k = rep[i];
+                        if (typeof k === 'string') {
+                            v = str(k, value);
+                            if (v) {
+                                partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                            }
+                        }
+                    }
+                } else {
+
+                    // Otherwise, iterate through all of the keys in the object.
+
+                    for (k in value) {
+                        if (Object.hasOwnProperty.call(value, k)) {
+                            v = str(k, value);
+                            if (v) {
+                                partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                            }
                         }
                     }
                 }
-            } else {
 
-// Otherwise, iterate through all of the keys in the object.
+                // Join all of the member texts together, separated with commas,
+                // and wrap them in braces.
 
-                for (k in value) {
-                    if (Object.hasOwnProperty.call(value, k)) {
-                        v = str(k, value);
-                        if (v) {
-                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
-                        }
-                    }
-                }
-            }
-
-// Join all of the member texts together, separated with commas,
-// and wrap them in braces.
-
-            v = partial.length === 0 ? '{}' :
+                v = partial.length === 0 ? '{}' :
                 gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' +
                         mind + '}' : '{' + partial.join(',') + '}';
-            gap = mind;
-            return v;
+                gap = mind;
+                return v;
         }
     }
 
-// If the JSON object does not yet have a stringify method, give it one.
+    // If the JSON object does not yet have a stringify method, give it one.
 
     if (typeof JSON.stringify !== 'function') {
         JSON.stringify = function (value, replacer, space) {
 
-// The stringify method takes a value and an optional replacer, and an optional
-// space parameter, and returns a JSON text. The replacer can be a function
-// that can replace values, or an array of strings that will select the keys.
-// A default replacer method can be provided. Use of the space parameter can
-// produce text that is more easily readable.
+            // The stringify method takes a value and an optional replacer, and an optional
+            // space parameter, and returns a JSON text. The replacer can be a function
+            // that can replace values, or an array of strings that will select the keys.
+            // A default replacer method can be provided. Use of the space parameter can
+            // produce text that is more easily readable.
 
             var i;
             gap = '';
             indent = '';
 
-// If the space parameter is a number, make an indent string containing that
-// many spaces.
+            // If the space parameter is a number, make an indent string containing that
+            // many spaces.
 
             if (typeof space === 'number') {
                 for (i = 0; i < space; i += 1) {
                     indent += ' ';
                 }
 
-// If the space parameter is a string, it will be used as the indent string.
+                // If the space parameter is a string, it will be used as the indent string.
 
             } else if (typeof space === 'string') {
                 indent = space;
             }
 
-// If there is a replacer, it must be a function or an array.
-// Otherwise, throw an error.
+            // If there is a replacer, it must be a function or an array.
+            // Otherwise, throw an error.
 
             rep = replacer;
             if (replacer && typeof replacer !== 'function' &&
@@ -1560,28 +1935,28 @@ if (!this.JSON) {
                 throw new Error('JSON.stringify');
             }
 
-// Make a fake root object containing our value under the key of ''.
-// Return the result of stringifying the value.
+            // Make a fake root object containing our value under the key of ''.
+            // Return the result of stringifying the value.
 
-            return str('', {'': value});
+            return str('', { '': value });
         };
     }
 
 
-// If the JSON object does not yet have a parse method, give it one.
+    // If the JSON object does not yet have a parse method, give it one.
 
     if (typeof JSON.parse !== 'function') {
         JSON.parse = function (text, reviver) {
 
-// The parse method takes a text and an optional reviver function, and returns
-// a JavaScript value if the text is a valid JSON text.
+            // The parse method takes a text and an optional reviver function, and returns
+            // a JavaScript value if the text is a valid JSON text.
 
             var j;
 
             function walk(holder, key) {
 
-// The walk method is used to recursively walk the resulting structure so
-// that modifications can be made.
+                // The walk method is used to recursively walk the resulting structure so
+                // that modifications can be made.
 
                 var k, v, value = holder[key];
                 if (value && typeof value === 'object') {
@@ -1600,9 +1975,9 @@ if (!this.JSON) {
             }
 
 
-// Parsing happens in four stages. In the first stage, we replace certain
-// Unicode characters with escape sequences. JavaScript handles many characters
-// incorrectly, either silently deleting them, or treating them as line endings.
+            // Parsing happens in four stages. In the first stage, we replace certain
+            // Unicode characters with escape sequences. JavaScript handles many characters
+            // incorrectly, either silently deleting them, or treating them as line endings.
 
             text = String(text);
             cx.lastIndex = 0;
@@ -1613,41 +1988,41 @@ if (!this.JSON) {
                 });
             }
 
-// In the second stage, we run the text against regular expressions that look
-// for non-JSON patterns. We are especially concerned with '()' and 'new'
-// because they can cause invocation, and '=' because it can cause mutation.
-// But just to be safe, we want to reject all unexpected forms.
+            // In the second stage, we run the text against regular expressions that look
+            // for non-JSON patterns. We are especially concerned with '()' and 'new'
+            // because they can cause invocation, and '=' because it can cause mutation.
+            // But just to be safe, we want to reject all unexpected forms.
 
-// We split the second stage into 4 regexp operations in order to work around
-// crippling inefficiencies in IE's and Safari's regexp engines. First we
-// replace the JSON backslash pairs with '@' (a non-JSON character). Second, we
-// replace all simple value tokens with ']' characters. Third, we delete all
-// open brackets that follow a colon or comma or that begin the text. Finally,
-// we look to see that the remaining characters are only whitespace or ']' or
-// ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
+            // We split the second stage into 4 regexp operations in order to work around
+            // crippling inefficiencies in IE's and Safari's regexp engines. First we
+            // replace the JSON backslash pairs with '@' (a non-JSON character). Second, we
+            // replace all simple value tokens with ']' characters. Third, we delete all
+            // open brackets that follow a colon or comma or that begin the text. Finally,
+            // we look to see that the remaining characters are only whitespace or ']' or
+            // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
 
             if (/^[\],:{}\s]*$/.
 test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
 replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
 replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
-// In the third stage we use the eval function to compile the text into a
-// JavaScript structure. The '{' operator is subject to a syntactic ambiguity
-// in JavaScript: it can begin a block or an object literal. We wrap the text
-// in parens to eliminate the ambiguity.
+                // In the third stage we use the eval function to compile the text into a
+                // JavaScript structure. The '{' operator is subject to a syntactic ambiguity
+                // in JavaScript: it can begin a block or an object literal. We wrap the text
+                // in parens to eliminate the ambiguity.
 
                 j = eval('(' + text + ')');
 
-// In the optional fourth stage, we recursively walk the new structure, passing
-// each name/value pair to a reviver function for possible transformation.
+                // In the optional fourth stage, we recursively walk the new structure, passing
+                // each name/value pair to a reviver function for possible transformation.
 
                 return typeof reviver === 'function' ?
-                    walk({'': j}, '') : j;
+                    walk({ '': j }, '') : j;
             }
 
-// If the text is not JSON parseable, then a SyntaxError is thrown.
+            // If the text is not JSON parseable, then a SyntaxError is thrown.
 
             throw new SyntaxError('JSON.parse');
         };
     }
-}());
+} ());

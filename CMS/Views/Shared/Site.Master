@@ -1,49 +1,91 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Mìøení a regulace, regulátory, PID regulátory | <asp:ContentPlaceHolder ID="TitleContent" runat="server" /> | HTH8 s.r.o.</title>
-    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../../Scripts/ckeditor.js"></script>
+    <title>Mìøení a regulace, regulátory, PID regulátory |
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+        | HTH8 s.r.o.</title>
+    <link rel="stylesheet" href="../../Content/frontend/css/main.css" />
+    <!--[if lt IE 7]>	
+      <link rel='stylesheet' href='../../Content/frontend/css/ie6.css' type='text/css' media='screen' />
+    <![endif]-->
+    <!--[if IE 7]>	
+      <link rel='stylesheet' href='../../Content/frontend/css/ie7.css' type='text/css' media='screen' />
+    <![endif]-->
+    <script src="<%= Url.Content("~/scripts/frontend/jquery.js") %>" type="text/javascript"></script> 
+    <script src="<%= Url.Content("~/scripts/frontend/slider.js") %>" type="text/javascript"></script> 
+    <script src="<%= Url.Content("~/scripts/frontend/jquery.dimensions.js") %>" type="text/javascript"></script> 
+    <script src="<%= Url.Content("~/scripts/frontend/jquery.tooltip.js") %>" type="text/javascript"></script> 
 </head>
-
 <body>
-    <div class="page">
-
+    <div id="wrapper">
         <div id="header">
-            <div id="title">
-                <h1>CMS</h1>
-            </div>
-              
-            <div id="logindisplay">
-                <% if((bool)ViewData["logged"]){%>
-                    Logged as <%= ViewData["user"] %>,
-                    <a href="/user/logout">Odhlásit se</a>
-                <%}else{%>
-                    <a href="/user/login">Pøihlásit se</a>
-                <%} %>
-            </div> 
-            
-            <div id="menucontainer">
-            
-                <ul id="menu">
-                        <li><a href="/">Titulka</a></li>  
-                        <li><a href="<%= Url.Action("Index","Backend") %>">Admin</a></li>       
-                    <% foreach (CMS.Models.category c in (IEnumerable<CMS.Models.category>) ViewData["menu"]){%>
-                        <li><a href="/category/list?id=<%= c.id %>">acd</a></li>
-                    <%} %>
-                </ul>
-            
+            <a id='logo' href='/' title="HTH8 s.r.o.">HTH8</a>
+            <ul id='main-menu' class='clearfix'>
+                <li class='products-li'><a href='#'>Produkty</a> </li>
+                <li class='selected'><a href='#'>Kontakt</a> </li>
+                <li><a href='#'>Podpora</a> </li>
+            </ul>
+            <ul id='products-menu' class='clearfix'>
+                <li><a href='#'>Datalogger</a></li>
+                <li><a href='#'>Mìøící technika</a></li>
+                <li><a href='#'>Regulátory</a>
+                    <ul>
+                        <li class='first'><a href='#'>Lorem ipsum</a></li>
+                        <li><a href='#'>Lorem ipsum</a></li>
+                        <li><a href='#'>Lorem ipsum</a></li>
+                        <li class='last'><a href='#'>Lorem ipsum</a></li>
+                    </ul>
+                </li>
+                <li><a href='#'>Teplotní èidla</a></li>
+                <li><a href='#'>Kompenzaèní vedení</a></li>
+                <li><a href='#'>Datalogger</a></li>
+                <li><a href='#'>Datalogger</a></li>
+            </ul>
+            <ul id='languages' class='clearfix'>
+                <li class='en'><a href='#'>EN</a></li>
+                <li class='de'><a href='#'>DE</a></li>
+                <li class='ru'><a href='#'>RU</a></li>
+            </ul>
+            <div id='search' class='clearfix'>
+                <form action='/' method='get'>
+                <input type='text' name='search-text' id='search-text' value="vyhledat" />
+                <input type='submit' id='search-button' title="" />
+                </form>
             </div>
         </div>
-
-        <div id="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-
-            <div id="footer">
+        <!-- /#header-->
+        <div id="logindisplay">
+            <% if ((bool)ViewData["logged"])
+               {%>
+            Logged as
+            <%= ViewData["user"] %>, <a href="/user/logout">Odhlásit se</a>
+            <%}
+               else
+               {%>
+            <a href="/user/login">Pøihlásit se</a>
+            <%} %>
+        </div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <div id='footer'>
+            <div id='footer-top' class='clearfix'>
+                <a href='#' class='all-news'>Všechny novinky</a>
+                <div class='aventio-footer'>
+                    <a href='http://aventio.cz'>Aventio</a>
+                </div>
+                <div class='hth-footer'>
+                    &copy; 2010 <a href='/'>HTH 8 s.r.o.</a>
+                    <br />
+                    Všechna práva vyhrazena.
+                </div>
+            </div>
+            <div id='footer-bottom'>
             </div>
         </div>
+        <!-- /#footer-->
     </div>
+    <!-- /#wrapper-->
 </body>
 </html>

@@ -7,3 +7,14 @@ C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS.Tests\obj\Debug\Res
 C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS.Tests\obj\Debug\CMS.Tests.dll
 C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS.Tests\obj\Debug\CMS.Tests.pdb
 C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS.Tests\bin\Debug\CMS.xml
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\CMS.Tests.dll.config
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\CMS.Tests.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\CMS.Tests.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\CMS.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\Microsoft.Web.Mvc.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\CMS.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\CMS.xml
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\bin\Debug\Microsoft.Web.Mvc.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\obj\Debug\CMS.Tests.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS.Tests\obj\Debug\CMS.Tests.pdb

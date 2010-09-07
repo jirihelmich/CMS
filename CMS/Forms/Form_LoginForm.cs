@@ -19,24 +19,29 @@ namespace CMS.Forms
         /// <summary>
         /// Constructor
         /// </summary>
-        public Form_LoginForm()
+        public Form_LoginForm(string backUrl)
         {
             _action = new CMS_Action("/user/login");
 
             CMS_Form_Element_Textbox username = new CMS_Form_Element_Textbox("username");
-            username.setLabel("Username");
+            username.setLabel("Uživatelské jméno");
             username.setRequired();
 
             addElement(username);
 
+            CMS_Form_Element_Hidden hidden = new CMS_Form_Element_Hidden("backUrl");
+            hidden.setValue(backUrl);
+
+            addElement(hidden);
+
             CMS_Form_Element_Password pw = new CMS_Form_Element_Password("password");
-            pw.setLabel("Password");
+            pw.setLabel("Heslo");
             pw.setRequired();
 
             addElement(pw);
 
             CMS_Form_Element_Submit submit = new CMS_Form_Element_Submit("submit");
-            submit.setLabel("Sign in");
+            submit.setLabel("Přihlásit se");
 
             addElement(submit);
 

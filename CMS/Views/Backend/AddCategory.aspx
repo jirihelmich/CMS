@@ -9,18 +9,17 @@
 
   <div id="controls"><div id="save">Uložit</div><div id="cancel">Storno</div></div>
 
-    <% String[] langs = new String[] { "cz", "gb", "de", "ru" }; %>
   <div id="add-category-container">
 
         <div class="left box-width-70" id="tabs">
           <ul>
-            <% foreach (String lang in langs) { %>
+            <% foreach (String lang in CMS.Helpers.LangHelper.langs) { %>
             <li><a href="#<%= lang %>">
               <img src="../../Content/flags/<%= lang %>.png" /></a></li>
             <% } %>
           </ul>
 
-          <% foreach (String lang in langs) { %>
+          <% foreach (String lang in CMS.Helpers.LangHelper.langs) { %>
             <div id="<%= lang %>">
                 <input id="title-<%= lang %>" type="text" class="largeField" />
                 <textarea id="description-<%= lang %>" class="ckeditor"></textarea>
@@ -30,10 +29,8 @@
               </div>        
         <div class="box left box-width-30 highlight" id="tree">
           <div class="box-content">
-            Vyberte rodièovskou kategorii <a href="#" class="no-radio">Odznaèit</a>:
-            <% foreach (CMS.CMS.OutputModels.CategoryOutputModel c in Model) { %>
-              <br /><input type="radio" name="parent" id="<%= c.Id %>" /><%= c.Title.cz %>
-            <% } %>
+            <strong>Vyberte rodièovskou kategorii <a href="#" class="no-radio">Odznaèit</a></strong>:
+            <%= CMS.Helpers.CategoryTree.PrintTree(Model, null, this, false, (int)CMS.Helpers.CategoryTree.SELECTMODE.RADIOS) %>
           </div>
         </div>
         <hr class="clear" />

@@ -14,6 +14,8 @@
     <script type="text/javascript" src="../../Scripts/ckeditor.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-1.4.1.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="../../Scripts/linq.min.js"></script>
     <script type="text/javascript" src="../../Scripts/effects.js"></script>
 </head>
 <body>
@@ -36,6 +38,11 @@
             <h3 class="noscreen">
                 Navigace</h3>
             <ul id="nav">
+                <li <%= (this.Url.RouteUrl(this.ViewContext.RouteData.Values) == "/Backend" ? "id=\"nav-active\"" : "") %>><a href="/Backend/" class="top"><span><span>Nástěnka</span></span></a></li>
+                <li <%= (this.Url.RouteUrl(this.ViewContext.RouteData.Values) == "/Backend/listProducts" ? "id=\"nav-active\"" : "") %>><a href="/Backend/listProducts" class="top"><span><span>Produkty</span></span></a></li>
+                <li <%= (this.Url.RouteUrl(this.ViewContext.RouteData.Values) == "/Backend/listCategories" ? "id=\"nav-active\"" : "") %>><a href="/Backend/listCategories" class="top"><span><span>Kategorie</span></span></a></li>
+                <li <%= (this.Url.RouteUrl(this.ViewContext.RouteData.Values) == "/Backend/listPages" ? "id=\"nav-active\"" : "") %>><a href="/Backend/listPages" class="top"><span><span>Statické stránky</span></span></a></li>
+                <li <%= (this.Url.RouteUrl(this.ViewContext.RouteData.Values) == "/Backend/listResources" ? "id=\"nav-active\"" : "") %>><a href="/Backend/listResources" class="top"><span><span>Oprávnění</span></span></a></li>
             </ul>
         </div>
         <!-- /main -->

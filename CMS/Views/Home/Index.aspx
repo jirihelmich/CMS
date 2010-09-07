@@ -1,76 +1,93 @@
 ﻿<%@ Import Namespace="System.IO" %>
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<CMS.Models.article>>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<CMS.CMS.OutputModels.NewsListOutputModel>>" %>
 
 <asp:Content ID="indexTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    Home Page
+    Úvodní strana
 </asp:Content>
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
-    <form id="form1" runat="server">
-    <h2>Latest articles</h2>
     
-    <div id="ordering_form">
-        
-        <form action="/" method="get">
-        
-            <select name="ordering" id="ordering"> 
-                <option value="id">Creation date</option> 
-                <option value="date">Published date</option> 
-                <option value="hits">Hits</option> 
-                <option value="title">Title</option> 
-            </select> 
-            
-            <input type="submit" value="Reorder" />
-        
-        </form>
-        
-    </div>
-    
-    <div id="articles">
-    
-    <% foreach (var a in Model){ %>
-        <h3><a href="/article/detail?chapter=0&id=<%= a.id %>"><%= a.title %></a></h3>
+		<div id='carousel'>
+			<div class='clearfix'>
+				<div class='carousel-item number1 selected'>
+					<span>&nbsp;</span>
+					<div class='carousel-content'>
+						<div class='left'>
+							<h3>Měřící technika</h3>
+							<ul>
+								<li><a href='#'>Měřiče tepla a tlaku</a></li>
+								<li><a href='#'>Měřiče tepla a tlaku</a></li>
+							</ul>
+							<p>Lorem ipsum dolor sit amet, etur adipiscing elit. Donec varius ius ultrices. Sed tellus quam, venenatis ut molestie </p>
+						</div>
+						<div class='right'>
+							<img src='images/carousel-photo.jpg' alt='Photo' />
+							<ul class='thumbnails'>
+								<li><a href='#' class='selected'><img src='images/carousel-thumbnail.jpg' alt='Photo' /></a></li>
+								<li><a href='#'><img src='images/carousel-thumbnail.jpg' alt='Photo' /></a></li>
+								<li><a href='#'><img src='images/carousel-thumbnail.jpg' alt='Photo' /></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class='carousel-item number2'>
+					<span>&nbsp;</span>
+					<div class='carousel-content'>
+						bb
+					</div>
+				</div>
+				<div class='carousel-item number3'>
+					<span>&nbsp;</span>
+					<div class='carousel-content'>
+						cc
+					</div>
+				</div>
+				<div class='carousel-item number4'>
+					<span>&nbsp;</span>
+					<div class='carousel-content'>
+						dd
+					</div>
+				</div>
+				<div class='carousel-item number5'>
+					<span>&nbsp;</span>
+					<div class='carousel-content'>
+						ee
+					</div>
+				</div>
+				<div class='carousel-item number6'>
+					<span>&nbsp;</span>
+					<div class='carousel-content'>
+						ff
+					</div>
+				</div>
+				<div class='carousel-item number7'>
+					<span>&nbsp;</span>
+					<div class='carousel-content'>
+						gg
+					</div>
+				</div>
+			</div>
+		</div> <!-- /#carousel-->
+		<div id='news-container' class='clearfix'>
         <%
-        FileInfo f = new FileInfo(Request.MapPath("~/images/") + a.id + "_small.jpg");
-        if (f.Exists)
-        {
-         %>
-            <img src="/images/<%= a.id %>_small.jpg" alt="<%= a.title %>" style="float: left;" />
-        <% } %>
-        <p><%= a.introtext %></p>
-        <div class="info">
-            Published on: <%= a.date_published.ToString() %>, hits: <%= a.hits %>
-        </div>
-        <hr />
-    <% } %>
-    
-    </div>
-    
-    <div id="pagination">
-        Pages: 
+            int i = 0;
+            
+            foreach (CMS.CMS.OutputModels.NewsListOutputModel news in Model)
+            {
+        %>
+			<div class='news <% if(i==0){ %>left <% }else if(i==3){ %>dark<% } %>'>
+				<div class='news-inner'>
+					<div class='news-image'>
+						<img src='' alt='aktualita' />
+					</div>
+					<div class='news-text'>
+						<h3><%= news.Title.getByCulture("cz") %></h3>
+						<%= news.Shortdesc.getByCulture("cz") %><a href='#'>...</a>
+					</div>
+				</div>
+			</div> <!-- /#news-->
         <%
-            int articlesCount = (int) ViewData["articlesCount"];
-            int perPage = 10;
-            double pages = articlesCount/10;
-            
-            pages = Math.Ceiling(pages);
-
-            string currentPage = Request.Params["page"];
-            if (String.Empty == currentPage || null == currentPage) currentPage = "0";
-            
-            for (int i = 0; i < pages+1; ++i) {
-                if ((i).ToString() == currentPage)
-                {
-                    %>
-                        <span><%= i+1 %></span>
-                    <%
-                }
-                else {
-                    %>
-                        <a href="?page=<%= i %>"><%= i+1 %></a>
-                    <%
-                }
-            } %>
-    </div>
-    </form>
+            }
+        %>
+		</div> <!-- /#news-container-->
 </asp:Content>

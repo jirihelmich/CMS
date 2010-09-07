@@ -13,20 +13,18 @@
     <table>
     <tr>
         <th>ID</th>
-        <th>Název <img src="../../Content/flags/cz.png" /></th>
-        <th>Název <img src="../../Content/flags/gb.png" /></th>
-        <th>Název <img src="../../Content/flags/de.png" /></th>
-        <th>Název <img src="../../Content/flags/ru.png" /></th>
+        <% foreach (String lang in CMS.Helpers.LangHelper.langs) { %>
+            <th>Název <img src="../../Content/flags/<%= lang %>.png" /></th>
+        <% } %>
         <th>Upravit</th>
         <th>Smazat</th>
     </tr>
     <% foreach (CMS.CMS.OutputModels.PageListOutputModel p in Model) { %>
         <tr>
             <td><%= p.Id %></td>
-            <td><%= p.Title.cz %></td>
-            <td><%= p.Title.gb %></td>
-            <td><%= p.Title.de %></td>
-            <td><%= p.Title.ru %></td>
+            <% foreach (String lang in CMS.Helpers.LangHelper.langs) { %>
+                <td><%= p.Title.getByCulture(lang) %></td>
+            <% } %>
             <td><a href="/backend/editPage?id=<%= p.Id %>">Upravit</a></td>
             <td><a href="#" class="delete-page" rel="<%= p.Id %>">Smazat</a></td>
         </tr>

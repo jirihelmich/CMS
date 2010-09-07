@@ -157,7 +157,7 @@ namespace CMS.CMS.App.Categories
                 dataContext.texts.InsertOnSubmit(content);
 
                 c.text = content;
-                c.text1 = title;
+                c.title = title;
 
                 foreach (CategoryInputModel.Category cat in input.request)
                 {
@@ -165,6 +165,7 @@ namespace CMS.CMS.App.Categories
                     titleValue.culture = cat.lang;
                     titleValue.value = cat.data.Title;
                     titleValue.text = title;
+                    titleValue.seo_value = this._app.makeAlias(cat.data.Title);
 
                     texts_value contentValue = new texts_value();
                     contentValue.culture = cat.lang;
@@ -175,7 +176,7 @@ namespace CMS.CMS.App.Categories
                     dataContext.texts_values.InsertOnSubmit(contentValue);
                 }
 
-                c.parentid = input.Parent;
+                c.parentid = input.catParent;
                 c.date = DateTime.Now;
 
                 dataContext.SubmitChanges();
@@ -240,7 +241,7 @@ namespace CMS.CMS.App.Categories
         /// </summary>
         /// <param name="id">category id</param>
         /// <returns>success</returns>
-        public bool delete(long id)
+        public Object delete(long id)
         {
             using (LangDataContext u = new LangDataContext())
             {
@@ -249,12 +250,12 @@ namespace CMS.CMS.App.Categories
                     u.categories.DeleteAllOnSubmit(u.categories.Where(x => x.id == id));
                     u.SubmitChanges();
                 }
-                catch
+                catch(Exception e)
                 {
-                    return false;
+                    return new { result = false, errorMsg = e.Message };
                 }
 
-                return true;
+                return new { result = true };
             }
         }
 
@@ -294,10 +295,10 @@ namespace CMS.CMS.App.Categories
             CategoryOutputModel om = new CategoryOutputModel();
             om.Id = c.id;
 
-            om.Parent = fillCategoryModel(c.category1);
+            om.Parent = c.parentid;
 
             om.Content = this._app.fillLangModel(c.text.texts_values);
-            om.Title = this._app.fillLangModel(c.text1.texts_values);
+            om.Title = this._app.fillLangModel(c.title.texts_values);
 
             return om;
         }
@@ -306,20 +307,56 @@ namespace CMS.CMS.App.Categories
         {
             using (LangDataContext dc = new LangDataContext())
             {
-                category c = dc.categories.Where(x => x.id == input.Id).Single();
+                category c = dc.categories.Single(x => x.id == input.catId);
 
-                String[] langs = new String[] {"cz", "gb", "de", "ru"};
-
-                foreach (String lang in langs)
+                foreach (String lang in Helpers.LangHelper.langs)
                 {
-                    c.text1.texts_values.Where(x => x.culture == lang).Single().value = input.request.Where(x => x.lang == lang).Single().data.Title;
-                    c.text.texts_values.Where(x => x.culture == lang).Single().value = input.request.Where(x => x.lang == lang).Single().data.Content;
+                    texts_value titleval = c.title.texts_values.SingleOrDefault(x => x.culture == lang);
+                    string value = input.request.Single(x => x.lang == lang).data.Title;
+
+                    if (titleval == null)
+                    {
+                        titleval = new texts_value();
+                        titleval.text = c.title;
+                        titleval.culture = lang;
+                    }
+
+                    titleval.value = value;
+                    titleval.seo_value = this._app.makeAlias(value);
+
+                    texts_value text = c.text.texts_values.SingleOrDefault(x => x.culture == lang);
+                    if (text == null)
+                    {
+                        text = new texts_value();
+                        text.text = c.text;
+                        text.culture = lang;
+                    }
+
+                    text.value = input.request.Single(x => x.lang == lang).data.Content;
                 }
 
                 dc.SubmitChanges();
             }
 
             return true;
+        }
+
+        public object setParent(long? id, long? parentId)
+        {
+            try
+            {
+                using (LangDataContext dc = new LangDataContext())
+                {
+                    dc.categories.Single(x => x.id == id).parentid = parentId;
+                    dc.SubmitChanges();
+
+                    return new { result = true };
+                }
+            }
+            catch (Exception e)
+            {
+                return new { result = false, errMsg = e.Message };
+            }
         }
     }
 }

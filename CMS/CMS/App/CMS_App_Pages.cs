@@ -104,16 +104,13 @@ namespace CMS.CMS.App.Pages
             pom.Id = p.id;
 
             LangOutputModel title = new LangOutputModel();
-            title.cz = p.text.texts_values.Where(x => x.culture == "cz").Single().value;
-            title.gb = p.text.texts_values.Where(x => x.culture == "gb").Single().value;
-            title.de = p.text.texts_values.Where(x => x.culture == "de").Single().value;
-            title.ru = p.text.texts_values.Where(x => x.culture == "ru").Single().value;
-
             LangOutputModel content = new LangOutputModel();
-            content.cz = p.text1.texts_values.Where(x => x.culture == "cz").Single().value;
-            content.gb = p.text1.texts_values.Where(x => x.culture == "gb").Single().value;
-            content.de = p.text1.texts_values.Where(x => x.culture == "de").Single().value;
-            content.ru = p.text1.texts_values.Where(x => x.culture == "ru").Single().value;
+
+            foreach (string lang in Helpers.LangHelper.langs)
+            { 
+                title.setByCulture(lang, p.text.texts_values.Single(x => x.culture == lang).value);
+                content.setByCulture(lang, p.text1.texts_values.Single(x => x.culture == lang).value);
+            }
 
             pom.Title = title;
             pom.Content = content;
@@ -170,15 +167,30 @@ namespace CMS.CMS.App.Pages
             {
                 page p = dC.pages.Where(x => x.id == input.request[0].Id).Single();
 
-                p.text.texts_values.Where(x => x.culture == "cz").Single().value = input.request.Where(x => x.lang == "cz").Single().data.title;
-                p.text.texts_values.Where(x => x.culture == "gb").Single().value = input.request.Where(x => x.lang == "gb").Single().data.title;
-                p.text.texts_values.Where(x => x.culture == "de").Single().value = input.request.Where(x => x.lang == "de").Single().data.title;
-                p.text.texts_values.Where(x => x.culture == "ru").Single().value = input.request.Where(x => x.lang == "ru").Single().data.title;
+                foreach (string lang in Helpers.LangHelper.langs)
+                {
+                    var titleTxt = p.text.texts_values.SingleOrDefault(x => x.culture == lang);
+                    var txtTxt = p.text1.texts_values.SingleOrDefault(x => x.culture == lang);
 
-                p.text1.texts_values.Where(x => x.culture == "cz").Single().value = input.request.Where(x => x.lang == "cz").Single().data.title;
-                p.text1.texts_values.Where(x => x.culture == "gb").Single().value = input.request.Where(x => x.lang == "gb").Single().data.title;
-                p.text1.texts_values.Where(x => x.culture == "de").Single().value = input.request.Where(x => x.lang == "de").Single().data.title;
-                p.text1.texts_values.Where(x => x.culture == "ru").Single().value = input.request.Where(x => x.lang == "ru").Single().data.title;
+                    if (titleTxt == null)
+                    {
+                        titleTxt = new texts_value();
+                        titleTxt.culture = lang;
+                        titleTxt.text = p.text;
+                    }
+
+                    if (txtTxt == null)
+                    {
+                        txtTxt = new texts_value();
+                        txtTxt.culture = lang;
+                        txtTxt.text = p.text1;
+                    }
+
+                    titleTxt.value = input.request.Single(x => x.lang == lang).data.title;
+                    titleTxt.seo_value = this._app.makeAlias(input.request.Single(x => x.lang == lang).data.title);
+
+                    txtTxt.value = input.request.Single(x => x.lang == lang).data.content;
+                }
 
                 dC.SubmitChanges();
             }
@@ -208,6 +220,7 @@ namespace CMS.CMS.App.Pages
                     titleValue.culture = newPage.lang;
                     titleValue.value = newPage.data.title;
                     titleValue.text = title;
+                    titleValue.seo_value = this._app.makeAlias(newPage.data.title);
 
                     texts_value contentValue = new texts_value();
                     contentValue.culture = newPage.lang;

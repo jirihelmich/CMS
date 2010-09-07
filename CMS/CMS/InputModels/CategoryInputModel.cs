@@ -21,8 +21,8 @@ namespace CMS.CMS.InputModels
             public CategoryData data { get; set; }
         }
 
-        public long? Parent { get; set; }
-        public long? Id { get; set; }
+        public long? catParent { get; set; }
+        public long? catId { get; set; }
         
         public Category[] request { get; set; }
 

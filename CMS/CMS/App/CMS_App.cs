@@ -9,6 +9,7 @@ using CMS.CMS.Login;
 using System.Web.Mvc;
 using CMS.CMS.App.Articles;
 using CMS.CMS.App.Pages;
+using CMS.CMS.App.News;
 using CMS.CMS.App.Users;
 using CMS.CMS.App.Roles;
 using CMS.CMS.App.Categories;
@@ -29,6 +30,8 @@ namespace CMS.CMS.App
         /// CMS_App_Articles Instance
         /// </summary>
         private CMS_App_Articles _articles;
+
+        private CMS_App_Products _products;
 
         /// <summary>
         /// CMS_App_Users Instance
@@ -61,6 +64,7 @@ namespace CMS.CMS.App
         private CMS_App_Comments _comments;
 
         private CMS_App_Pages _pages;
+        private CMS_App_News _news;
 
         /// <summary>
         /// Length of lists
@@ -117,6 +121,8 @@ namespace CMS.CMS.App
             _acl = new CMS_Acl();
             _comments = new CMS_App_Comments(this);
             _pages = new CMS_App_Pages(this);
+            _news = new CMS_App_News(this);
+            _products = new CMS_App_Products(this);
 
             using (SettingsDataContext s = new SettingsDataContext())
             {
@@ -312,6 +318,15 @@ namespace CMS.CMS.App
         /// Getter
         /// </summary>
         /// <returns></returns>
+        public CMS_App_Products products()
+        {
+            return this._products;
+        }
+
+        /// <summary>
+        /// Getter
+        /// </summary>
+        /// <returns></returns>
         public CMS_App_Resources resources()
         {
             return this._resources;
@@ -336,12 +351,23 @@ namespace CMS.CMS.App
         }
 
         /// <summary>
+        /// Getter
+        /// </summary>
+        /// <returns></returns>
+        public CMS_App_News news()
+        {
+            return this._news;
+        }
+
+        /// <summary>
         /// remove diacritics and whitespace
         /// </summary>
         /// <param name="name">name</param>
         /// <returns>name without diacritics</returns>
         public string makeAlias(string name)
         {
+            if (name == null) return String.Empty;
+
             name = name.ToLower();
             string normalized = name.Normalize(NormalizationForm.FormD);
             int length = normalized.Length;
@@ -517,12 +543,34 @@ namespace CMS.CMS.App
             }
         }
 
-        
+        public Object MultiUpload(HttpRequestBase Request)
+        {
+            LangDataContext dc = new LangDataContext();
+
+            docgroup dg = new docgroup();
+
+            dc.docgroups.InsertOnSubmit(dg);
+
+            dc.SubmitChanges();
+
+            List<Object> output = new List<Object>();
+
+            foreach (String key in Request.Files)
+            {
+                output.Add(new { lang = key, data = uploadFile(Request.Files[key], Request, dg.id, Request.Form["title-"+key], key) });
+            }
+
+            return new {id = dg.id, docs = output.ToArray()};
+        }
 
         public Object saveUploadedFile(HttpRequestBase Request) {
-            
-            HttpPostedFileBase small = Request.Files[0];
 
+            return uploadFile(Request.Files[0], Request, null, Request.Files[0].FileName, "cz");
+
+        }
+
+        private Object uploadFile(HttpPostedFileBase small, HttpRequestBase Request, long? docgroupId, String name, String culture)
+        {
             var postfix = DateTime.Now.ToString().GetHashCode().ToString("x") + "_" + small.FileName;
             var path = Path.Combine(Request.MapPath("./../files"), postfix);
 
@@ -536,14 +584,31 @@ namespace CMS.CMS.App
                     doc d = new doc();
                     d.path = postfix;
 
+                    if (name != null)
+                    {
+                        d.text = new text();
+
+                        texts_value val = new texts_value();
+                        val.culture = culture;
+                        val.value = name;
+                        val.text = d.text;                    
+                    }
+
                     l.docs.InsertOnSubmit(d);
                     l.SubmitChanges();
+
+                    d.docgroup_id = docgroupId; //can be null
 
                     return new { id = d.id, path = postfix, name = small.FileName };
                 case "img":
 
                     image i = new image();
                     i.path = postfix;
+
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(path);
+
+                    i.height = img.Height;
+                    i.width = img.Width;
 
                     l.images.InsertOnSubmit(i);
                     l.SubmitChanges();
@@ -552,16 +617,17 @@ namespace CMS.CMS.App
                 default:
                     return new { id = 0, path = "", name = small.FileName };
             }
-
         }
 
         public LangOutputModel fillLangModel(System.Data.Linq.EntitySet<Models.texts_value> val)
         {
             LangOutputModel lmo = new LangOutputModel();
-            lmo.cz = val.Where(x => x.culture == "cz").Single().value;
-            lmo.gb = val.Where(x => x.culture == "gb").Single().value;
-            lmo.de = val.Where(x => x.culture == "de").Single().value;
-            lmo.ru = val.Where(x => x.culture == "ru").Single().value;
+
+            foreach (string lang in Helpers.LangHelper.langs)
+            {
+                texts_value entity = val.SingleOrDefault(x => x.culture == lang);
+                lmo.setByCulture(lang, (entity == null ? String.Empty : entity.value));
+            }
 
             return lmo;
         }

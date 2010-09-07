@@ -33,15 +33,6 @@ namespace CMS.Models
     partial void Insertpage(page instance);
     partial void Updatepage(page instance);
     partial void Deletepage(page instance);
-    partial void Insertproduct(product instance);
-    partial void Updateproduct(product instance);
-    partial void Deleteproduct(product instance);
-    partial void Insertproducts_connection(products_connection instance);
-    partial void Updateproducts_connection(products_connection instance);
-    partial void Deleteproducts_connection(products_connection instance);
-    partial void Insertcategory(category instance);
-    partial void Updatecategory(category instance);
-    partial void Deletecategory(category instance);
     partial void Insertmenuitem(menuitem instance);
     partial void Updatemenuitem(menuitem instance);
     partial void Deletemenuitem(menuitem instance);
@@ -66,24 +57,42 @@ namespace CMS.Models
     partial void Inserttags_article(tags_article instance);
     partial void Updatetags_article(tags_article instance);
     partial void Deletetags_article(tags_article instance);
-    partial void Insertdocs_product(docs_product instance);
-    partial void Updatedocs_product(docs_product instance);
-    partial void Deletedocs_product(docs_product instance);
-    partial void Insertproducts_connection1(products_connection1 instance);
-    partial void Updateproducts_connection1(products_connection1 instance);
-    partial void Deleteproducts_connection1(products_connection1 instance);
-    partial void Insertimage(image instance);
-    partial void Updateimage(image instance);
-    partial void Deleteimage(image instance);
-    partial void Insertdoc(doc instance);
-    partial void Updatedoc(doc instance);
-    partial void Deletedoc(doc instance);
-    partial void Inserttexts_value(texts_value instance);
-    partial void Updatetexts_value(texts_value instance);
-    partial void Deletetexts_value(texts_value instance);
     partial void Inserttext(text instance);
     partial void Updatetext(text instance);
     partial void Deletetext(text instance);
+    partial void Insertdoc(doc instance);
+    partial void Updatedoc(doc instance);
+    partial void Deletedoc(doc instance);
+    partial void Insertdocgroup(docgroup instance);
+    partial void Updatedocgroup(docgroup instance);
+    partial void Deletedocgroup(docgroup instance);
+    partial void Insertdocgroups_product(docgroups_product instance);
+    partial void Updatedocgroups_product(docgroups_product instance);
+    partial void Deletedocgroups_product(docgroups_product instance);
+    partial void Inserttexts_value(texts_value instance);
+    partial void Updatetexts_value(texts_value instance);
+    partial void Deletetexts_value(texts_value instance);
+    partial void Insertproducts_connection(products_connection instance);
+    partial void Updateproducts_connection(products_connection instance);
+    partial void Deleteproducts_connection(products_connection instance);
+    partial void Insertproducts_category(products_category instance);
+    partial void Updateproducts_category(products_category instance);
+    partial void Deleteproducts_category(products_category instance);
+    partial void Insertimages_product(images_product instance);
+    partial void Updateimages_product(images_product instance);
+    partial void Deleteimages_product(images_product instance);
+    partial void Insertproduct(product instance);
+    partial void Updateproduct(product instance);
+    partial void Deleteproduct(product instance);
+    partial void Insertcategory(category instance);
+    partial void Updatecategory(category instance);
+    partial void Deletecategory(category instance);
+    partial void Insertimage(image instance);
+    partial void Updateimage(image instance);
+    partial void Deleteimage(image instance);
+    partial void Insertnews(news instance);
+    partial void Updatenews(news instance);
+    partial void Deletenews(news instance);
     #endregion
 		
 		public LangDataContext() : 
@@ -121,30 +130,6 @@ namespace CMS.Models
 			get
 			{
 				return this.GetTable<page>();
-			}
-		}
-		
-		public System.Data.Linq.Table<product> products
-		{
-			get
-			{
-				return this.GetTable<product>();
-			}
-		}
-		
-		public System.Data.Linq.Table<products_connection> products_connections
-		{
-			get
-			{
-				return this.GetTable<products_connection>();
-			}
-		}
-		
-		public System.Data.Linq.Table<category> categories
-		{
-			get
-			{
-				return this.GetTable<category>();
 			}
 		}
 		
@@ -212,27 +197,11 @@ namespace CMS.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<docs_product> docs_products
+		public System.Data.Linq.Table<text> texts
 		{
 			get
 			{
-				return this.GetTable<docs_product>();
-			}
-		}
-		
-		public System.Data.Linq.Table<products_connection1> products_connection1s
-		{
-			get
-			{
-				return this.GetTable<products_connection1>();
-			}
-		}
-		
-		public System.Data.Linq.Table<image> images
-		{
-			get
-			{
-				return this.GetTable<image>();
+				return this.GetTable<text>();
 			}
 		}
 		
@@ -244,6 +213,22 @@ namespace CMS.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<docgroup> docgroups
+		{
+			get
+			{
+				return this.GetTable<docgroup>();
+			}
+		}
+		
+		public System.Data.Linq.Table<docgroups_product> docgroups_products
+		{
+			get
+			{
+				return this.GetTable<docgroups_product>();
+			}
+		}
+		
 		public System.Data.Linq.Table<texts_value> texts_values
 		{
 			get
@@ -252,11 +237,59 @@ namespace CMS.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<text> texts
+		public System.Data.Linq.Table<products_connection> products_connections
 		{
 			get
 			{
-				return this.GetTable<text>();
+				return this.GetTable<products_connection>();
+			}
+		}
+		
+		public System.Data.Linq.Table<products_category> products_categories
+		{
+			get
+			{
+				return this.GetTable<products_category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<images_product> images_products
+		{
+			get
+			{
+				return this.GetTable<images_product>();
+			}
+		}
+		
+		public System.Data.Linq.Table<product> products
+		{
+			get
+			{
+				return this.GetTable<product>();
+			}
+		}
+		
+		public System.Data.Linq.Table<category> categories
+		{
+			get
+			{
+				return this.GetTable<category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<image> images
+		{
+			get
+			{
+				return this.GetTable<image>();
+			}
+		}
+		
+		public System.Data.Linq.Table<news> news
+		{
+			get
+			{
+				return this.GetTable<news>();
 			}
 		}
 	}
@@ -453,936 +486,6 @@ namespace CMS.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.products")]
-	public partial class product : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _id;
-		
-		private long _title_text_id;
-		
-		private long _description_text_id;
-		
-		private long _text_text_id;
-		
-		private EntitySet<products_connection> _products_connections;
-		
-		private EntitySet<products_connection> _products_connections1;
-		
-		private EntitySet<docs_product> _docs_products;
-		
-		private EntitySet<products_connection1> _products_connection1s;
-		
-		private EntitySet<products_connection1> _products_connection1s1;
-		
-		private EntityRef<text> _text;
-		
-		private EntityRef<text> _text1;
-		
-		private EntityRef<text> _text2;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(long value);
-    partial void OnidChanged();
-    partial void Ontitle_text_idChanging(long value);
-    partial void Ontitle_text_idChanged();
-    partial void Ondescription_text_idChanging(long value);
-    partial void Ondescription_text_idChanged();
-    partial void Ontext_text_idChanging(long value);
-    partial void Ontext_text_idChanged();
-    #endregion
-		
-		public product()
-		{
-			this._products_connections = new EntitySet<products_connection>(new Action<products_connection>(this.attach_products_connections), new Action<products_connection>(this.detach_products_connections));
-			this._products_connections1 = new EntitySet<products_connection>(new Action<products_connection>(this.attach_products_connections1), new Action<products_connection>(this.detach_products_connections1));
-			this._docs_products = new EntitySet<docs_product>(new Action<docs_product>(this.attach_docs_products), new Action<docs_product>(this.detach_docs_products));
-			this._products_connection1s = new EntitySet<products_connection1>(new Action<products_connection1>(this.attach_products_connection1s), new Action<products_connection1>(this.detach_products_connection1s));
-			this._products_connection1s1 = new EntitySet<products_connection1>(new Action<products_connection1>(this.attach_products_connection1s1), new Action<products_connection1>(this.detach_products_connection1s1));
-			this._text = default(EntityRef<text>);
-			this._text1 = default(EntityRef<text>);
-			this._text2 = default(EntityRef<text>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title_text_id", DbType="BigInt NOT NULL")]
-		public long title_text_id
-		{
-			get
-			{
-				return this._title_text_id;
-			}
-			set
-			{
-				if ((this._title_text_id != value))
-				{
-					if (this._text2.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ontitle_text_idChanging(value);
-					this.SendPropertyChanging();
-					this._title_text_id = value;
-					this.SendPropertyChanged("title_text_id");
-					this.Ontitle_text_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description_text_id", DbType="BigInt NOT NULL")]
-		public long description_text_id
-		{
-			get
-			{
-				return this._description_text_id;
-			}
-			set
-			{
-				if ((this._description_text_id != value))
-				{
-					if (this._text.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ondescription_text_idChanging(value);
-					this.SendPropertyChanging();
-					this._description_text_id = value;
-					this.SendPropertyChanged("description_text_id");
-					this.Ondescription_text_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text_text_id", DbType="BigInt NOT NULL")]
-		public long text_text_id
-		{
-			get
-			{
-				return this._text_text_id;
-			}
-			set
-			{
-				if ((this._text_text_id != value))
-				{
-					if (this._text1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ontext_text_idChanging(value);
-					this.SendPropertyChanging();
-					this._text_text_id = value;
-					this.SendPropertyChanged("text_text_id");
-					this.Ontext_text_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection", Storage="_products_connections", ThisKey="id", OtherKey="product_id")]
-		public EntitySet<products_connection> products_connections
-		{
-			get
-			{
-				return this._products_connections;
-			}
-			set
-			{
-				this._products_connections.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection1", Storage="_products_connections1", ThisKey="id", OtherKey="product_id_2")]
-		public EntitySet<products_connection> products_connections1
-		{
-			get
-			{
-				return this._products_connections1;
-			}
-			set
-			{
-				this._products_connections1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_docs_product", Storage="_docs_products", ThisKey="id", OtherKey="product_id")]
-		public EntitySet<docs_product> docs_products
-		{
-			get
-			{
-				return this._docs_products;
-			}
-			set
-			{
-				this._docs_products.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection11", Storage="_products_connection1s", ThisKey="id", OtherKey="product_id")]
-		public EntitySet<products_connection1> products_connection1s
-		{
-			get
-			{
-				return this._products_connection1s;
-			}
-			set
-			{
-				this._products_connection1s.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection12", Storage="_products_connection1s1", ThisKey="id", OtherKey="product_id_2")]
-		public EntitySet<products_connection1> products_connection1s1
-		{
-			get
-			{
-				return this._products_connection1s1;
-			}
-			set
-			{
-				this._products_connection1s1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product", Storage="_text", ThisKey="description_text_id", OtherKey="id", IsForeignKey=true)]
-		public text text
-		{
-			get
-			{
-				return this._text.Entity;
-			}
-			set
-			{
-				text previousValue = this._text.Entity;
-				if (((previousValue != value) 
-							|| (this._text.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._text.Entity = null;
-						previousValue.products.Remove(this);
-					}
-					this._text.Entity = value;
-					if ((value != null))
-					{
-						value.products.Add(this);
-						this._description_text_id = value.id;
-					}
-					else
-					{
-						this._description_text_id = default(long);
-					}
-					this.SendPropertyChanged("text");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product1", Storage="_text1", ThisKey="text_text_id", OtherKey="id", IsForeignKey=true)]
-		public text text1
-		{
-			get
-			{
-				return this._text1.Entity;
-			}
-			set
-			{
-				text previousValue = this._text1.Entity;
-				if (((previousValue != value) 
-							|| (this._text1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._text1.Entity = null;
-						previousValue.products1.Remove(this);
-					}
-					this._text1.Entity = value;
-					if ((value != null))
-					{
-						value.products1.Add(this);
-						this._text_text_id = value.id;
-					}
-					else
-					{
-						this._text_text_id = default(long);
-					}
-					this.SendPropertyChanged("text1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product2", Storage="_text2", ThisKey="title_text_id", OtherKey="id", IsForeignKey=true)]
-		public text text2
-		{
-			get
-			{
-				return this._text2.Entity;
-			}
-			set
-			{
-				text previousValue = this._text2.Entity;
-				if (((previousValue != value) 
-							|| (this._text2.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._text2.Entity = null;
-						previousValue.products2.Remove(this);
-					}
-					this._text2.Entity = value;
-					if ((value != null))
-					{
-						value.products2.Add(this);
-						this._title_text_id = value.id;
-					}
-					else
-					{
-						this._title_text_id = default(long);
-					}
-					this.SendPropertyChanged("text2");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_products_connections(products_connection entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = this;
-		}
-		
-		private void detach_products_connections(products_connection entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = null;
-		}
-		
-		private void attach_products_connections1(products_connection entity)
-		{
-			this.SendPropertyChanging();
-			entity.product1 = this;
-		}
-		
-		private void detach_products_connections1(products_connection entity)
-		{
-			this.SendPropertyChanging();
-			entity.product1 = null;
-		}
-		
-		private void attach_docs_products(docs_product entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = this;
-		}
-		
-		private void detach_docs_products(docs_product entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = null;
-		}
-		
-		private void attach_products_connection1s(products_connection1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = this;
-		}
-		
-		private void detach_products_connection1s(products_connection1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.product = null;
-		}
-		
-		private void attach_products_connection1s1(products_connection1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.product1 = this;
-		}
-		
-		private void detach_products_connection1s1(products_connection1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.product1 = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.products_connections")]
-	public partial class products_connection : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _product_id;
-		
-		private long _product_id_2;
-		
-		private EntityRef<product> _product;
-		
-		private EntityRef<product> _product1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onproduct_idChanging(long value);
-    partial void Onproduct_idChanged();
-    partial void Onproduct_id_2Changing(long value);
-    partial void Onproduct_id_2Changed();
-    #endregion
-		
-		public products_connection()
-		{
-			this._product = default(EntityRef<product>);
-			this._product1 = default(EntityRef<product>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long product_id
-		{
-			get
-			{
-				return this._product_id;
-			}
-			set
-			{
-				if ((this._product_id != value))
-				{
-					if (this._product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onproduct_idChanging(value);
-					this.SendPropertyChanging();
-					this._product_id = value;
-					this.SendPropertyChanged("product_id");
-					this.Onproduct_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id_2", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long product_id_2
-		{
-			get
-			{
-				return this._product_id_2;
-			}
-			set
-			{
-				if ((this._product_id_2 != value))
-				{
-					if (this._product1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onproduct_id_2Changing(value);
-					this.SendPropertyChanging();
-					this._product_id_2 = value;
-					this.SendPropertyChanged("product_id_2");
-					this.Onproduct_id_2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection", Storage="_product", ThisKey="product_id", OtherKey="id", IsForeignKey=true)]
-		public product product
-		{
-			get
-			{
-				return this._product.Entity;
-			}
-			set
-			{
-				product previousValue = this._product.Entity;
-				if (((previousValue != value) 
-							|| (this._product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._product.Entity = null;
-						previousValue.products_connections.Remove(this);
-					}
-					this._product.Entity = value;
-					if ((value != null))
-					{
-						value.products_connections.Add(this);
-						this._product_id = value.id;
-					}
-					else
-					{
-						this._product_id = default(long);
-					}
-					this.SendPropertyChanged("product");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection1", Storage="_product1", ThisKey="product_id_2", OtherKey="id", IsForeignKey=true)]
-		public product product1
-		{
-			get
-			{
-				return this._product1.Entity;
-			}
-			set
-			{
-				product previousValue = this._product1.Entity;
-				if (((previousValue != value) 
-							|| (this._product1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._product1.Entity = null;
-						previousValue.products_connections1.Remove(this);
-					}
-					this._product1.Entity = value;
-					if ((value != null))
-					{
-						value.products_connections1.Add(this);
-						this._product_id_2 = value.id;
-					}
-					else
-					{
-						this._product_id_2 = default(long);
-					}
-					this.SendPropertyChanged("product1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.categories")]
-	public partial class category : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _id;
-		
-		private long _name_text_id;
-		
-		private System.Nullable<long> _parentid;
-		
-		private long _alias_text_id;
-		
-		private System.DateTime _date;
-		
-		private EntitySet<category> _categories;
-		
-		private EntitySet<menuitem> _menuitems;
-		
-		private EntitySet<articles_category> _articles_categories;
-		
-		private EntityRef<category> _category1;
-		
-		private EntityRef<text> _text;
-		
-		private EntityRef<text> _text1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(long value);
-    partial void OnidChanged();
-    partial void Onname_text_idChanging(long value);
-    partial void Onname_text_idChanged();
-    partial void OnparentidChanging(System.Nullable<long> value);
-    partial void OnparentidChanged();
-    partial void Onalias_text_idChanging(long value);
-    partial void Onalias_text_idChanged();
-    partial void OndateChanging(System.DateTime value);
-    partial void OndateChanged();
-    #endregion
-		
-		public category()
-		{
-			this._categories = new EntitySet<category>(new Action<category>(this.attach_categories), new Action<category>(this.detach_categories));
-			this._menuitems = new EntitySet<menuitem>(new Action<menuitem>(this.attach_menuitems), new Action<menuitem>(this.detach_menuitems));
-			this._articles_categories = new EntitySet<articles_category>(new Action<articles_category>(this.attach_articles_categories), new Action<articles_category>(this.detach_articles_categories));
-			this._category1 = default(EntityRef<category>);
-			this._text = default(EntityRef<text>);
-			this._text1 = default(EntityRef<text>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name_text_id", DbType="BigInt NOT NULL")]
-		public long name_text_id
-		{
-			get
-			{
-				return this._name_text_id;
-			}
-			set
-			{
-				if ((this._name_text_id != value))
-				{
-					if (this._text.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onname_text_idChanging(value);
-					this.SendPropertyChanging();
-					this._name_text_id = value;
-					this.SendPropertyChanged("name_text_id");
-					this.Onname_text_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parentid", DbType="BigInt")]
-		public System.Nullable<long> parentid
-		{
-			get
-			{
-				return this._parentid;
-			}
-			set
-			{
-				if ((this._parentid != value))
-				{
-					if (this._category1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnparentidChanging(value);
-					this.SendPropertyChanging();
-					this._parentid = value;
-					this.SendPropertyChanged("parentid");
-					this.OnparentidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_alias_text_id", DbType="BigInt NOT NULL")]
-		public long alias_text_id
-		{
-			get
-			{
-				return this._alias_text_id;
-			}
-			set
-			{
-				if ((this._alias_text_id != value))
-				{
-					if (this._text1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onalias_text_idChanging(value);
-					this.SendPropertyChanging();
-					this._alias_text_id = value;
-					this.SendPropertyChanged("alias_text_id");
-					this.Onalias_text_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
-		public System.DateTime date
-		{
-			get
-			{
-				return this._date;
-			}
-			set
-			{
-				if ((this._date != value))
-				{
-					this.OndateChanging(value);
-					this.SendPropertyChanging();
-					this._date = value;
-					this.SendPropertyChanged("date");
-					this.OndateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_category", Storage="_categories", ThisKey="id", OtherKey="parentid")]
-		public EntitySet<category> categories
-		{
-			get
-			{
-				return this._categories;
-			}
-			set
-			{
-				this._categories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_menuitem", Storage="_menuitems", ThisKey="id", OtherKey="categoriesid")]
-		public EntitySet<menuitem> menuitems
-		{
-			get
-			{
-				return this._menuitems;
-			}
-			set
-			{
-				this._menuitems.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_articles_category", Storage="_articles_categories", ThisKey="id", OtherKey="categoriesid")]
-		public EntitySet<articles_category> articles_categories
-		{
-			get
-			{
-				return this._articles_categories;
-			}
-			set
-			{
-				this._articles_categories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_category", Storage="_category1", ThisKey="parentid", OtherKey="id", IsForeignKey=true)]
-		public category category1
-		{
-			get
-			{
-				return this._category1.Entity;
-			}
-			set
-			{
-				category previousValue = this._category1.Entity;
-				if (((previousValue != value) 
-							|| (this._category1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._category1.Entity = null;
-						previousValue.categories.Remove(this);
-					}
-					this._category1.Entity = value;
-					if ((value != null))
-					{
-						value.categories.Add(this);
-						this._parentid = value.id;
-					}
-					else
-					{
-						this._parentid = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("category1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category", Storage="_text", ThisKey="name_text_id", OtherKey="id", IsForeignKey=true)]
-		public text text
-		{
-			get
-			{
-				return this._text.Entity;
-			}
-			set
-			{
-				text previousValue = this._text.Entity;
-				if (((previousValue != value) 
-							|| (this._text.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._text.Entity = null;
-						previousValue.categories.Remove(this);
-					}
-					this._text.Entity = value;
-					if ((value != null))
-					{
-						value.categories.Add(this);
-						this._name_text_id = value.id;
-					}
-					else
-					{
-						this._name_text_id = default(long);
-					}
-					this.SendPropertyChanged("text");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category1", Storage="_text1", ThisKey="alias_text_id", OtherKey="id", IsForeignKey=true)]
-		public text text1
-		{
-			get
-			{
-				return this._text1.Entity;
-			}
-			set
-			{
-				text previousValue = this._text1.Entity;
-				if (((previousValue != value) 
-							|| (this._text1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._text1.Entity = null;
-						previousValue.categories1.Remove(this);
-					}
-					this._text1.Entity = value;
-					if ((value != null))
-					{
-						value.categories1.Add(this);
-						this._alias_text_id = value.id;
-					}
-					else
-					{
-						this._alias_text_id = default(long);
-					}
-					this.SendPropertyChanged("text1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_categories(category entity)
-		{
-			this.SendPropertyChanging();
-			entity.category1 = this;
-		}
-		
-		private void detach_categories(category entity)
-		{
-			this.SendPropertyChanging();
-			entity.category1 = null;
-		}
-		
-		private void attach_menuitems(menuitem entity)
-		{
-			this.SendPropertyChanging();
-			entity.category = this;
-		}
-		
-		private void detach_menuitems(menuitem entity)
-		{
-			this.SendPropertyChanging();
-			entity.category = null;
-		}
-		
-		private void attach_articles_categories(articles_category entity)
-		{
-			this.SendPropertyChanging();
-			entity.category = this;
-		}
-		
-		private void detach_articles_categories(articles_category entity)
-		{
-			this.SendPropertyChanging();
-			entity.category = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.menuitems")]
 	public partial class menuitem : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1401,9 +504,9 @@ namespace CMS.Models
 		
 		private System.DateTime _date;
 		
-		private EntityRef<category> _category;
-		
 		private EntityRef<article> _article;
+		
+		private EntityRef<category> _category;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1425,8 +528,8 @@ namespace CMS.Models
 		
 		public menuitem()
 		{
-			this._category = default(EntityRef<category>);
 			this._article = default(EntityRef<article>);
+			this._category = default(EntityRef<category>);
 			OnCreated();
 		}
 		
@@ -1558,40 +661,6 @@ namespace CMS.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_menuitem", Storage="_category", ThisKey="categoriesid", OtherKey="id", IsForeignKey=true)]
-		public category category
-		{
-			get
-			{
-				return this._category.Entity;
-			}
-			set
-			{
-				category previousValue = this._category.Entity;
-				if (((previousValue != value) 
-							|| (this._category.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._category.Entity = null;
-						previousValue.menuitems.Remove(this);
-					}
-					this._category.Entity = value;
-					if ((value != null))
-					{
-						value.menuitems.Add(this);
-						this._categoriesid = value.id;
-					}
-					else
-					{
-						this._categoriesid = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("category");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="article_menuitem", Storage="_article", ThisKey="articlesid", OtherKey="id", IsForeignKey=true)]
 		public article article
 		{
@@ -1622,6 +691,40 @@ namespace CMS.Models
 						this._articlesid = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("article");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_menuitem", Storage="_category", ThisKey="categoriesid", OtherKey="id", IsForeignKey=true)]
+		public category category
+		{
+			get
+			{
+				return this._category.Entity;
+			}
+			set
+			{
+				category previousValue = this._category.Entity;
+				if (((previousValue != value) 
+							|| (this._category.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._category.Entity = null;
+						previousValue.menuitems.Remove(this);
+					}
+					this._category.Entity = value;
+					if ((value != null))
+					{
+						value.menuitems.Add(this);
+						this._categoriesid = value.id;
+					}
+					else
+					{
+						this._categoriesid = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("category");
 				}
 			}
 		}
@@ -3473,355 +2576,41 @@ namespace CMS.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.docs_products")]
-	public partial class docs_product : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _doc_id;
-		
-		private long _product_id;
-		
-		private EntityRef<product> _product;
-		
-		private EntityRef<doc> _doc;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Ondoc_idChanging(long value);
-    partial void Ondoc_idChanged();
-    partial void Onproduct_idChanging(long value);
-    partial void Onproduct_idChanged();
-    #endregion
-		
-		public docs_product()
-		{
-			this._product = default(EntityRef<product>);
-			this._doc = default(EntityRef<doc>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_doc_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long doc_id
-		{
-			get
-			{
-				return this._doc_id;
-			}
-			set
-			{
-				if ((this._doc_id != value))
-				{
-					if (this._doc.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ondoc_idChanging(value);
-					this.SendPropertyChanging();
-					this._doc_id = value;
-					this.SendPropertyChanged("doc_id");
-					this.Ondoc_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long product_id
-		{
-			get
-			{
-				return this._product_id;
-			}
-			set
-			{
-				if ((this._product_id != value))
-				{
-					if (this._product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onproduct_idChanging(value);
-					this.SendPropertyChanging();
-					this._product_id = value;
-					this.SendPropertyChanged("product_id");
-					this.Onproduct_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_docs_product", Storage="_product", ThisKey="product_id", OtherKey="id", IsForeignKey=true)]
-		public product product
-		{
-			get
-			{
-				return this._product.Entity;
-			}
-			set
-			{
-				product previousValue = this._product.Entity;
-				if (((previousValue != value) 
-							|| (this._product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._product.Entity = null;
-						previousValue.docs_products.Remove(this);
-					}
-					this._product.Entity = value;
-					if ((value != null))
-					{
-						value.docs_products.Add(this);
-						this._product_id = value.id;
-					}
-					else
-					{
-						this._product_id = default(long);
-					}
-					this.SendPropertyChanged("product");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="doc_docs_product", Storage="_doc", ThisKey="doc_id", OtherKey="id", IsForeignKey=true)]
-		public doc doc
-		{
-			get
-			{
-				return this._doc.Entity;
-			}
-			set
-			{
-				doc previousValue = this._doc.Entity;
-				if (((previousValue != value) 
-							|| (this._doc.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._doc.Entity = null;
-						previousValue.docs_products.Remove(this);
-					}
-					this._doc.Entity = value;
-					if ((value != null))
-					{
-						value.docs_products.Add(this);
-						this._doc_id = value.id;
-					}
-					else
-					{
-						this._doc_id = default(long);
-					}
-					this.SendPropertyChanged("doc");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.products_connections")]
-	public partial class products_connection1 : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _product_id;
-		
-		private long _product_id_2;
-		
-		private EntityRef<product> _product;
-		
-		private EntityRef<product> _product1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onproduct_idChanging(long value);
-    partial void Onproduct_idChanged();
-    partial void Onproduct_id_2Changing(long value);
-    partial void Onproduct_id_2Changed();
-    #endregion
-		
-		public products_connection1()
-		{
-			this._product = default(EntityRef<product>);
-			this._product1 = default(EntityRef<product>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long product_id
-		{
-			get
-			{
-				return this._product_id;
-			}
-			set
-			{
-				if ((this._product_id != value))
-				{
-					if (this._product.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onproduct_idChanging(value);
-					this.SendPropertyChanging();
-					this._product_id = value;
-					this.SendPropertyChanged("product_id");
-					this.Onproduct_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id_2", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
-		public long product_id_2
-		{
-			get
-			{
-				return this._product_id_2;
-			}
-			set
-			{
-				if ((this._product_id_2 != value))
-				{
-					if (this._product1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onproduct_id_2Changing(value);
-					this.SendPropertyChanging();
-					this._product_id_2 = value;
-					this.SendPropertyChanged("product_id_2");
-					this.Onproduct_id_2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection11", Storage="_product", ThisKey="product_id", OtherKey="id", IsForeignKey=true)]
-		public product product
-		{
-			get
-			{
-				return this._product.Entity;
-			}
-			set
-			{
-				product previousValue = this._product.Entity;
-				if (((previousValue != value) 
-							|| (this._product.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._product.Entity = null;
-						previousValue.products_connection1s.Remove(this);
-					}
-					this._product.Entity = value;
-					if ((value != null))
-					{
-						value.products_connection1s.Add(this);
-						this._product_id = value.id;
-					}
-					else
-					{
-						this._product_id = default(long);
-					}
-					this.SendPropertyChanged("product");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection12", Storage="_product1", ThisKey="product_id_2", OtherKey="id", IsForeignKey=true)]
-		public product product1
-		{
-			get
-			{
-				return this._product1.Entity;
-			}
-			set
-			{
-				product previousValue = this._product1.Entity;
-				if (((previousValue != value) 
-							|| (this._product1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._product1.Entity = null;
-						previousValue.products_connection1s1.Remove(this);
-					}
-					this._product1.Entity = value;
-					if ((value != null))
-					{
-						value.products_connection1s1.Add(this);
-						this._product_id_2 = value.id;
-					}
-					else
-					{
-						this._product_id_2 = default(long);
-					}
-					this.SendPropertyChanged("product1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.images")]
-	public partial class image : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.texts")]
+	public partial class text : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private long _id;
 		
-		private string _path;
+		private EntitySet<page> _pages;
 		
-		private long _description_text_id;
+		private EntitySet<page> _pages1;
 		
-		private EntityRef<text> _text;
+		private EntitySet<doc> _docs;
+		
+		private EntitySet<texts_value> _texts_values;
+		
+		private EntitySet<product> _products;
+		
+		private EntitySet<product> _products1;
+		
+		private EntitySet<product> _products2;
+		
+		private EntitySet<product> _products3;
+		
+		private EntitySet<category> _categories;
+		
+		private EntitySet<category> _categories1;
+		
+		private EntitySet<image> _images;
+		
+		private EntitySet<news> _news;
+		
+		private EntitySet<news> _news1;
+		
+		private EntitySet<news> _news2;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3829,19 +2618,28 @@ namespace CMS.Models
     partial void OnCreated();
     partial void OnidChanging(long value);
     partial void OnidChanged();
-    partial void OnpathChanging(string value);
-    partial void OnpathChanged();
-    partial void Ondescription_text_idChanging(long value);
-    partial void Ondescription_text_idChanged();
     #endregion
 		
-		public image()
+		public text()
 		{
-			this._text = default(EntityRef<text>);
+			this._pages = new EntitySet<page>(new Action<page>(this.attach_pages), new Action<page>(this.detach_pages));
+			this._pages1 = new EntitySet<page>(new Action<page>(this.attach_pages1), new Action<page>(this.detach_pages1));
+			this._docs = new EntitySet<doc>(new Action<doc>(this.attach_docs), new Action<doc>(this.detach_docs));
+			this._texts_values = new EntitySet<texts_value>(new Action<texts_value>(this.attach_texts_values), new Action<texts_value>(this.detach_texts_values));
+			this._products = new EntitySet<product>(new Action<product>(this.attach_products), new Action<product>(this.detach_products));
+			this._products1 = new EntitySet<product>(new Action<product>(this.attach_products1), new Action<product>(this.detach_products1));
+			this._products2 = new EntitySet<product>(new Action<product>(this.attach_products2), new Action<product>(this.detach_products2));
+			this._products3 = new EntitySet<product>(new Action<product>(this.attach_products3), new Action<product>(this.detach_products3));
+			this._categories = new EntitySet<category>(new Action<category>(this.attach_categories), new Action<category>(this.detach_categories));
+			this._categories1 = new EntitySet<category>(new Action<category>(this.attach_categories1), new Action<category>(this.detach_categories1));
+			this._images = new EntitySet<image>(new Action<image>(this.attach_images), new Action<image>(this.detach_images));
+			this._news = new EntitySet<news>(new Action<news>(this.attach_news), new Action<news>(this.detach_news));
+			this._news1 = new EntitySet<news>(new Action<news>(this.attach_news1), new Action<news>(this.detach_news1));
+			this._news2 = new EntitySet<news>(new Action<news>(this.attach_news2), new Action<news>(this.detach_news2));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long id
 		{
 			get
@@ -3861,81 +2659,185 @@ namespace CMS.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_path", DbType="VarChar(150)")]
-		public string path
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_page", Storage="_pages", ThisKey="id", OtherKey="text_text_id")]
+		public EntitySet<page> pages
 		{
 			get
 			{
-				return this._path;
+				return this._pages;
 			}
 			set
 			{
-				if ((this._path != value))
-				{
-					this.OnpathChanging(value);
-					this.SendPropertyChanging();
-					this._path = value;
-					this.SendPropertyChanged("path");
-					this.OnpathChanged();
-				}
+				this._pages.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description_text_id", DbType="BigInt NOT NULL")]
-		public long description_text_id
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_page1", Storage="_pages1", ThisKey="id", OtherKey="title_text_id")]
+		public EntitySet<page> pages1
 		{
 			get
 			{
-				return this._description_text_id;
+				return this._pages1;
 			}
 			set
 			{
-				if ((this._description_text_id != value))
-				{
-					if (this._text.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Ondescription_text_idChanging(value);
-					this.SendPropertyChanging();
-					this._description_text_id = value;
-					this.SendPropertyChanged("description_text_id");
-					this.Ondescription_text_idChanged();
-				}
+				this._pages1.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_image", Storage="_text", ThisKey="description_text_id", OtherKey="id", IsForeignKey=true)]
-		public text text
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_doc", Storage="_docs", ThisKey="id", OtherKey="name_text_id")]
+		public EntitySet<doc> docs
 		{
 			get
 			{
-				return this._text.Entity;
+				return this._docs;
 			}
 			set
 			{
-				text previousValue = this._text.Entity;
-				if (((previousValue != value) 
-							|| (this._text.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._text.Entity = null;
-						previousValue.images.Remove(this);
-					}
-					this._text.Entity = value;
-					if ((value != null))
-					{
-						value.images.Add(this);
-						this._description_text_id = value.id;
-					}
-					else
-					{
-						this._description_text_id = default(long);
-					}
-					this.SendPropertyChanged("text");
-				}
+				this._docs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_texts_value", Storage="_texts_values", ThisKey="id", OtherKey="text_id")]
+		public EntitySet<texts_value> texts_values
+		{
+			get
+			{
+				return this._texts_values;
+			}
+			set
+			{
+				this._texts_values.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product", Storage="_products", ThisKey="id", OtherKey="description_text_id")]
+		public EntitySet<product> products
+		{
+			get
+			{
+				return this._products;
+			}
+			set
+			{
+				this._products.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product1", Storage="_products1", ThisKey="id", OtherKey="subtitle_text_id")]
+		public EntitySet<product> products1
+		{
+			get
+			{
+				return this._products1;
+			}
+			set
+			{
+				this._products1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product2", Storage="_products2", ThisKey="id", OtherKey="text_text_id")]
+		public EntitySet<product> products2
+		{
+			get
+			{
+				return this._products2;
+			}
+			set
+			{
+				this._products2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product3", Storage="_products3", ThisKey="id", OtherKey="title_text_id")]
+		public EntitySet<product> products3
+		{
+			get
+			{
+				return this._products3;
+			}
+			set
+			{
+				this._products3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category", Storage="_categories", ThisKey="id", OtherKey="name_text_id")]
+		public EntitySet<category> categories
+		{
+			get
+			{
+				return this._categories;
+			}
+			set
+			{
+				this._categories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category1", Storage="_categories1", ThisKey="id", OtherKey="text_text_id")]
+		public EntitySet<category> categories1
+		{
+			get
+			{
+				return this._categories1;
+			}
+			set
+			{
+				this._categories1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_image", Storage="_images", ThisKey="id", OtherKey="description_text_id")]
+		public EntitySet<image> images
+		{
+			get
+			{
+				return this._images;
+			}
+			set
+			{
+				this._images.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_new", Storage="_news", ThisKey="id", OtherKey="title")]
+		public EntitySet<news> news
+		{
+			get
+			{
+				return this._news;
+			}
+			set
+			{
+				this._news.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_new1", Storage="_news1", ThisKey="id", OtherKey="shortdesc")]
+		public EntitySet<news> news1
+		{
+			get
+			{
+				return this._news1;
+			}
+			set
+			{
+				this._news1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_new2", Storage="_news2", ThisKey="id", OtherKey="text")]
+		public EntitySet<news> news2
+		{
+			get
+			{
+				return this._news2;
+			}
+			set
+			{
+				this._news2.Assign(value);
 			}
 		}
 		
@@ -3958,6 +2860,174 @@ namespace CMS.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_pages(page entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = this;
+		}
+		
+		private void detach_pages(page entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = null;
+		}
+		
+		private void attach_pages1(page entity)
+		{
+			this.SendPropertyChanging();
+			entity.text1 = this;
+		}
+		
+		private void detach_pages1(page entity)
+		{
+			this.SendPropertyChanging();
+			entity.text1 = null;
+		}
+		
+		private void attach_docs(doc entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = this;
+		}
+		
+		private void detach_docs(doc entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = null;
+		}
+		
+		private void attach_texts_values(texts_value entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = this;
+		}
+		
+		private void detach_texts_values(texts_value entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = null;
+		}
+		
+		private void attach_products(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_description = this;
+		}
+		
+		private void detach_products(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_description = null;
+		}
+		
+		private void attach_products1(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_subtitle = this;
+		}
+		
+		private void detach_products1(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_subtitle = null;
+		}
+		
+		private void attach_products2(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_text = this;
+		}
+		
+		private void detach_products2(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_text = null;
+		}
+		
+		private void attach_products3(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_title = this;
+		}
+		
+		private void detach_products3(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.text_title = null;
+		}
+		
+		private void attach_categories(category entity)
+		{
+			this.SendPropertyChanging();
+			entity.title = this;
+		}
+		
+		private void detach_categories(category entity)
+		{
+			this.SendPropertyChanging();
+			entity.title = null;
+		}
+		
+		private void attach_categories1(category entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = this;
+		}
+		
+		private void detach_categories1(category entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = null;
+		}
+		
+		private void attach_images(image entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = this;
+		}
+		
+		private void detach_images(image entity)
+		{
+			this.SendPropertyChanging();
+			entity.text = null;
+		}
+		
+		private void attach_news(news entity)
+		{
+			this.SendPropertyChanging();
+			entity.text1 = this;
+		}
+		
+		private void detach_news(news entity)
+		{
+			this.SendPropertyChanging();
+			entity.text1 = null;
+		}
+		
+		private void attach_news1(news entity)
+		{
+			this.SendPropertyChanging();
+			entity.text2 = this;
+		}
+		
+		private void detach_news1(news entity)
+		{
+			this.SendPropertyChanging();
+			entity.text2 = null;
+		}
+		
+		private void attach_news2(news entity)
+		{
+			this.SendPropertyChanging();
+			entity.text3 = this;
+		}
+		
+		private void detach_news2(news entity)
+		{
+			this.SendPropertyChanging();
+			entity.text3 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.docs")]
@@ -3972,9 +3042,11 @@ namespace CMS.Models
 		
 		private string _path;
 		
-		private EntitySet<docs_product> _docs_products;
+		private System.Nullable<long> _docgroup_id;
 		
 		private EntityRef<text> _text;
+		
+		private EntityRef<docgroup> _docgroup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3986,12 +3058,14 @@ namespace CMS.Models
     partial void Onname_text_idChanged();
     partial void OnpathChanging(string value);
     partial void OnpathChanged();
+    partial void Ondocgroup_idChanging(System.Nullable<long> value);
+    partial void Ondocgroup_idChanged();
     #endregion
 		
 		public doc()
 		{
-			this._docs_products = new EntitySet<docs_product>(new Action<docs_product>(this.attach_docs_products), new Action<docs_product>(this.detach_docs_products));
 			this._text = default(EntityRef<text>);
+			this._docgroup = default(EntityRef<docgroup>);
 			OnCreated();
 		}
 		
@@ -4059,16 +3133,27 @@ namespace CMS.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="doc_docs_product", Storage="_docs_products", ThisKey="id", OtherKey="doc_id")]
-		public EntitySet<docs_product> docs_products
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_docgroup_id", DbType="BigInt")]
+		public System.Nullable<long> docgroup_id
 		{
 			get
 			{
-				return this._docs_products;
+				return this._docgroup_id;
 			}
 			set
 			{
-				this._docs_products.Assign(value);
+				if ((this._docgroup_id != value))
+				{
+					if (this._docgroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondocgroup_idChanging(value);
+					this.SendPropertyChanging();
+					this._docgroup_id = value;
+					this.SendPropertyChanged("docgroup_id");
+					this.Ondocgroup_idChanged();
+				}
 			}
 		}
 		
@@ -4106,6 +3191,134 @@ namespace CMS.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="docgroup_doc", Storage="_docgroup", ThisKey="docgroup_id", OtherKey="id", IsForeignKey=true)]
+		public docgroup docgroup
+		{
+			get
+			{
+				return this._docgroup.Entity;
+			}
+			set
+			{
+				docgroup previousValue = this._docgroup.Entity;
+				if (((previousValue != value) 
+							|| (this._docgroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._docgroup.Entity = null;
+						previousValue.docs.Remove(this);
+					}
+					this._docgroup.Entity = value;
+					if ((value != null))
+					{
+						value.docs.Add(this);
+						this._docgroup_id = value.id;
+					}
+					else
+					{
+						this._docgroup_id = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("docgroup");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.docgroups")]
+	public partial class docgroup : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _id;
+		
+		private EntitySet<doc> _docs;
+		
+		private EntitySet<docgroups_product> _docgroups_products;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(long value);
+    partial void OnidChanged();
+    #endregion
+		
+		public docgroup()
+		{
+			this._docs = new EntitySet<doc>(new Action<doc>(this.attach_docs), new Action<doc>(this.detach_docs));
+			this._docgroups_products = new EntitySet<docgroups_product>(new Action<docgroups_product>(this.attach_docgroups_products), new Action<docgroups_product>(this.detach_docgroups_products));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="docgroup_doc", Storage="_docs", ThisKey="id", OtherKey="docgroup_id")]
+		public EntitySet<doc> docs
+		{
+			get
+			{
+				return this._docs;
+			}
+			set
+			{
+				this._docs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="docgroup_docgroups_product", Storage="_docgroups_products", ThisKey="id", OtherKey="docgroup_id")]
+		public EntitySet<docgroups_product> docgroups_products
+		{
+			get
+			{
+				return this._docgroups_products;
+			}
+			set
+			{
+				this._docgroups_products.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -4126,16 +3339,196 @@ namespace CMS.Models
 			}
 		}
 		
-		private void attach_docs_products(docs_product entity)
+		private void attach_docs(doc entity)
 		{
 			this.SendPropertyChanging();
-			entity.doc = this;
+			entity.docgroup = this;
 		}
 		
-		private void detach_docs_products(docs_product entity)
+		private void detach_docs(doc entity)
 		{
 			this.SendPropertyChanging();
-			entity.doc = null;
+			entity.docgroup = null;
+		}
+		
+		private void attach_docgroups_products(docgroups_product entity)
+		{
+			this.SendPropertyChanging();
+			entity.docgroup = this;
+		}
+		
+		private void detach_docgroups_products(docgroups_product entity)
+		{
+			this.SendPropertyChanging();
+			entity.docgroup = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.docgroups_products")]
+	public partial class docgroups_product : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _docgroup_id;
+		
+		private long _product_id;
+		
+		private EntityRef<docgroup> _docgroup;
+		
+		private EntityRef<product> _product;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Ondocgroup_idChanging(long value);
+    partial void Ondocgroup_idChanged();
+    partial void Onproduct_idChanging(long value);
+    partial void Onproduct_idChanged();
+    #endregion
+		
+		public docgroups_product()
+		{
+			this._docgroup = default(EntityRef<docgroup>);
+			this._product = default(EntityRef<product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_docgroup_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long docgroup_id
+		{
+			get
+			{
+				return this._docgroup_id;
+			}
+			set
+			{
+				if ((this._docgroup_id != value))
+				{
+					if (this._docgroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondocgroup_idChanging(value);
+					this.SendPropertyChanging();
+					this._docgroup_id = value;
+					this.SendPropertyChanged("docgroup_id");
+					this.Ondocgroup_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long product_id
+		{
+			get
+			{
+				return this._product_id;
+			}
+			set
+			{
+				if ((this._product_id != value))
+				{
+					if (this._product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproduct_idChanging(value);
+					this.SendPropertyChanging();
+					this._product_id = value;
+					this.SendPropertyChanged("product_id");
+					this.Onproduct_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="docgroup_docgroups_product", Storage="_docgroup", ThisKey="docgroup_id", OtherKey="id", IsForeignKey=true)]
+		public docgroup docgroup
+		{
+			get
+			{
+				return this._docgroup.Entity;
+			}
+			set
+			{
+				docgroup previousValue = this._docgroup.Entity;
+				if (((previousValue != value) 
+							|| (this._docgroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._docgroup.Entity = null;
+						previousValue.docgroups_products.Remove(this);
+					}
+					this._docgroup.Entity = value;
+					if ((value != null))
+					{
+						value.docgroups_products.Add(this);
+						this._docgroup_id = value.id;
+					}
+					else
+					{
+						this._docgroup_id = default(long);
+					}
+					this.SendPropertyChanged("docgroup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_docgroups_product", Storage="_product", ThisKey="product_id", OtherKey="id", IsForeignKey=true)]
+		public product product
+		{
+			get
+			{
+				return this._product.Entity;
+			}
+			set
+			{
+				product previousValue = this._product.Entity;
+				if (((previousValue != value) 
+							|| (this._product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product.Entity = null;
+						previousValue.docgroups_products.Remove(this);
+					}
+					this._product.Entity = value;
+					if ((value != null))
+					{
+						value.docgroups_products.Add(this);
+						this._product_id = value.id;
+					}
+					else
+					{
+						this._product_id = default(long);
+					}
+					this.SendPropertyChanged("product");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -4153,6 +3546,8 @@ namespace CMS.Models
 		
 		private long _text_id;
 		
+		private string _seo_value;
+		
 		private EntityRef<text> _text;
 		
     #region Extensibility Method Definitions
@@ -4167,6 +3562,8 @@ namespace CMS.Models
     partial void OnvalueChanged();
     partial void Ontext_idChanging(long value);
     partial void Ontext_idChanged();
+    partial void Onseo_valueChanging(string value);
+    partial void Onseo_valueChanged();
     #endregion
 		
 		public texts_value()
@@ -4259,6 +3656,26 @@ namespace CMS.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seo_value", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string seo_value
+		{
+			get
+			{
+				return this._seo_value;
+			}
+			set
+			{
+				if ((this._seo_value != value))
+				{
+					this.Onseo_valueChanging(value);
+					this.SendPropertyChanging();
+					this._seo_value = value;
+					this.SendPropertyChanged("seo_value");
+					this.Onseo_valueChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_texts_value", Storage="_text", ThisKey="text_id", OtherKey="id", IsForeignKey=true)]
 		public text text
 		{
@@ -4314,33 +3731,547 @@ namespace CMS.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.texts")]
-	public partial class text : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.products_connections")]
+	public partial class products_connection : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _product_id;
+		
+		private long _product_id_2;
+		
+		private EntityRef<product> _product;
+		
+		private EntityRef<product> _product1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onproduct_idChanging(long value);
+    partial void Onproduct_idChanged();
+    partial void Onproduct_id_2Changing(long value);
+    partial void Onproduct_id_2Changed();
+    #endregion
+		
+		public products_connection()
+		{
+			this._product = default(EntityRef<product>);
+			this._product1 = default(EntityRef<product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long product_id
+		{
+			get
+			{
+				return this._product_id;
+			}
+			set
+			{
+				if ((this._product_id != value))
+				{
+					if (this._product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproduct_idChanging(value);
+					this.SendPropertyChanging();
+					this._product_id = value;
+					this.SendPropertyChanged("product_id");
+					this.Onproduct_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id_2", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long product_id_2
+		{
+			get
+			{
+				return this._product_id_2;
+			}
+			set
+			{
+				if ((this._product_id_2 != value))
+				{
+					if (this._product1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproduct_id_2Changing(value);
+					this.SendPropertyChanging();
+					this._product_id_2 = value;
+					this.SendPropertyChanged("product_id_2");
+					this.Onproduct_id_2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection", Storage="_product", ThisKey="product_id", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public product product
+		{
+			get
+			{
+				return this._product.Entity;
+			}
+			set
+			{
+				product previousValue = this._product.Entity;
+				if (((previousValue != value) 
+							|| (this._product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product.Entity = null;
+						previousValue.products_connections.Remove(this);
+					}
+					this._product.Entity = value;
+					if ((value != null))
+					{
+						value.products_connections.Add(this);
+						this._product_id = value.id;
+					}
+					else
+					{
+						this._product_id = default(long);
+					}
+					this.SendPropertyChanged("product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection1", Storage="_product1", ThisKey="product_id_2", OtherKey="id", IsForeignKey=true)]
+		public product product1
+		{
+			get
+			{
+				return this._product1.Entity;
+			}
+			set
+			{
+				product previousValue = this._product1.Entity;
+				if (((previousValue != value) 
+							|| (this._product1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product1.Entity = null;
+						previousValue.products_connections1.Remove(this);
+					}
+					this._product1.Entity = value;
+					if ((value != null))
+					{
+						value.products_connections1.Add(this);
+						this._product_id_2 = value.id;
+					}
+					else
+					{
+						this._product_id_2 = default(long);
+					}
+					this.SendPropertyChanged("product1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.products_categories")]
+	public partial class products_category : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _product_id;
+		
+		private long _category_id;
+		
+		private EntityRef<product> _product;
+		
+		private EntityRef<category> _category;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onproduct_idChanging(long value);
+    partial void Onproduct_idChanged();
+    partial void Oncategory_idChanging(long value);
+    partial void Oncategory_idChanged();
+    #endregion
+		
+		public products_category()
+		{
+			this._product = default(EntityRef<product>);
+			this._category = default(EntityRef<category>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long product_id
+		{
+			get
+			{
+				return this._product_id;
+			}
+			set
+			{
+				if ((this._product_id != value))
+				{
+					if (this._product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproduct_idChanging(value);
+					this.SendPropertyChanging();
+					this._product_id = value;
+					this.SendPropertyChanged("product_id");
+					this.Onproduct_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_category_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long category_id
+		{
+			get
+			{
+				return this._category_id;
+			}
+			set
+			{
+				if ((this._category_id != value))
+				{
+					if (this._category.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncategory_idChanging(value);
+					this.SendPropertyChanging();
+					this._category_id = value;
+					this.SendPropertyChanged("category_id");
+					this.Oncategory_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_category", Storage="_product", ThisKey="product_id", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public product product
+		{
+			get
+			{
+				return this._product.Entity;
+			}
+			set
+			{
+				product previousValue = this._product.Entity;
+				if (((previousValue != value) 
+							|| (this._product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product.Entity = null;
+						previousValue.products_categories.Remove(this);
+					}
+					this._product.Entity = value;
+					if ((value != null))
+					{
+						value.products_categories.Add(this);
+						this._product_id = value.id;
+					}
+					else
+					{
+						this._product_id = default(long);
+					}
+					this.SendPropertyChanged("product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_products_category", Storage="_category", ThisKey="category_id", OtherKey="id", IsForeignKey=true)]
+		public category category
+		{
+			get
+			{
+				return this._category.Entity;
+			}
+			set
+			{
+				category previousValue = this._category.Entity;
+				if (((previousValue != value) 
+							|| (this._category.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._category.Entity = null;
+						previousValue.products_categories.Remove(this);
+					}
+					this._category.Entity = value;
+					if ((value != null))
+					{
+						value.products_categories.Add(this);
+						this._category_id = value.id;
+					}
+					else
+					{
+						this._category_id = default(long);
+					}
+					this.SendPropertyChanged("category");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.images_products")]
+	public partial class images_product : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _image_id;
+		
+		private long _product_id;
+		
+		private EntityRef<product> _product;
+		
+		private EntityRef<image> _image;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onimage_idChanging(long value);
+    partial void Onimage_idChanged();
+    partial void Onproduct_idChanging(long value);
+    partial void Onproduct_idChanged();
+    #endregion
+		
+		public images_product()
+		{
+			this._product = default(EntityRef<product>);
+			this._image = default(EntityRef<image>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long image_id
+		{
+			get
+			{
+				return this._image_id;
+			}
+			set
+			{
+				if ((this._image_id != value))
+				{
+					if (this._image.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onimage_idChanging(value);
+					this.SendPropertyChanging();
+					this._image_id = value;
+					this.SendPropertyChanged("image_id");
+					this.Onimage_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_product_id", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long product_id
+		{
+			get
+			{
+				return this._product_id;
+			}
+			set
+			{
+				if ((this._product_id != value))
+				{
+					if (this._product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproduct_idChanging(value);
+					this.SendPropertyChanging();
+					this._product_id = value;
+					this.SendPropertyChanged("product_id");
+					this.Onproduct_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_images_product", Storage="_product", ThisKey="product_id", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public product product
+		{
+			get
+			{
+				return this._product.Entity;
+			}
+			set
+			{
+				product previousValue = this._product.Entity;
+				if (((previousValue != value) 
+							|| (this._product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._product.Entity = null;
+						previousValue.images_products.Remove(this);
+					}
+					this._product.Entity = value;
+					if ((value != null))
+					{
+						value.images_products.Add(this);
+						this._product_id = value.id;
+					}
+					else
+					{
+						this._product_id = default(long);
+					}
+					this.SendPropertyChanged("product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="image_images_product", Storage="_image", ThisKey="image_id", OtherKey="id", IsForeignKey=true)]
+		public image image
+		{
+			get
+			{
+				return this._image.Entity;
+			}
+			set
+			{
+				image previousValue = this._image.Entity;
+				if (((previousValue != value) 
+							|| (this._image.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._image.Entity = null;
+						previousValue.images_products.Remove(this);
+					}
+					this._image.Entity = value;
+					if ((value != null))
+					{
+						value.images_products.Add(this);
+						this._image_id = value.id;
+					}
+					else
+					{
+						this._image_id = default(long);
+					}
+					this.SendPropertyChanged("image");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.products")]
+	public partial class product : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private long _id;
 		
-		private EntitySet<page> _pages;
+		private long _title_text_id;
 		
-		private EntitySet<page> _pages1;
+		private long _subtitle_text_id;
 		
-		private EntitySet<product> _products;
+		private long _description_text_id;
 		
-		private EntitySet<product> _products1;
+		private long _text_text_id;
 		
-		private EntitySet<product> _products2;
+		private System.Nullable<long> _image_id;
 		
-		private EntitySet<category> _categories;
+		private EntitySet<docgroups_product> _docgroups_products;
 		
-		private EntitySet<category> _categories1;
+		private EntitySet<products_connection> _products_connections;
 		
-		private EntitySet<image> _images;
+		private EntitySet<products_connection> _products_connections1;
 		
-		private EntitySet<doc> _docs;
+		private EntitySet<products_category> _products_categories;
 		
-		private EntitySet<texts_value> _texts_values;
+		private EntitySet<images_product> _images_products;
+		
+		private EntityRef<text> _description_text;
+		
+		private EntityRef<text> _subtitle_text;
+		
+		private EntityRef<text> _text_text;
+		
+		private EntityRef<text> _title_text;
+		
+		private EntityRef<image> _image;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4348,20 +4279,30 @@ namespace CMS.Models
     partial void OnCreated();
     partial void OnidChanging(long value);
     partial void OnidChanged();
+    partial void Ontitle_text_idChanging(long value);
+    partial void Ontitle_text_idChanged();
+    partial void Onsubtitle_text_idChanging(long value);
+    partial void Onsubtitle_text_idChanged();
+    partial void Ondescription_text_idChanging(long value);
+    partial void Ondescription_text_idChanged();
+    partial void Ontext_text_idChanging(long value);
+    partial void Ontext_text_idChanged();
+    partial void Onimage_idChanging(System.Nullable<long> value);
+    partial void Onimage_idChanged();
     #endregion
 		
-		public text()
+		public product()
 		{
-			this._pages = new EntitySet<page>(new Action<page>(this.attach_pages), new Action<page>(this.detach_pages));
-			this._pages1 = new EntitySet<page>(new Action<page>(this.attach_pages1), new Action<page>(this.detach_pages1));
-			this._products = new EntitySet<product>(new Action<product>(this.attach_products), new Action<product>(this.detach_products));
-			this._products1 = new EntitySet<product>(new Action<product>(this.attach_products1), new Action<product>(this.detach_products1));
-			this._products2 = new EntitySet<product>(new Action<product>(this.attach_products2), new Action<product>(this.detach_products2));
-			this._categories = new EntitySet<category>(new Action<category>(this.attach_categories), new Action<category>(this.detach_categories));
-			this._categories1 = new EntitySet<category>(new Action<category>(this.attach_categories1), new Action<category>(this.detach_categories1));
-			this._images = new EntitySet<image>(new Action<image>(this.attach_images), new Action<image>(this.detach_images));
-			this._docs = new EntitySet<doc>(new Action<doc>(this.attach_docs), new Action<doc>(this.detach_docs));
-			this._texts_values = new EntitySet<texts_value>(new Action<texts_value>(this.attach_texts_values), new Action<texts_value>(this.detach_texts_values));
+			this._docgroups_products = new EntitySet<docgroups_product>(new Action<docgroups_product>(this.attach_docgroups_products), new Action<docgroups_product>(this.detach_docgroups_products));
+			this._products_connections = new EntitySet<products_connection>(new Action<products_connection>(this.attach_products_connections), new Action<products_connection>(this.detach_products_connections));
+			this._products_connections1 = new EntitySet<products_connection>(new Action<products_connection>(this.attach_products_connections1), new Action<products_connection>(this.detach_products_connections1));
+			this._products_categories = new EntitySet<products_category>(new Action<products_category>(this.attach_products_categories), new Action<products_category>(this.detach_products_categories));
+			this._images_products = new EntitySet<images_product>(new Action<images_product>(this.attach_images_products), new Action<images_product>(this.detach_images_products));
+			this._description_text = default(EntityRef<text>);
+			this._subtitle_text = default(EntityRef<text>);
+			this._text_text = default(EntityRef<text>);
+			this._title_text = default(EntityRef<text>);
+			this._image = default(EntityRef<image>);
 			OnCreated();
 		}
 		
@@ -4385,133 +4326,358 @@ namespace CMS.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_page", Storage="_pages", ThisKey="id", OtherKey="text_text_id")]
-		public EntitySet<page> pages
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title_text_id", DbType="BigInt NOT NULL")]
+		public long title_text_id
 		{
 			get
 			{
-				return this._pages;
+				return this._title_text_id;
 			}
 			set
 			{
-				this._pages.Assign(value);
+				if ((this._title_text_id != value))
+				{
+					if (this._title_text.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ontitle_text_idChanging(value);
+					this.SendPropertyChanging();
+					this._title_text_id = value;
+					this.SendPropertyChanged("title_text_id");
+					this.Ontitle_text_idChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_page1", Storage="_pages1", ThisKey="id", OtherKey="title_text_id")]
-		public EntitySet<page> pages1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subtitle_text_id", DbType="BigInt NOT NULL")]
+		public long subtitle_text_id
 		{
 			get
 			{
-				return this._pages1;
+				return this._subtitle_text_id;
 			}
 			set
 			{
-				this._pages1.Assign(value);
+				if ((this._subtitle_text_id != value))
+				{
+					if (this._subtitle_text.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onsubtitle_text_idChanging(value);
+					this.SendPropertyChanging();
+					this._subtitle_text_id = value;
+					this.SendPropertyChanged("subtitle_text_id");
+					this.Onsubtitle_text_idChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product", Storage="_products", ThisKey="id", OtherKey="description_text_id")]
-		public EntitySet<product> products
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description_text_id", DbType="BigInt NOT NULL")]
+		public long description_text_id
 		{
 			get
 			{
-				return this._products;
+				return this._description_text_id;
 			}
 			set
 			{
-				this._products.Assign(value);
+				if ((this._description_text_id != value))
+				{
+					if (this._description_text.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondescription_text_idChanging(value);
+					this.SendPropertyChanging();
+					this._description_text_id = value;
+					this.SendPropertyChanged("description_text_id");
+					this.Ondescription_text_idChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product1", Storage="_products1", ThisKey="id", OtherKey="text_text_id")]
-		public EntitySet<product> products1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text_text_id", DbType="BigInt NOT NULL")]
+		public long text_text_id
 		{
 			get
 			{
-				return this._products1;
+				return this._text_text_id;
 			}
 			set
 			{
-				this._products1.Assign(value);
+				if ((this._text_text_id != value))
+				{
+					if (this._text_text.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ontext_text_idChanging(value);
+					this.SendPropertyChanging();
+					this._text_text_id = value;
+					this.SendPropertyChanged("text_text_id");
+					this.Ontext_text_idChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product2", Storage="_products2", ThisKey="id", OtherKey="title_text_id")]
-		public EntitySet<product> products2
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image_id", DbType="BigInt")]
+		public System.Nullable<long> image_id
 		{
 			get
 			{
-				return this._products2;
+				return this._image_id;
 			}
 			set
 			{
-				this._products2.Assign(value);
+				if ((this._image_id != value))
+				{
+					if (this._image.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onimage_idChanging(value);
+					this.SendPropertyChanging();
+					this._image_id = value;
+					this.SendPropertyChanged("image_id");
+					this.Onimage_idChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category", Storage="_categories", ThisKey="id", OtherKey="name_text_id")]
-		public EntitySet<category> categories
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_docgroups_product", Storage="_docgroups_products", ThisKey="id", OtherKey="product_id")]
+		public EntitySet<docgroups_product> docgroups_products
 		{
 			get
 			{
-				return this._categories;
+				return this._docgroups_products;
 			}
 			set
 			{
-				this._categories.Assign(value);
+				this._docgroups_products.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category1", Storage="_categories1", ThisKey="id", OtherKey="alias_text_id")]
-		public EntitySet<category> categories1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection", Storage="_products_connections", ThisKey="id", OtherKey="product_id")]
+		public EntitySet<products_connection> products_connections
 		{
 			get
 			{
-				return this._categories1;
+				return this._products_connections;
 			}
 			set
 			{
-				this._categories1.Assign(value);
+				this._products_connections.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_image", Storage="_images", ThisKey="id", OtherKey="description_text_id")]
-		public EntitySet<image> images
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_connection1", Storage="_products_connections1", ThisKey="id", OtherKey="product_id_2")]
+		public EntitySet<products_connection> products_connections1
 		{
 			get
 			{
-				return this._images;
+				return this._products_connections1;
 			}
 			set
 			{
-				this._images.Assign(value);
+				this._products_connections1.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_doc", Storage="_docs", ThisKey="id", OtherKey="name_text_id")]
-		public EntitySet<doc> docs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_products_category", Storage="_products_categories", ThisKey="id", OtherKey="product_id")]
+		public EntitySet<products_category> products_categories
 		{
 			get
 			{
-				return this._docs;
+				return this._products_categories;
 			}
 			set
 			{
-				this._docs.Assign(value);
+				this._products_categories.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_texts_value", Storage="_texts_values", ThisKey="id", OtherKey="text_id")]
-		public EntitySet<texts_value> texts_values
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="product_images_product", Storage="_images_products", ThisKey="id", OtherKey="product_id")]
+		public EntitySet<images_product> images_products
 		{
 			get
 			{
-				return this._texts_values;
+				return this._images_products;
 			}
 			set
 			{
-				this._texts_values.Assign(value);
+				this._images_products.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product", Storage="_description_text", ThisKey="description_text_id", OtherKey="id", IsForeignKey=true)]
+		public text text_description
+		{
+			get
+			{
+				return this._description_text.Entity;
+			}
+			set
+			{
+				text previousValue = this._description_text.Entity;
+				if (((previousValue != value) 
+							|| (this._description_text.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._description_text.Entity = null;
+						previousValue.products.Remove(this);
+					}
+					this._description_text.Entity = value;
+					if ((value != null))
+					{
+						value.products.Add(this);
+						this._description_text_id = value.id;
+					}
+					else
+					{
+						this._description_text_id = default(long);
+					}
+					this.SendPropertyChanged("text_description");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product1", Storage="_subtitle_text", ThisKey="subtitle_text_id", OtherKey="id", IsForeignKey=true)]
+		public text text_subtitle
+		{
+			get
+			{
+				return this._subtitle_text.Entity;
+			}
+			set
+			{
+				text previousValue = this._subtitle_text.Entity;
+				if (((previousValue != value) 
+							|| (this._subtitle_text.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._subtitle_text.Entity = null;
+						previousValue.products1.Remove(this);
+					}
+					this._subtitle_text.Entity = value;
+					if ((value != null))
+					{
+						value.products1.Add(this);
+						this._subtitle_text_id = value.id;
+					}
+					else
+					{
+						this._subtitle_text_id = default(long);
+					}
+					this.SendPropertyChanged("text_subtitle");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product2", Storage="_text_text", ThisKey="text_text_id", OtherKey="id", IsForeignKey=true)]
+		public text text_text
+		{
+			get
+			{
+				return this._text_text.Entity;
+			}
+			set
+			{
+				text previousValue = this._text_text.Entity;
+				if (((previousValue != value) 
+							|| (this._text_text.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._text_text.Entity = null;
+						previousValue.products2.Remove(this);
+					}
+					this._text_text.Entity = value;
+					if ((value != null))
+					{
+						value.products2.Add(this);
+						this._text_text_id = value.id;
+					}
+					else
+					{
+						this._text_text_id = default(long);
+					}
+					this.SendPropertyChanged("text_text");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_product3", Storage="_title_text", ThisKey="title_text_id", OtherKey="id", IsForeignKey=true)]
+		public text text_title
+		{
+			get
+			{
+				return this._title_text.Entity;
+			}
+			set
+			{
+				text previousValue = this._title_text.Entity;
+				if (((previousValue != value) 
+							|| (this._title_text.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._title_text.Entity = null;
+						previousValue.products3.Remove(this);
+					}
+					this._title_text.Entity = value;
+					if ((value != null))
+					{
+						value.products3.Add(this);
+						this._title_text_id = value.id;
+					}
+					else
+					{
+						this._title_text_id = default(long);
+					}
+					this.SendPropertyChanged("text_title");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="image_product", Storage="_image", ThisKey="image_id", OtherKey="id", IsForeignKey=true)]
+		public image image
+		{
+			get
+			{
+				return this._image.Entity;
+			}
+			set
+			{
+				image previousValue = this._image.Entity;
+				if (((previousValue != value) 
+							|| (this._image.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._image.Entity = null;
+						previousValue.products.Remove(this);
+					}
+					this._image.Entity = value;
+					if ((value != null))
+					{
+						value.products.Add(this);
+						this._image_id = value.id;
+					}
+					else
+					{
+						this._image_id = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("image");
+				}
 			}
 		}
 		
@@ -4535,124 +4701,993 @@ namespace CMS.Models
 			}
 		}
 		
-		private void attach_pages(page entity)
+		private void attach_docgroups_products(docgroups_product entity)
 		{
 			this.SendPropertyChanging();
-			entity.text = this;
+			entity.product = this;
 		}
 		
-		private void detach_pages(page entity)
+		private void detach_docgroups_products(docgroups_product entity)
 		{
 			this.SendPropertyChanging();
-			entity.text = null;
+			entity.product = null;
 		}
 		
-		private void attach_pages1(page entity)
+		private void attach_products_connections(products_connection entity)
 		{
 			this.SendPropertyChanging();
-			entity.text1 = this;
+			entity.product = this;
 		}
 		
-		private void detach_pages1(page entity)
+		private void detach_products_connections(products_connection entity)
 		{
 			this.SendPropertyChanging();
-			entity.text1 = null;
+			entity.product = null;
 		}
 		
-		private void attach_products(product entity)
+		private void attach_products_connections1(products_connection entity)
 		{
 			this.SendPropertyChanging();
-			entity.text = this;
+			entity.product1 = this;
 		}
 		
-		private void detach_products(product entity)
+		private void detach_products_connections1(products_connection entity)
 		{
 			this.SendPropertyChanging();
-			entity.text = null;
+			entity.product1 = null;
 		}
 		
-		private void attach_products1(product entity)
+		private void attach_products_categories(products_category entity)
 		{
 			this.SendPropertyChanging();
-			entity.text1 = this;
+			entity.product = this;
 		}
 		
-		private void detach_products1(product entity)
+		private void detach_products_categories(products_category entity)
 		{
 			this.SendPropertyChanging();
-			entity.text1 = null;
+			entity.product = null;
 		}
 		
-		private void attach_products2(product entity)
+		private void attach_images_products(images_product entity)
 		{
 			this.SendPropertyChanging();
-			entity.text2 = this;
+			entity.product = this;
 		}
 		
-		private void detach_products2(product entity)
+		private void detach_images_products(images_product entity)
 		{
 			this.SendPropertyChanging();
-			entity.text2 = null;
+			entity.product = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.categories")]
+	public partial class category : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _id;
+		
+		private long _name_text_id;
+		
+		private System.Nullable<long> _parentid;
+		
+		private long _text_text_id;
+		
+		private System.DateTime _date;
+		
+		private EntitySet<menuitem> _menuitems;
+		
+		private EntitySet<articles_category> _articles_categories;
+		
+		private EntitySet<products_category> _products_categories;
+		
+		private EntitySet<category> _categories;
+		
+		private EntityRef<category> _category1;
+		
+		private EntityRef<text> _title;
+		
+		private EntityRef<text> _text;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(long value);
+    partial void OnidChanged();
+    partial void Onname_text_idChanging(long value);
+    partial void Onname_text_idChanged();
+    partial void OnparentidChanging(System.Nullable<long> value);
+    partial void OnparentidChanged();
+    partial void Ontext_text_idChanging(long value);
+    partial void Ontext_text_idChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    #endregion
+		
+		public category()
+		{
+			this._menuitems = new EntitySet<menuitem>(new Action<menuitem>(this.attach_menuitems), new Action<menuitem>(this.detach_menuitems));
+			this._articles_categories = new EntitySet<articles_category>(new Action<articles_category>(this.attach_articles_categories), new Action<articles_category>(this.detach_articles_categories));
+			this._products_categories = new EntitySet<products_category>(new Action<products_category>(this.attach_products_categories), new Action<products_category>(this.detach_products_categories));
+			this._categories = new EntitySet<category>(new Action<category>(this.attach_categories), new Action<category>(this.detach_categories));
+			this._category1 = default(EntityRef<category>);
+			this._title = default(EntityRef<text>);
+			this._text = default(EntityRef<text>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name_text_id", DbType="BigInt NOT NULL")]
+		public long name_text_id
+		{
+			get
+			{
+				return this._name_text_id;
+			}
+			set
+			{
+				if ((this._name_text_id != value))
+				{
+					if (this._title.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onname_text_idChanging(value);
+					this.SendPropertyChanging();
+					this._name_text_id = value;
+					this.SendPropertyChanged("name_text_id");
+					this.Onname_text_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parentid", DbType="BigInt")]
+		public System.Nullable<long> parentid
+		{
+			get
+			{
+				return this._parentid;
+			}
+			set
+			{
+				if ((this._parentid != value))
+				{
+					if (this._category1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnparentidChanging(value);
+					this.SendPropertyChanging();
+					this._parentid = value;
+					this.SendPropertyChanged("parentid");
+					this.OnparentidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text_text_id", DbType="BigInt NOT NULL")]
+		public long text_text_id
+		{
+			get
+			{
+				return this._text_text_id;
+			}
+			set
+			{
+				if ((this._text_text_id != value))
+				{
+					if (this._text.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ontext_text_idChanging(value);
+					this.SendPropertyChanging();
+					this._text_text_id = value;
+					this.SendPropertyChanged("text_text_id");
+					this.Ontext_text_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_menuitem", Storage="_menuitems", ThisKey="id", OtherKey="categoriesid")]
+		public EntitySet<menuitem> menuitems
+		{
+			get
+			{
+				return this._menuitems;
+			}
+			set
+			{
+				this._menuitems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_articles_category", Storage="_articles_categories", ThisKey="id", OtherKey="categoriesid")]
+		public EntitySet<articles_category> articles_categories
+		{
+			get
+			{
+				return this._articles_categories;
+			}
+			set
+			{
+				this._articles_categories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_products_category", Storage="_products_categories", ThisKey="id", OtherKey="category_id")]
+		public EntitySet<products_category> products_categories
+		{
+			get
+			{
+				return this._products_categories;
+			}
+			set
+			{
+				this._products_categories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_category", Storage="_categories", ThisKey="id", OtherKey="parentid")]
+		public EntitySet<category> categories
+		{
+			get
+			{
+				return this._categories;
+			}
+			set
+			{
+				this._categories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="category_category", Storage="_category1", ThisKey="parentid", OtherKey="id", IsForeignKey=true)]
+		public category category1
+		{
+			get
+			{
+				return this._category1.Entity;
+			}
+			set
+			{
+				category previousValue = this._category1.Entity;
+				if (((previousValue != value) 
+							|| (this._category1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._category1.Entity = null;
+						previousValue.categories.Remove(this);
+					}
+					this._category1.Entity = value;
+					if ((value != null))
+					{
+						value.categories.Add(this);
+						this._parentid = value.id;
+					}
+					else
+					{
+						this._parentid = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("category1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category", Storage="_title", ThisKey="name_text_id", OtherKey="id", IsForeignKey=true)]
+		public text title
+		{
+			get
+			{
+				return this._title.Entity;
+			}
+			set
+			{
+				text previousValue = this._title.Entity;
+				if (((previousValue != value) 
+							|| (this._title.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._title.Entity = null;
+						previousValue.categories.Remove(this);
+					}
+					this._title.Entity = value;
+					if ((value != null))
+					{
+						value.categories.Add(this);
+						this._name_text_id = value.id;
+					}
+					else
+					{
+						this._name_text_id = default(long);
+					}
+					this.SendPropertyChanged("title");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_category1", Storage="_text", ThisKey="text_text_id", OtherKey="id", IsForeignKey=true)]
+		public text text
+		{
+			get
+			{
+				return this._text.Entity;
+			}
+			set
+			{
+				text previousValue = this._text.Entity;
+				if (((previousValue != value) 
+							|| (this._text.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._text.Entity = null;
+						previousValue.categories1.Remove(this);
+					}
+					this._text.Entity = value;
+					if ((value != null))
+					{
+						value.categories1.Add(this);
+						this._text_text_id = value.id;
+					}
+					else
+					{
+						this._text_text_id = default(long);
+					}
+					this.SendPropertyChanged("text");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_menuitems(menuitem entity)
+		{
+			this.SendPropertyChanging();
+			entity.category = this;
+		}
+		
+		private void detach_menuitems(menuitem entity)
+		{
+			this.SendPropertyChanging();
+			entity.category = null;
+		}
+		
+		private void attach_articles_categories(articles_category entity)
+		{
+			this.SendPropertyChanging();
+			entity.category = this;
+		}
+		
+		private void detach_articles_categories(articles_category entity)
+		{
+			this.SendPropertyChanging();
+			entity.category = null;
+		}
+		
+		private void attach_products_categories(products_category entity)
+		{
+			this.SendPropertyChanging();
+			entity.category = this;
+		}
+		
+		private void detach_products_categories(products_category entity)
+		{
+			this.SendPropertyChanging();
+			entity.category = null;
 		}
 		
 		private void attach_categories(category entity)
 		{
 			this.SendPropertyChanging();
-			entity.text = this;
+			entity.category1 = this;
 		}
 		
 		private void detach_categories(category entity)
 		{
 			this.SendPropertyChanging();
-			entity.text = null;
+			entity.category1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.images")]
+	public partial class image : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _id;
+		
+		private string _path;
+		
+		private System.Nullable<long> _description_text_id;
+		
+		private System.Nullable<int> _width;
+		
+		private System.Nullable<int> _height;
+		
+		private EntitySet<images_product> _images_products;
+		
+		private EntitySet<product> _products;
+		
+		private EntityRef<text> _text;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(long value);
+    partial void OnidChanged();
+    partial void OnpathChanging(string value);
+    partial void OnpathChanged();
+    partial void Ondescription_text_idChanging(System.Nullable<long> value);
+    partial void Ondescription_text_idChanged();
+    partial void OnwidthChanging(System.Nullable<int> value);
+    partial void OnwidthChanged();
+    partial void OnheightChanging(System.Nullable<int> value);
+    partial void OnheightChanged();
+    #endregion
+		
+		public image()
+		{
+			this._images_products = new EntitySet<images_product>(new Action<images_product>(this.attach_images_products), new Action<images_product>(this.detach_images_products));
+			this._products = new EntitySet<product>(new Action<product>(this.attach_products), new Action<product>(this.detach_products));
+			this._text = default(EntityRef<text>);
+			OnCreated();
 		}
 		
-		private void attach_categories1(category entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long id
 		{
-			this.SendPropertyChanging();
-			entity.text1 = this;
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
 		}
 		
-		private void detach_categories1(category entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_path", DbType="VarChar(150)")]
+		public string path
 		{
-			this.SendPropertyChanging();
-			entity.text1 = null;
+			get
+			{
+				return this._path;
+			}
+			set
+			{
+				if ((this._path != value))
+				{
+					this.OnpathChanging(value);
+					this.SendPropertyChanging();
+					this._path = value;
+					this.SendPropertyChanged("path");
+					this.OnpathChanged();
+				}
+			}
 		}
 		
-		private void attach_images(image entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description_text_id", DbType="BigInt")]
+		public System.Nullable<long> description_text_id
 		{
-			this.SendPropertyChanging();
-			entity.text = this;
+			get
+			{
+				return this._description_text_id;
+			}
+			set
+			{
+				if ((this._description_text_id != value))
+				{
+					if (this._text.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondescription_text_idChanging(value);
+					this.SendPropertyChanging();
+					this._description_text_id = value;
+					this.SendPropertyChanged("description_text_id");
+					this.Ondescription_text_idChanged();
+				}
+			}
 		}
 		
-		private void detach_images(image entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_width", DbType="Int")]
+		public System.Nullable<int> width
 		{
-			this.SendPropertyChanging();
-			entity.text = null;
+			get
+			{
+				return this._width;
+			}
+			set
+			{
+				if ((this._width != value))
+				{
+					this.OnwidthChanging(value);
+					this.SendPropertyChanging();
+					this._width = value;
+					this.SendPropertyChanged("width");
+					this.OnwidthChanged();
+				}
+			}
 		}
 		
-		private void attach_docs(doc entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Int")]
+		public System.Nullable<int> height
 		{
-			this.SendPropertyChanging();
-			entity.text = this;
+			get
+			{
+				return this._height;
+			}
+			set
+			{
+				if ((this._height != value))
+				{
+					this.OnheightChanging(value);
+					this.SendPropertyChanging();
+					this._height = value;
+					this.SendPropertyChanged("height");
+					this.OnheightChanged();
+				}
+			}
 		}
 		
-		private void detach_docs(doc entity)
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="image_images_product", Storage="_images_products", ThisKey="id", OtherKey="image_id")]
+		public EntitySet<images_product> images_products
 		{
-			this.SendPropertyChanging();
-			entity.text = null;
+			get
+			{
+				return this._images_products;
+			}
+			set
+			{
+				this._images_products.Assign(value);
+			}
 		}
 		
-		private void attach_texts_values(texts_value entity)
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="image_product", Storage="_products", ThisKey="id", OtherKey="image_id")]
+		public EntitySet<product> products
 		{
-			this.SendPropertyChanging();
-			entity.text = this;
+			get
+			{
+				return this._products;
+			}
+			set
+			{
+				this._products.Assign(value);
+			}
 		}
 		
-		private void detach_texts_values(texts_value entity)
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_image", Storage="_text", ThisKey="description_text_id", OtherKey="id", IsForeignKey=true)]
+		public text text
+		{
+			get
+			{
+				return this._text.Entity;
+			}
+			set
+			{
+				text previousValue = this._text.Entity;
+				if (((previousValue != value) 
+							|| (this._text.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._text.Entity = null;
+						previousValue.images.Remove(this);
+					}
+					this._text.Entity = value;
+					if ((value != null))
+					{
+						value.images.Add(this);
+						this._description_text_id = value.id;
+					}
+					else
+					{
+						this._description_text_id = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("text");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_images_products(images_product entity)
 		{
 			this.SendPropertyChanging();
-			entity.text = null;
+			entity.image = this;
+		}
+		
+		private void detach_images_products(images_product entity)
+		{
+			this.SendPropertyChanging();
+			entity.image = null;
+		}
+		
+		private void attach_products(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.image = this;
+		}
+		
+		private void detach_products(product entity)
+		{
+			this.SendPropertyChanging();
+			entity.image = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.news")]
+	public partial class news : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _id;
+		
+		private long _title;
+		
+		private long _shortdesc;
+		
+		private long _text;
+		
+		private System.Data.Linq.Binary _date;
+		
+		private EntityRef<text> _text1;
+		
+		private EntityRef<text> _text2;
+		
+		private EntityRef<text> _text3;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(long value);
+    partial void OnidChanged();
+    partial void OntitleChanging(long value);
+    partial void OntitleChanged();
+    partial void OnshortdescChanging(long value);
+    partial void OnshortdescChanged();
+    partial void OntextChanging(long value);
+    partial void OntextChanged();
+    partial void OndateChanging(System.Data.Linq.Binary value);
+    partial void OndateChanged();
+    #endregion
+		
+		public news()
+		{
+			this._text1 = default(EntityRef<text>);
+			this._text2 = default(EntityRef<text>);
+			this._text3 = default(EntityRef<text>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public long id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					if (this._text1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_shortdesc", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long shortdesc
+		{
+			get
+			{
+				return this._shortdesc;
+			}
+			set
+			{
+				if ((this._shortdesc != value))
+				{
+					if (this._text2.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnshortdescChanging(value);
+					this.SendPropertyChanging();
+					this._shortdesc = value;
+					this.SendPropertyChanged("shortdesc");
+					this.OnshortdescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="BigInt NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public long text
+		{
+			get
+			{
+				return this._text;
+			}
+			set
+			{
+				if ((this._text != value))
+				{
+					if (this._text3.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OntextChanging(value);
+					this.SendPropertyChanging();
+					this._text = value;
+					this.SendPropertyChanged("text");
+					this.OntextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_new", Storage="_text1", ThisKey="title", OtherKey="id", IsForeignKey=true)]
+		public text text1
+		{
+			get
+			{
+				return this._text1.Entity;
+			}
+			set
+			{
+				text previousValue = this._text1.Entity;
+				if (((previousValue != value) 
+							|| (this._text1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._text1.Entity = null;
+						previousValue.news.Remove(this);
+					}
+					this._text1.Entity = value;
+					if ((value != null))
+					{
+						value.news.Add(this);
+						this._title = value.id;
+					}
+					else
+					{
+						this._title = default(long);
+					}
+					this.SendPropertyChanged("text1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_new1", Storage="_text2", ThisKey="shortdesc", OtherKey="id", IsForeignKey=true)]
+		public text text2
+		{
+			get
+			{
+				return this._text2.Entity;
+			}
+			set
+			{
+				text previousValue = this._text2.Entity;
+				if (((previousValue != value) 
+							|| (this._text2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._text2.Entity = null;
+						previousValue.news1.Remove(this);
+					}
+					this._text2.Entity = value;
+					if ((value != null))
+					{
+						value.news1.Add(this);
+						this._shortdesc = value.id;
+					}
+					else
+					{
+						this._shortdesc = default(long);
+					}
+					this.SendPropertyChanged("text2");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="text_new2", Storage="_text3", ThisKey="text", OtherKey="id", IsForeignKey=true)]
+		public text text3
+		{
+			get
+			{
+				return this._text3.Entity;
+			}
+			set
+			{
+				text previousValue = this._text3.Entity;
+				if (((previousValue != value) 
+							|| (this._text3.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._text3.Entity = null;
+						previousValue.news2.Remove(this);
+					}
+					this._text3.Entity = value;
+					if ((value != null))
+					{
+						value.news2.Add(this);
+						this._text = value.id;
+					}
+					else
+					{
+						this._text = default(long);
+					}
+					this.SendPropertyChanged("text3");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

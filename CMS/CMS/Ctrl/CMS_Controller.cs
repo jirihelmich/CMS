@@ -20,6 +20,8 @@ namespace CMS.CMS.Ctrl
         /// </summary>
         protected CMS_Services_Message _messages;
 
+        public static String[] langs = new String[] { "cz", "gb", "de", "ru", "fr", "pl" };
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -27,6 +29,7 @@ namespace CMS.CMS.Ctrl
         {
             this._app = new CMS_App();
             this._messages = CMS_Services_Message.getInstance();
+            this.ViewData["langs"] = langs;
         }
 
         /// <summary>
@@ -46,14 +49,12 @@ namespace CMS.CMS.Ctrl
             catch (Acl.ACLResourceNotRegisteredException)
             {
                 _messages.addError("You are about requesting a resource which is not registered");
-                this.Response.Redirect("/");
-                this.Response.End();
+                filterContext.HttpContext.Response.Redirect("/",true);
             }
             catch
             {
                 _messages.addError("You aren't allowed to view the datasource!");
-                this.Response.Redirect("/");
-                this.Response.End();
+                filterContext.HttpContext.Response.Redirect("/user/login?backUrl=" + Request.Url, true);
             }
 
             this.ViewData["menu"] = this._app.categories().get(0, 0, 100000);

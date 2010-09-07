@@ -9,45 +9,6 @@
       <Association Name="text_page1" Member="text1" ThisKey="title_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.products" Member="products">
-    <Type Name="product">
-      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="description_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="text_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="product_products_connection" Member="products_connections" ThisKey="id" OtherKey="product_id" Type="products_connection" />
-      <Association Name="product_products_connection1" Member="products_connections1" ThisKey="id" OtherKey="product_id_2" Type="products_connection" />
-      <Association Name="product_docs_product" Member="docs_products" ThisKey="id" OtherKey="product_id" Type="docs_product" />
-      <Association Name="product_products_connection11" Member="products_connection1s" ThisKey="id" OtherKey="product_id" Type="products_connection1" />
-      <Association Name="product_products_connection12" Member="products_connection1s1" ThisKey="id" OtherKey="product_id_2" Type="products_connection1" />
-      <Association Name="text_product" Member="text" ThisKey="description_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
-      <Association Name="text_product1" Member="text1" ThisKey="text_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
-      <Association Name="text_product2" Member="text2" ThisKey="title_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.products_connections" Member="products_connections">
-    <Type Name="products_connection">
-      <Column Name="product_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="product_id_2" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="product_products_connection" Member="product" ThisKey="product_id" OtherKey="id" Type="product" IsForeignKey="true" />
-      <Association Name="product_products_connection1" Member="product1" ThisKey="product_id_2" OtherKey="id" Type="product" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.categories" Member="categories">
-    <Type Name="category">
-      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="parentid" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="alias_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="category_category" Member="categories" ThisKey="id" OtherKey="parentid" Type="category" />
-      <Association Name="category_menuitem" Member="menuitems" ThisKey="id" OtherKey="categoriesid" Type="menuitem" />
-      <Association Name="category_articles_category" Member="articles_categories" ThisKey="id" OtherKey="categoriesid" Type="articles_category" />
-      <Association Name="category_category" Member="category1" ThisKey="parentid" OtherKey="id" Type="category" IsForeignKey="true" />
-      <Association Name="text_category" Member="text" ThisKey="name_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
-      <Association Name="text_category1" Member="text1" ThisKey="alias_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.menuitems" Member="menuitems">
     <Type Name="menuitem">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -56,8 +17,8 @@
       <Column Name="articlesid" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="link" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="category_menuitem" Member="category" ThisKey="categoriesid" OtherKey="id" Type="category" IsForeignKey="true" />
       <Association Name="article_menuitem" Member="article" ThisKey="articlesid" OtherKey="id" Type="article" IsForeignKey="true" />
+      <Association Name="category_menuitem" Member="category" ThisKey="categoriesid" OtherKey="id" Type="category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.authors" Member="authors">
@@ -146,28 +107,23 @@
       <Association Name="tag_tags_article" Member="tag" ThisKey="tagsid" OtherKey="id" Type="tag" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.docs_products" Member="docs_products">
-    <Type Name="docs_product">
-      <Column Name="doc_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="product_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="product_docs_product" Member="product" ThisKey="product_id" OtherKey="id" Type="product" IsForeignKey="true" />
-      <Association Name="doc_docs_product" Member="doc" ThisKey="doc_id" OtherKey="id" Type="doc" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.products_connections" Member="products_connection1s">
-    <Type Name="products_connection1">
-      <Column Name="product_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="product_id_2" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="product_products_connection11" Member="product" ThisKey="product_id" OtherKey="id" Type="product" IsForeignKey="true" />
-      <Association Name="product_products_connection12" Member="product1" ThisKey="product_id_2" OtherKey="id" Type="product" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.images" Member="images">
-    <Type Name="image">
-      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="path" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-      <Column Name="description_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Association Name="text_image" Member="text" ThisKey="description_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+  <Table Name="dbo.texts" Member="texts">
+    <Type Name="text">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="text_page" Member="pages" ThisKey="id" OtherKey="text_text_id" Type="page" />
+      <Association Name="text_page1" Member="pages1" ThisKey="id" OtherKey="title_text_id" Type="page" />
+      <Association Name="text_doc" Member="docs" ThisKey="id" OtherKey="name_text_id" Type="doc" />
+      <Association Name="text_texts_value" Member="texts_values" ThisKey="id" OtherKey="text_id" Type="texts_value" />
+      <Association Name="text_product" Member="products" ThisKey="id" OtherKey="description_text_id" Type="product" />
+      <Association Name="text_product1" Member="products1" ThisKey="id" OtherKey="subtitle_text_id" Type="product" />
+      <Association Name="text_product2" Member="products2" ThisKey="id" OtherKey="text_text_id" Type="product" />
+      <Association Name="text_product3" Member="products3" ThisKey="id" OtherKey="title_text_id" Type="product" />
+      <Association Name="text_category" Member="categories" ThisKey="id" OtherKey="name_text_id" Type="category" />
+      <Association Name="text_category1" Member="categories1" ThisKey="id" OtherKey="text_text_id" Type="category" />
+      <Association Name="text_image" Member="images" ThisKey="id" OtherKey="description_text_id" Type="image" />
+      <Association Name="text_new" Member="news" ThisKey="id" OtherKey="title" Type="news" />
+      <Association Name="text_new1" Member="news1" ThisKey="id" OtherKey="shortdesc" Type="news" />
+      <Association Name="text_new2" Member="news2" ThisKey="id" OtherKey="text" Type="news" />
     </Type>
   </Table>
   <Table Name="dbo.docs" Member="docs">
@@ -175,8 +131,24 @@
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name_text_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="path" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Association Name="doc_docs_product" Member="docs_products" ThisKey="id" OtherKey="doc_id" Type="docs_product" />
+      <Column Name="docgroup_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Association Name="text_doc" Member="text" ThisKey="name_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="docgroup_doc" Member="docgroup" ThisKey="docgroup_id" OtherKey="id" Type="docgroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.docgroups" Member="docgroups">
+    <Type Name="docgroup">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="docgroup_doc" Member="docs" ThisKey="id" OtherKey="docgroup_id" Type="doc" />
+      <Association Name="docgroup_docgroups_product" Member="docgroups_products" ThisKey="id" OtherKey="docgroup_id" Type="docgroups_product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.docgroups_products" Member="docgroups_products">
+    <Type Name="docgroups_product">
+      <Column Name="docgroup_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="docgroup_docgroups_product" Member="docgroup" ThisKey="docgroup_id" OtherKey="id" Type="docgroup" IsForeignKey="true" />
+      <Association Name="product_docgroups_product" Member="product" ThisKey="product_id" OtherKey="id" Type="product" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.texts_values" Member="texts_values">
@@ -185,22 +157,92 @@
       <Column Name="culture" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="value" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="seo_value" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="text_texts_value" Member="text" ThisKey="text_id" OtherKey="id" Type="text" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.texts" Member="texts">
-    <Type Name="text">
+  <Table Name="dbo.products_connections" Member="products_connections">
+    <Type Name="products_connection">
+      <Column Name="product_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_id_2" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="product_products_connection" Member="product" ThisKey="product_id" OtherKey="id" Type="product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="product_products_connection1" Member="product1" ThisKey="product_id_2" OtherKey="id" Type="product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.products_categories" Member="products_categories">
+    <Type Name="products_category">
+      <Column Name="product_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="category_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="product_products_category" Member="product" ThisKey="product_id" OtherKey="id" Type="product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="category_products_category" Member="category" ThisKey="category_id" OtherKey="id" Type="category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.images_products" Member="images_products">
+    <Type Name="images_product">
+      <Column Name="image_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="product_images_product" Member="product" ThisKey="product_id" OtherKey="id" Type="product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="image_images_product" Member="image" ThisKey="image_id" OtherKey="id" Type="image" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.products" Member="products">
+    <Type Name="product">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="text_page" Member="pages" ThisKey="id" OtherKey="text_text_id" Type="page" />
-      <Association Name="text_page1" Member="pages1" ThisKey="id" OtherKey="title_text_id" Type="page" />
-      <Association Name="text_product" Member="products" ThisKey="id" OtherKey="description_text_id" Type="product" />
-      <Association Name="text_product1" Member="products1" ThisKey="id" OtherKey="text_text_id" Type="product" />
-      <Association Name="text_product2" Member="products2" ThisKey="id" OtherKey="title_text_id" Type="product" />
-      <Association Name="text_category" Member="categories" ThisKey="id" OtherKey="name_text_id" Type="category" />
-      <Association Name="text_category1" Member="categories1" ThisKey="id" OtherKey="alias_text_id" Type="category" />
-      <Association Name="text_image" Member="images" ThisKey="id" OtherKey="description_text_id" Type="image" />
-      <Association Name="text_doc" Member="docs" ThisKey="id" OtherKey="name_text_id" Type="doc" />
-      <Association Name="text_texts_value" Member="texts_values" ThisKey="id" OtherKey="text_id" Type="texts_value" />
+      <Column Name="title_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="subtitle_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="description_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="text_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="image_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="product_docgroups_product" Member="docgroups_products" ThisKey="id" OtherKey="product_id" Type="docgroups_product" />
+      <Association Name="product_products_connection" Member="products_connections" ThisKey="id" OtherKey="product_id" Type="products_connection" />
+      <Association Name="product_products_connection1" Member="products_connections1" ThisKey="id" OtherKey="product_id_2" Type="products_connection" />
+      <Association Name="product_products_category" Member="products_categories" ThisKey="id" OtherKey="product_id" Type="products_category" />
+      <Association Name="product_images_product" Member="images_products" ThisKey="id" OtherKey="product_id" Type="images_product" />
+      <Association Name="text_product" Member="text_description" Storage="_description_text" ThisKey="description_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="text_product1" Member="text_subtitle" Storage="_subtitle_text" ThisKey="subtitle_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="text_product2" Member="text_text" ThisKey="text_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="text_product3" Member="text_title" Storage="_title_text" ThisKey="title_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="image_product" Member="image" ThisKey="image_id" OtherKey="id" Type="image" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.categories" Member="categories">
+    <Type Name="category">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="parentid" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="text_text_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="category_menuitem" Member="menuitems" ThisKey="id" OtherKey="categoriesid" Type="menuitem" />
+      <Association Name="category_articles_category" Member="articles_categories" ThisKey="id" OtherKey="categoriesid" Type="articles_category" />
+      <Association Name="category_products_category" Member="products_categories" ThisKey="id" OtherKey="category_id" Type="products_category" />
+      <Association Name="category_category" Member="categories" ThisKey="id" OtherKey="parentid" Type="category" />
+      <Association Name="category_category" Member="category1" ThisKey="parentid" OtherKey="id" Type="category" IsForeignKey="true" />
+      <Association Name="text_category" Member="title" ThisKey="name_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="text_category1" Member="text" ThisKey="text_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.images" Member="images">
+    <Type Name="image">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="path" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="description_text_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="width" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="image_images_product" Member="images_products" ThisKey="id" OtherKey="image_id" Type="images_product" />
+      <Association Name="image_product" Member="products" ThisKey="id" OtherKey="image_id" Type="product" />
+      <Association Name="text_image" Member="text" ThisKey="description_text_id" OtherKey="id" Type="text" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.news" Member="news">
+    <Type Name="news">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="shortdesc" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="text" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Association Name="text_new" Member="text1" ThisKey="title" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="text_new1" Member="text2" ThisKey="shortdesc" OtherKey="id" Type="text" IsForeignKey="true" />
+      <Association Name="text_new2" Member="text3" ThisKey="text" OtherKey="id" Type="text" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

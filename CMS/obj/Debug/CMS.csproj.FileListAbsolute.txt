@@ -3,3 +3,16 @@ C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\bin\CMS.pdb
 C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\obj\Debug\CMS.dll
 C:\Users\Jirka\Documents\Visual Studio 2008\Projects\CMS\CMS\obj\Debug\CMS.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\CMS.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\CMS.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.AspNet4.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.Build.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\System.Web.Mvc.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.AspNet4.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\Microsoft.Web.Mvc.Build.pdb
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\bin\System.Web.Mvc.xml
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\obj\Debug\CMS.dll
+C:\Users\Jirka\Documents\Visual Studio 2010\Projects\CMS\CMS\obj\Debug\CMS.pdb

@@ -23,9 +23,10 @@
     <ul id="dashboard">
         <!--<li><a href="/backend/">Map</a></li>-->
         <!--<li><a href="/backend/listArticles">Articles List</a></li>-->
+        <li id="products"><a href="<%= Url.Action("listProducts","Backend") %>">Produkty</a></li>
         <li id="static"><a href="<%= Url.Action("listPages","Backend") %>">Statické stránky</a></li>
         <li id="categories"><a href="<%= Url.Action("listCategories","Backend") %>">Kategorie</a></li>
-        <li id="access"><a href="<%= Url.Action("listPages","Backend") %>">Oprávnìní</a></li>
+        <li id="access"><a href="<%= Url.Action("listResources","Backend") %>">Oprávnìní</a></li>
         <!--<li><a href="/backend/listRoles">Roles List</a></li>-->
         <li id="users"><a href="<%= Url.Action("listUsers","Backend") %>">Uživatelé</a></li>
         <li id="settings"><a href="<%= Url.Action("listSettings","Backend") %>">Nastavení</a></li>

@@ -2,7 +2,7 @@
 
 <asp:Content ID="errorContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        Please, log in
+        Prosím, přihlaste se:
     </h2>
     <%= this.ViewData["form"] %>
 </asp:Content>

@@ -385,6 +385,17 @@
             <param name="id">user id</param>
             <returns>success</returns>
         </member>
+        <member name="F:CMS.CMS.App.CMS_App_Products._app">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App_Products.#ctor(CMS.CMS.App.CMS_App)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+        </member>
         <member name="M:CMS.CMS.App.CMS_App_Authors.getAll">
             <summary>
             Returns all authors
@@ -1166,6 +1177,12 @@
             <returns></returns>
         </member>
         <member name="M:CMS.CMS.App.CMS_App.categories">
+            <summary>
+            Getter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CMS.CMS.App.CMS_App.products">
             <summary>
             Getter
             </summary>

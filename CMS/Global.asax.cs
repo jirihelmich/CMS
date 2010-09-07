@@ -23,6 +23,12 @@ namespace CMS
                 new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
             );
 
+            routes.MapRoute(
+                "login",
+                "{backUrl}",
+                new { Controller = "User", action = "Login", backUrl = "/" }
+            );
+
         }
 
         protected void Application_Start()

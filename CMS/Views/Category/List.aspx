@@ -9,10 +9,7 @@
     <form id="form1" runat="server">
     <h2>Category listing</h2>
     <h3>Subcategories</h3>
-    <ul id="category-menu">              
-        <% foreach (CMS.Models.category c in (IEnumerable<CMS.Models.category>) ViewData["children"]){%>
-            <li><a href="/category/list?id=<%= c.id %>"><%= c.name %></a></li>
-        <%} %>
+    <ul id="category-menu">    
     </ul>
     <hr />
     
